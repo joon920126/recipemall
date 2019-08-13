@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Search from '../layout/Search'
-
+import RecipeButton from '../recipes/RecipeButton'
+import {connect} from 'react-redux'
 
 class ProductDetail extends Component {
 
@@ -8,69 +9,103 @@ class ProductDetail extends Component {
         quantity: 1
     }
 
-    handleClick = (e) => {
+    putIntoCart = (e) => {
+
+    }
+
+    buy = (e) => {
 
     }
 
     plus = (e) => {
-        this.setState({
-            quantity: this.state.quantity+1
-        })
+        e.preventDefault()
+        const product = this.props.product
+        if(this.state.quantity<product.stock){
+            this.setState({
+                quantity: this.state.quantity+1
+            })
+        }else{
+            
+        }
     }
     
-    minus = (e) => {
-        if(this.state.quantity>1)
-        this.setState({
-            quantity: this.state.quantity-1
-        })
+    minus = () => {
+        if(this.state.quantity>1){
+            this.setState({
+                quantity: this.state.quantity-1
+            })
+        }
     }
-    
-    
 
     render(){
+        const product = this.props.product
+        const recipe = this.props.recipe
+        
         return (
             <div className="container">
                 <Search/>
                 <div className="row">
                     <div className="col s12 l6">
-                        <img className="responsive-img materialboxed" src="http://img.danawa.com/prod_img/500000/075/132/img/6132075_1.jpg?shrink=500:500&_v=20180813140819" alt=""/>
+                        <img className="responsive-img materialboxed" src={product.img} alt=""/>
                     </div>
                     <div className="col s12 l6">
                         <table>
                             <tbody>
                                 <tr>
                                     <td colSpan="2">
-                                        <h4>소가 부침두부</h4>
+                                        <h4>{product.name}</h4>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="40%" className="blue-text text-lighten-2 flow-text">가격</td>
-                                    <td className="blue-text text-lighten-2 flow-text">1500원</td>
+                                    <td className="blue-text text-lighten-2 flow-text">{product.price}원</td>
                                 </tr>
                                 <tr>
                                     <td width="40%">제조사</td>
-                                    <td>풀무원</td>
+                                    <td>{product.company}</td>
                                 </tr>
                                 <tr>
                                     <td width="40%">원산지</td>
-                                    <td>국내산</td>
+                                    <td>{product.madein}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <hr/>
                         <div className="grey lighten-3">
-                            
-                            <div className="card horizontal">
-                                <div className="card-content flow-text" style={{minWidth:"20%"}}>
-                                    {this.state.quantity}
+                            <div className="card">
+                                <div className="card-content">
+                                    <div className="row" style={{marginBottom:"0px"}}>
+                                        <div className="col s3 l3 flow-text center-align">
+                                            {this.state.quantity}
+                                        </div>
+                                        <div className="col s4 l4 valign-wrapper">
+                                            <button className="btn white black-text" type="button" onClick={this.minus}><i className="material-icons">remove</i></button>
+                                            <button className="btn white black-text" type="button" onClick={this.plus}><i className="material-icons">add</i></button>
+                                        </div>
+                                        <div className="col s5 l5 flow-text right-align">
+                                            {this.state.quantity*product.price}원
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="card-action valign-wrapper">
-                                    <button className="btn white black-text" type="button" onClick={this.plus}><i className="material-icons">add</i></button>
-                                    <button className="btn white black-text" type="button" onClick={this.minus}><i className="material-icons">remove</i></button>
-                                    <span className="flow-text">{this.state.quantity*1500}원</span>
+                                <div className="card-action">
+                                    <button style={{marginRight:"4px"}} className="btn brown" onClick={this.buy}>바로구매</button>
+                                    <button className="btn brown" onClick={this.putIntoCart}>장바구니</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="flow-text center-align">
+                        {product.content && product.content.map((content, index) => <p key={index}>{content}</p>)}
+                    </div>
+                    <hr/>
+                    <h4 className="center">관련 레시피</h4>
+                    <div className="row" id="recipe">
+                        {recipe && recipe.map(recipe => {
+                            return(
+                                    <RecipeButton recipe={recipe} key={recipe.id}/>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
@@ -78,4 +113,19 @@ class ProductDetail extends Component {
     }
 }
 
-export default ProductDetail
+const mapStateToProps = (state, ownProps) => {
+    let id=ownProps.match.params.id
+    let product = state.product.product.find(product => product.id === id)
+    let recipe = state.recipe.recipe
+
+    return {
+        product: product,
+        recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1)
+    }
+    /**
+     * recipe의 ingredients 배열 내에 
+     * product의 tag가 있다면 true
+     */
+}
+
+export default connect(mapStateToProps)(ProductDetail)

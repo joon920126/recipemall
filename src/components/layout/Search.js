@@ -3,7 +3,9 @@ import {withRouter} from 'react-router-dom'
 
 class Search extends Component {
     state={
-        keyword: ''
+        keyword: '',
+        includeRecipe: '',
+        includeProduct: ''
     }
     handleChange = (e) => {
         this.setState({

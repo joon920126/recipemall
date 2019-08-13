@@ -31,24 +31,24 @@ class App extends Component {
           <Navbar/>
           <Switch>
             <Route exact path="/" component={Main}/>
-            <Route path="/Login" component={Login}/>
-            <Route path="/Join" component={Join}/>
-            <Route path="/JoinCompleted" component={JoinCompleted}/>
-            <Route path="/CreateProduct" component={CreateProduct}/>
-            <Route path="/CreateRecipe" component={CreateRecipe}/>
-            <Route path="/Member" component={Member}/>
-            <Route path="/QnA" component={QnA}/>
-            <Route path="/Cart" component={Cart}/>
-            <Route path="/Order" component={Order}/>
-            <Route path="/OrderCompleted" component={OrderCompleted}/>
-            <Route path="/Shipping" component={Shipping}/>
-            <Route path="/MyPage" component={MyPage}/>
-            <Route path="/CreateQnA" component={CreateQnA}/>
-            <Route path="/AdminQnA" component={AdminQnA}/>
-            <Route path="/AdminShipping" component={AdminShipping}/>
-            <Route path="/List" component={List}/>
-            <Route path="/Product/:pid" component={ProductDetail}/>
-            <Route path="/Recipe/:rid" component={RecipeDetail}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/join" component={Join}/>
+            <Route path="/joincompleted" component={JoinCompleted}/>
+            <Route path="/createproduct" component={CreateProduct}/>
+            <Route path="/createrecipe" component={CreateRecipe}/>
+            <Route path="/member" component={Member}/>
+            <Route path="/qna" component={QnA}/>
+            <Route path="/cart" component={Cart}/>
+            <Route path="/order" component={Order}/>
+            <Route path="/ordercompleted" component={OrderCompleted}/>
+            <Route path="/shipping" component={Shipping}/>
+            <Route path="/myPage" component={MyPage}/>
+            <Route path="/createqna" component={CreateQnA}/>
+            <Route path="/adminqna" component={AdminQnA}/>
+            <Route path="/adminshipping" component={AdminShipping}/>
+            <Route path="/list" component={List}/>
+            <Route path="/product/:id" component={ProductDetail}/>
+            <Route path="/recipe/:id" component={RecipeDetail}/>
             
           </Switch>
           <Footer/>
