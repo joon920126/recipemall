@@ -10,7 +10,7 @@ class ProductDetail extends Component {
     }
 
     putIntoCart = (e) => {
-
+        this.props.addToCart(this.props.product.id, this.state.quantity)
     }
 
     buy = (e) => {
@@ -128,4 +128,10 @@ const mapStateToProps = (state, ownProps) => {
      */
 }
 
-export default connect(mapStateToProps)(ProductDetail)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart : (id, qty) => {dispatch({type:"ADD_TO_CART", id:id , qty:qty})}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)

@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 const Order = () => {
     return (
         <div className="container">
-            <h1>this is Order</h1>
-            <Link className="btn" to='/OrderCompleted'>Order</Link>
+            <div className="flow-text">주문하시겠습니까?
+                <Link className="btn brown" to='/OrderCompleted'>주문하기</Link>
+            </div>
         </div>
     )
 }

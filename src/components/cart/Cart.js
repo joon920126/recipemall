@@ -7,7 +7,16 @@ class Cart extends Component {
     render(){
         const {product} = this.props.product
         const {cart} = this.props.cart
-        let total = 0
+
+        const total = cart.map(item => 
+                                product.find(product=>product.id===item.id).price 
+                                * item.qty)
+                          .reduce((a,b)=>a+b)
+
+        const row = cart.map((item) => <ProductSummary 
+                                            cart={item} 
+                                            product={product.find(product => product.id === item.id)} 
+                                            key={item.id}/>)
 
         return (
             <div className="container">
@@ -23,21 +32,11 @@ class Cart extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            cart? (
-                                cart.map(cart => {
-                                    let prod = product.find(product => product.id === cart.id)
-                                    total+=prod.price*cart.qty
-                                    return <ProductSummary cart={cart} product={prod} key={cart.id}/>
-                                })
-                            ) : (
-                                <h6>장바구니에 저장된 품목이 없습니다.</h6>
-                            )
-                        }
+                        {row}
                     </tbody>
                 </table>
-                <div className="center">
-                    {total}원
+                <div className="center flow-text">
+                    총 {total}원 
                     <Link style={{margin:"8px"}} className="btn brown" to='/Order'>Order</Link>
                 </div>
             </div>
@@ -52,4 +51,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
