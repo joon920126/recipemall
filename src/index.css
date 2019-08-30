@@ -42,7 +42,7 @@ code {
   flex: 1;
 }
 
-.card-content{
+.recipe-button, .product-button{
   height:153.89px
 }
 

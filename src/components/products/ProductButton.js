@@ -16,7 +16,7 @@ const ProductButton = ({product, dispatch}) => {
                     <Link to={'/product/' + product.id} key={product.id}><img src={product.img} alt=""/></Link>
                     <i className="fas fa-shopping-cart halfway-fab btn-floating center pink lighten-4" onClick={handleClick}></i>
                 </div>
-                <div className="card-content">
+                <div className="card-content product-button">
                     <div>
                         <Link to={'/product/' + product.id} key={product.id}>
                             <span className="grey-text text-darken-3"><strong>{product.name}</strong></span>

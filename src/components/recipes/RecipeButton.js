@@ -17,7 +17,7 @@ const RecipeButton = ({recipe, dispatch}) => {
                     </Link>
                     <i className="fas fa-heart halfway-fab btn-floating center pink lighten-4" onClick={handleClick}></i>
                 </div>
-                <div className="card-content">
+                <div className="card-content recipe-button">
                     <div><Link to={'/recipe/'+recipe.id} key={recipe.id}><span className="card-title grey-text text-darken-2"><strong>{recipe.name}</strong></span></Link></div>
                     <h6 className="grey-text">{recipe.time}분</h6>
                     <h6 className="grey-text">난이도: {recipe.difficulty}</h6>

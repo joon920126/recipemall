@@ -46,8 +46,11 @@ const mapStateToProps = (state) => {
     
     return {
         keyword: state.search.keyword,
-        product: state.product.product.filter(prod => prod.name.includes(state.search.keyword)),
-        recipe: state.recipe.recipe.filter(rec => rec.name.includes(state.search.keyword))
+        product: state.product.product.filter(prod => prod.name.includes(state.search.keyword)
+                                                    ||prod.tag.includes(state.search.keyword)),
+        recipe: state.recipe.recipe.filter(rec => rec.name.includes(state.search.keyword)
+                                                ||rec.tag.includes(state.search.keyword))
+                
     }
 }
 

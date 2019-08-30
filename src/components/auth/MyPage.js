@@ -10,22 +10,22 @@ class MyPage extends Component {
 
                 <div className="row">
                     <MyPageButton
-                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        image='https://image.freepik.com/free-icon/1_318-10653.jpg'
                         link='/cart'
                         name='CART'
                         description='장바구니 조회'/>
                     <MyPageButton
-                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        image='https://static.thenounproject.com/png/101952-200.png'
                         link='ordered'
                         name='ORDER'
                         description='주문내역 조회'/>
                     <MyPageButton
-                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        image='https://icons-for-free.com/iconfiles/png/512/friend+human+man+member+person+profile+user+users+icon-1320168707291252637.png'
                         link='profile'
                         name='PROFILE'
                         description='회원정보 수정'/>
                     <MyPageButton
-                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        image='https://static.thenounproject.com/png/19653-200.png'
                         link='favorite'
                         name='RECIPE'
                         description='레시피 즐겨찾기'/>
