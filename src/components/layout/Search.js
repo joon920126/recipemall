@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class Search extends Component {
     state={
         keyword: '',
-        includeRecipe: '',
-        includeProduct: ''
+        includeRecipe: true,
+        includeProduct: true
     }
     handleChange = (e) => {
         this.setState({
@@ -14,7 +15,7 @@ class Search extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state.keyword)
+        this.props.search(this.state.keyword)
         this.props.history.push('/list')
     }
     render(){
@@ -34,4 +35,10 @@ class Search extends Component {
     }
 }
 
-export default withRouter(Search)
+const mapDispatchToProps = (dispatch) => {
+    return{
+        search: (keyword) => {dispatch({type:"SEARCH", keyword:keyword})}
+    }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(Search))

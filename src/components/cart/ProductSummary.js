@@ -51,7 +51,7 @@ class ProductSummary extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        addOneToCart: (id) => {dispatch({type:"ADD_ONE_TO_CART", id:id})},
+        addOneToCart: (id) => {dispatch({type:"ADD_TO_CART", id:id, qty:1})},
         removeOneFromCart: (id) => {dispatch({type:"REMOVE_ONE_FROM_CART", id:id})},
         removeFromCart: (id) => {dispatch({type:"REMOVE_FROM_CART", id:id})}
     }

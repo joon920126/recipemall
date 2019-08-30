@@ -20,7 +20,7 @@ class Login extends Component {
 
     render(){
         return (
-            <div className="container">
+            <div className="container Site-content">
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">로그인</h5>
                     <div className="input-field">

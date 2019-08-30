@@ -21,13 +21,15 @@ import AdminShipping from './components/customerService/AdminShipping'
 import List from './components/layout/List'
 import ProductDetail from './components/products/ProductDetail'
 import RecipeDetail from './components/recipes/RecipeDetail'
+import MemberDetail from './components/auth/MemberDetail'
+import Favorite from './components/layout/Favorite'
 
 
 class App extends Component {
   render(){
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="App Site">
           <Navbar/>
           <Switch>
             <Route exact path="/" component={Main}/>
@@ -36,7 +38,8 @@ class App extends Component {
             <Route path="/joincompleted" component={JoinCompleted}/>
             <Route path="/createproduct" component={CreateProduct}/>
             <Route path="/createrecipe" component={CreateRecipe}/>
-            <Route path="/member" component={Member}/>
+            <Route path="/favorite" component={Favorite}/>
+            <Route exact path="/member" component={Member}/>
             <Route path="/qna" component={QnA}/>
             <Route path="/cart" component={Cart}/>
             <Route path="/order" component={Order}/>
@@ -49,7 +52,7 @@ class App extends Component {
             <Route path="/list" component={List}/>
             <Route path="/product/:id" component={ProductDetail}/>
             <Route path="/recipe/:id" component={RecipeDetail}/>
-            
+            <Route path="/member/:id" component={MemberDetail}/>
           </Switch>
           <Footer/>
         </div>

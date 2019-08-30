@@ -5,15 +5,19 @@ import {connect} from 'react-redux'
 
 class ProductDetail extends Component {
 
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
+
     state = {
         quantity: 1
     }
 
-    putIntoCart = (e) => {
+    putIntoCart = () => {
         this.props.addToCart(this.props.product.id, this.state.quantity)
     }
 
-    buy = (e) => {
+    buy = () => {
 
     }
 
@@ -42,7 +46,7 @@ class ProductDetail extends Component {
         const recipe = this.props.recipe
         
         return (
-            <div className="container">
+            <div className="container Site-content">
                 <Search/>
                 <div className="row">
                     <div className="col s12 l6">
@@ -88,7 +92,7 @@ class ProductDetail extends Component {
                                 </div>
                                 <div className="card-action">
                                     <button style={{marginRight:"4px"}} className="btn brown" onClick={this.buy}>바로구매</button>
-                                    <button className="btn brown" onClick={this.putIntoCart}>장바구니</button>
+                                    <button className="btn brown waves-effect waves-light" onClick={this.putIntoCart}>장바구니</button>
                                 </div>
                             </div>
                         </div>
@@ -117,10 +121,12 @@ const mapStateToProps = (state, ownProps) => {
     let id=ownProps.match.params.id
     let product = state.product.product.find(product => product.id === id)
     let recipe = state.recipe.recipe
+    let cart = state.cart
 
     return {
         product: product,
-        recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1)
+        recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1),
+        cart: cart
     }
     /**
      * recipe의 ingredients 배열 내에 

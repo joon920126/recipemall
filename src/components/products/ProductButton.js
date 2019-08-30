@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux'
 
-const ProductButton = ({product}) => {
+const ProductButton = ({product, dispatch}) => {
 
     const handleClick = (e) => {
-        console.log(`Button clicked: ${product.name}`)
+        alert('장바구니에 추가되었습니다.')
+        dispatch({type:'ADD_TO_CART', id:product.id, qty:1})
     }
 
     return (
@@ -15,10 +17,12 @@ const ProductButton = ({product}) => {
                     <i className="fas fa-shopping-cart halfway-fab btn-floating center pink lighten-4" onClick={handleClick}></i>
                 </div>
                 <div className="card-content">
-                    <Link to={'/product/' + product.id} key={product.id}>
-                        <span className="card-title grey-text darken-2"><strong>{product.name}</strong></span>
-                    </Link>
-                    <h6 className="grey-text">{product.price}원</h6>
+                    <div>
+                        <Link to={'/product/' + product.id} key={product.id}>
+                            <span className="grey-text text-darken-3"><strong>{product.name}</strong></span>
+                        </Link>
+                    </div>
+                    <h6 className="card-title grey-text text-darken-1">{product.price}원</h6>
                 </div>
             </div>
         </div>
@@ -26,4 +30,4 @@ const ProductButton = ({product}) => {
 }
 
 
-export default ProductButton
+export default connect()(ProductButton)

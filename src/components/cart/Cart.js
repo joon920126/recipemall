@@ -17,9 +17,9 @@ class Cart extends Component {
                                             cart={item} 
                                             product={product.find(product => product.id === item.id)} 
                                             key={item.id}/>)
-
-        return (
-            <div className="container">
+        if(row){
+            return (
+                <div className="container Site-content">
                 <h5>장바구니</h5>
                 <table>
                     <thead>
@@ -41,6 +41,14 @@ class Cart extends Component {
                 </div>
             </div>
         )
+    } else {
+        return(
+            <div className="container Site-content">
+                <h5>장바구니</h5>
+                <span className="center">장바구니에 담긴 상품이 없습니다.</span>
+            </div>
+        )
+    }
     }
 }
 

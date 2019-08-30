@@ -31,3 +31,21 @@ code {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
 }
+
+.Site {
+  display:flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content{
+  flex: 1;
+}
+
+.card-content{
+  height:153.89px
+}
+
+.card-content div{
+  height:40px
+}

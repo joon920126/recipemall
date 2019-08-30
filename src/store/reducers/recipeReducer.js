@@ -1,12 +1,14 @@
 const initState = {
+    favorite:[],
     recipe: [
         {
             id: '1',
             name: '연어 타르타르',
             time: 15,
             difficulty: '중',
+            keyIngredient: '연어',
             ingredients: ['연어', '비트', '아보카도', '간장', '와사비', '어린잎채소'],
-            img: 'http://heatherchristo.com/wp-content/uploads/2017/08/Salmon-Beet-and-Avocado-Tartar-with-Lemon-Vinaigrette-from-HeatherChristo.com_.jpg',
+            img: 'https://www.huonaqua.com.au/wp-content/uploads/2015/10/Tartare-Square-360x360.jpg',
             contentimg: [
                 'http://heatherchristo.com/wp-content/uploads/2017/08/Salmon-Beet-and-Avocado-Tartar-with-Lemon-Vinaigrette-from-HeatherChristo.com_.jpg',
                 'http://heatherchristo.com/wp-content/uploads/2017/08/Salmon-Beet-and-Avocado-Tartar-with-Lemon-Vinaigrette-from-HeatherChristo.com_.jpg',
@@ -37,9 +39,10 @@ const initState = {
             id: '2',
             name: '치킨 누들 수프',
             time: 20,
+            keyIngredient: '',
             difficulty: '하',
             ingredients: ['닭가슴살', '양파', '당근', '셀러리', '완두콩', '치킨스톡', '타임', '후추', '숏파스타', '올리브유'],
-            img: 'https://i.ytimg.com/vi/o91gT73mQhg/maxresdefault.jpg',
+            img: 'http://images.media-allrecipes.com/userphotos/960x960/4552426.jpg',
             contentimg: [
                 'https://i.ytimg.com/vi/o91gT73mQhg/maxresdefault.jpg',
                 'https://i.ytimg.com/vi/o91gT73mQhg/maxresdefault.jpg',
@@ -71,6 +74,7 @@ const initState = {
             name: '마파두부',
             time: 15,
             difficulty: '중',
+            keyIngredient: '',
             ingredients: ['두부', '두반장', '설탕', '간장', '후추', '고춧가루', '다짐육', '대파', '마늘', '맛술', '식용유', '고추기름'],
             contentimg: [
                 'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2011/10/mapo-tofu-hp.jpg',
@@ -83,7 +87,7 @@ const initState = {
                 'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2011/10/mapo-tofu-hp.jpg',
                 'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2011/10/mapo-tofu-hp.jpg'
             ],
-            img: 'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2011/10/mapo-tofu-hp.jpg',
+            img: 'https://static.myletter.net/20161104/dbcdced5-0731-473b-943d-439ae4655b86.jpg',
             content: [
                 '두부를 원하는 크기로 잘라주세요. 원래는 연두부를 쓰지만 어떤 두부를 써도 괜찮습니다. 연두부를 쓴다면 끓는 물에 살짝 데쳐주세요.',
                 '두반장과 설탕, 간장, 맛술을 섞어 양념장을 만들어둡니다. 고춧가루와 고추기름은 나중에 따로 넣을거예요.',
@@ -105,8 +109,9 @@ const initState = {
             name: '문어 샐러드',
             time: 40,
             difficulty: '하',
+            keyIngredient: '',
             ingredients: ['문어', '로메인', '양상추', '올리브유', '소금', '후추', '레몬즙'],
-            img: 'http://irepo.primecp.com/2016/03/269664/recipe-24886_ExtraLarge1000_ID-1529935.jpg?v=1529935',
+            img: 'https://www.msc.org/images/default-source/msc-english/content-banner/recipes-500x500/octopus-salad.jpg?sfvrsn=cb01186d_0',
             contentimg: [
                 'http://irepo.primecp.com/2016/03/269664/recipe-24886_ExtraLarge1000_ID-1529935.jpg?v=1529935',
                 'http://irepo.primecp.com/2016/03/269664/recipe-24886_ExtraLarge1000_ID-1529935.jpg?v=1529935',
@@ -132,6 +137,7 @@ const initState = {
             name: '두부김치',
             time: 15,
             difficulty: '하',
+            keyIngredient: '',
             ingredients: ['두부', '김치', '돼지고기', '참기름', '참깨'],
             img: 'http://static.myletter.net/20190215/6c2bb790-35c7-47f3-9a48-44f695a2a2fb.jpg',
             contentimg: [
@@ -163,6 +169,7 @@ const initState = {
             name: '두부조림',
             time: 30,
             difficulty: '하',
+            keyIngredient: '',
             ingredients: ['두부', '간장', '고춧가루', '참깨'],
             img: 'https://t1.daumcdn.net/cfile/tistory/99ED593F5CFEF77E05',
             contentimg: [
@@ -198,6 +205,7 @@ const initState = {
             name: '두부부침',
             time: 10,
             difficulty: '하',
+            keyIngredient: '',
             ingredients: ['두부', '식용유', '간장'],
             img: 'http://img.mimint.co.kr/food/bbs/2016/8/25/20160825134456_peilczhz.jpg',
             contentimg: [
@@ -235,8 +243,9 @@ const initState = {
             name: '만두밥',
             time: 5,
             difficulty: '하',
+            keyIngredient: '',
             ingredients: ['만두', '밥', '간장', '참기름'],
-            img: 'http://recipe.ezmember.co.kr/cache/recipe/2015/06/24/018a27cf4a6ce57d8c2a17951451b192.jpg',
+            img: 'https://t1.daumcdn.net/cfile/tistory/9975173C5B9B84BE08',
             contentimg: [
                 'http://recipe.ezmember.co.kr/cache/recipe/2015/06/24/018a27cf4a6ce57d8c2a17951451b192.jpg',
                 'http://recipe.ezmember.co.kr/cache/recipe/2015/06/24/018a27cf4a6ce57d8c2a17951451b192.jpg',
@@ -272,8 +281,9 @@ const initState = {
             name: '눈꽃만두',
             time: 15,
             difficulty: '중',
+            keyIngredient: '',
             ingredients: ['만두','전분','식용유','간장','고춧가루'],
-            img: 'http://recipe1.ezmember.co.kr/cache/recipe/2015/07/12/b46a1015bf806bbeba77861355e38d861.jpg',
+            img: 'http://mblogthumb1.phinf.naver.net/20160827_196/menzel_1472224222702GjX65_JPEG/image_3995489801472222408921.jpg?type=w800',
             contentimg: [
                 'http://recipe1.ezmember.co.kr/cache/recipe/2015/07/12/b46a1015bf806bbeba77861355e38d861.jpg',
                 'http://recipe1.ezmember.co.kr/cache/recipe/2015/07/12/b46a1015bf806bbeba77861355e38d861.jpg',
@@ -308,7 +318,25 @@ const initState = {
 }
 
 const recipeReducer = (state=initState, action) => {
-    return state
+    switch(action.type){
+        case 'ADD_TO_FAVORITE':
+            if(state.favorite.indexOf(action.id)===-1){
+                alert('즐겨찾기에 등록되었습니다.')
+                return {
+                    ...state,
+                    favorite: [...state.favorite, action.id]
+                }
+            } else {
+                alert('이미 즐겨찾기에 등록되어있는 레시피입니다.')
+                return state
+            }
+        case 'REMOVE_FROM_FAVORITE':
+            return{
+                ...state,
+                favorite: state.favorite.filter(item => item.id!==action.id)
+            }
+        default: return state
+    }
 }
 
 export default recipeReducer

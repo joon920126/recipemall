@@ -146,7 +146,7 @@ const initState = {
             stock: 15,
             company: 'CJ',
             madein: '국내산',
-            img: 'http://img2.tmon.kr/cdn2/deals/2018/12/18/1712390014/front_c86ab_moupr.jpg',
+            img: 'http://item.ssgcdn.com/94/05/93/item/0000007930594_i1_1200.jpg',
             tag: '마늘',
             content: [
                 "한식에서는 절대 빠질 수 없는 향신료인 마늘입니다.",

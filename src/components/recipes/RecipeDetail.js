@@ -4,19 +4,17 @@ import Search from '../layout/Search'
 import ProductButton from '../products/ProductButton'
 
 class RecipeDetail extends Component {
-    
-    buyall = (e) => {
 
+    componentDidMount(){
+        window.scrollTo(0,0)
     }
-
+    
     render(){
         const recipe=this.props.recipe
         const product=this.props.product
-        console.log(product);
-        
 
         return (
-            <div className="container">
+            <div className="container Site-content">
                 <Search/>
                 <div className="row">
                     <div className="col s12 l6">

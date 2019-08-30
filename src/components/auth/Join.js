@@ -18,12 +18,12 @@ class Join extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        console.log(this.state) 
     }
 
     render(){
         return (
-            <div className="container">
+            <div className="container Site-content">
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5>회원가입</h5>
                     <div className="input-field">

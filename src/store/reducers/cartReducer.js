@@ -9,18 +9,26 @@ const initState = {
 const cartReducer = (state=initState, action) => {
     switch(action.type){
         case 'ADD_TO_CART':
-            console.log('added to cart', action);
-            return state
+            if(state.cart.map(item => item.id === action.id).reduce((a,b)=>a||b)){
+                return {
+                    ...state,
+                    cart: state.cart.map(item => item.id===action.id? {id:item.id, qty:item.qty+action.qty} : item)
+                }
+            } else {
+                return {
+                    ...state,
+                    cart: [...state.cart.splice(0), {id:action.id, qty:action.qty}]
+                }
+            }
         case 'REMOVE_FROM_CART':
-            console.log('removed from cart', action);
-            return state
-        case 'ORDER':
-            console.log('ordered', action)
-            return state
-        case 'ADD_ONE_TO_CART':
             return {
                 ...state,
-                cart: state.cart.map(item => item.id===action.id? {id:item.id, qty:item.qty+1} : item)
+                cart: state.cart.filter(item => item.id !== action.id)
+            }
+        case 'ORDER':
+            return {
+                ...state,
+                cart: []
             }
         case 'REMOVE_ONE_FROM_CART':
             return {

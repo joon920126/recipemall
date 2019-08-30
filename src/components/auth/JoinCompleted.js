@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const JoinCompleted = () => {
     return (
-        <div className="container">
+        <div className="container Site-content">
             <div className="row">
                 <div className="col s8 l8 offset-l2 center">
                     <h5>회원가입이 완료되셨습니다.</h5>

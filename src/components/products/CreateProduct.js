@@ -1,18 +1,29 @@
 import React, { Component } from 'react'
+import ImageUploader from 'react-images-upload'
 
 class CreateProduct extends Component {
+
+    constructor(props) {
+		super(props);
+		 this.state = { img: [] };
+		 this.onDrop = this.onDrop.bind(this);
+	}
+
+	onDrop(pictureFiles, pictureDataURLs) {
+		this.setState({
+            img: this.state.img.concat(pictureFiles),
+        });
+        console.log(this.state);
+        
+	}
 
     state = {
         name: '',
         price: 0,
         company: '',
         madeIn: '',
-        img: '',
+        img: [],
         content: ''
-    }
-
-    handleImageButtonClick = (e) => {
-        console.log(this.state.img)
     }
 
     handleChange = (e) => {
@@ -28,7 +39,7 @@ class CreateProduct extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container Site-content">
                 <form onSubmit={this.handleSubmit}>
                     <h4 className="grey-text text-darken-1">상품 등록</h4>
                     <div className="row">
@@ -53,9 +64,7 @@ class CreateProduct extends Component {
                                 <input type="text" id="madeIn" onChange={this.handleChange}/>
                             </div>
                             <div className="input-field">
-                                <label htmlFor="img">이미지</label>
-                                <input type="text" id="img" onChange={this.handleChange}/>
-                                <button onClick={this.handleImageButtonClick} type="button" className="btn brown lighten-2">이미지 업로드</button>
+                                <ImageUploader withIcon={true} buttonText='이미지 등록' onChange={this.ondrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/>
                             </div>
                         </div>
                     </div>

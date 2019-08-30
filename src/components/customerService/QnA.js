@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 class QnA extends Component {
     render() {
         return (
-            <div className="container">
+            <div className="container Site-content">
                 <h1>this is QnA</h1>
                 <Link className="btn" to='/CreateQnA'>Ask</Link>
                 

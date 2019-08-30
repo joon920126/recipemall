@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RecipeContent from './RecipeContent'
 
 class CreateRecipe extends Component {
     state = {
@@ -7,7 +8,8 @@ class CreateRecipe extends Component {
         ingredients: [],
         difficulty: '',
         img: '',
-        content: ''
+        content: [''],
+        contentImg: ['']
     }
 
     handleChange = (e) => {
@@ -34,9 +36,18 @@ class CreateRecipe extends Component {
         console.log('image upload')
     }
 
+    addContent = (e) => {
+        e.preventDefault()
+        this.setState({
+            content: [...this.state.content, ''],
+            contentImg: [...this.state.contentImg, '']
+        })
+        console.log('added new step')
+    }
+
     render() {
         return (
-            <div className="container">
+            <div className="container Site-content">
             <form onSubmit={this.handleSubmit}>
                     <h4 className="grey-text text-darken-1">레시피 등록</h4>
                     <div className="row">
@@ -68,11 +79,11 @@ class CreateRecipe extends Component {
                         </div>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="content">레시피 상세</label>
-                        <textarea id="content" onChange={this.handleChange} className="materialize-textarea"></textarea>
+                        {this.state.content.map((step, idx) => <RecipeContent key={idx}/>)}
                     </div>
                     <div className="input-field center">
-                        <button className="btn brown lighten-2">레시피 등록</button>
+                        <button className="btn brown lighten-2" style={{marginRight:"4px"}} onClick={this.addContent}>내용 추가</button>
+                        <button className="btn brown">레시피 등록</button>
                     </div>
                 </form>
             </div>

@@ -1,29 +1,21 @@
 import React, { Component } from 'react'
-import ProductButton from '../products/ProductButton'
 import RecipeButton from '../recipes/RecipeButton'
 import Search from '../layout/Search'
 import {connect} from 'react-redux'
 
-class List extends Component {
+class Favorite extends Component {
 
     render() {
-        const keyword = this.props.keyword
-        const product = this.props.product
-        const recipe = this.props.recipe
+        const favorite = this.props.favorite
 
         return (
             <div className="container Site-content">
             <Search/>
-                <h5 className="center">'{keyword}' 검색결과</h5>
+            <h5>즐겨찾기</h5>
                 <div className="row">
-                    {recipe && recipe.map(recipe => {
+                    {favorite && favorite.map(favorite => {
                         return(
-                            <RecipeButton recipe={recipe} key={recipe.id}/>
-                        )
-                    })}
-                    {product && product.map(product => {
-                        return (
-                            <ProductButton product={product} key={product.id} />
+                            <RecipeButton recipe={favorite} key={favorite.id}/>
                         )
                     })}
                 </div>
@@ -42,13 +34,10 @@ class List extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log();
-    
+    let favorite = state.recipe.favorite.map(fav => state.recipe.recipe.find(rec => rec.id===fav))
     return {
-        keyword: state.search.keyword,
-        product: state.product.product.filter(prod => prod.name.includes(state.search.keyword)),
-        recipe: state.recipe.recipe.filter(rec => rec.name.includes(state.search.keyword))
+         favorite: favorite
     }
 }
 
-export default connect(mapStateToProps)(List)
+export default connect(mapStateToProps)(Favorite)

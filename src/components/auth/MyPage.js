@@ -1,10 +1,35 @@
 import React, { Component } from 'react'
+import MyPageButton from './MyPageButton'
 
 class MyPage extends Component {
+
     render() {
         return (
-            <div className="container">
-                <h1>this is MyPage</h1>
+            <div className="container Site-content">
+                <h5>마이페이지</h5>
+
+                <div className="row">
+                    <MyPageButton
+                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        link='/cart'
+                        name='CART'
+                        description='장바구니 조회'/>
+                    <MyPageButton
+                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        link='ordered'
+                        name='ORDER'
+                        description='주문내역 조회'/>
+                    <MyPageButton
+                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        link='profile'
+                        name='PROFILE'
+                        description='회원정보 수정'/>
+                    <MyPageButton
+                        image='https://assets.ifttt.com/images/channels/891279159/icons/large.png'
+                        link='favorite'
+                        name='RECIPE'
+                        description='레시피 즐겨찾기'/>
+                </div>
             </div>
         )
     }
