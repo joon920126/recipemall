@@ -20,7 +20,7 @@ class Search extends Component {
     }
     render(){
         return (
-            <div className="row">
+            <div className="row" style={{marginTop:'16px'}}>
                 <div className="container col s12 l4 offset-l4">
                     <form onSubmit={this.handleSubmit}>
                         <div className="input-field">
