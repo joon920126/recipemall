@@ -49,7 +49,7 @@ class App extends Component {
             <Route path="/createqna" component={CreateQnA}/>
             <Route path="/adminqna" component={AdminQnA}/>
             <Route path="/adminshipping" component={AdminShipping}/>
-            <Route path="/list" component={List}/>
+            <Route path="/list/:page" component={List}/>
             <Route path="/product/:id" component={ProductDetail}/>
             <Route path="/recipe/:id" component={RecipeDetail}/>
             <Route path="/member/:id" component={MemberDetail}/>

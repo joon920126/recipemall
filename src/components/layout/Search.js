@@ -16,7 +16,7 @@ class Search extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.search(this.state.keyword)
-        this.props.history.push('/list')
+        this.props.history.push('/list/1')
     }
     render(){
         return (
