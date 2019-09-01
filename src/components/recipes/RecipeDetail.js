@@ -75,10 +75,10 @@ class RecipeDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     let id = ownProps.match.params.id
-    let recipe = state.recipe.recipe.find(recipe => recipe.id === id)
+    let recipe = state.recipeAndProduct.recipe.find(recipe => recipe.id === id)
     return {
         recipe: recipe,
-        product: state.product.product.filter(product=>recipe.ingredients.indexOf(product.tag)!==-1)
+        product: state.recipeAndProduct.product.filter(product=>recipe.ingredients.indexOf(product.tag)!==-1)
     }
 }
 

@@ -119,8 +119,8 @@ class ProductDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     let id=ownProps.match.params.id
-    let product = state.product.product.find(product => product.id === id)
-    let recipe = state.recipe.recipe
+    let product = state.recipeAndProduct.product.find(item => item.id === id)
+    let recipe = state.recipeAndProduct.recipe
     let cart = state.cart
 
     return {
