@@ -11,13 +11,13 @@ class Cart extends Component {
         const total = cart.map(item => 
                                 product.find(product=>product.id===item.id).price 
                                 * item.qty)
-                          .reduce((a,b)=>a+b)
+                          .reduce(((a,b)=>a+b),0)
 
         const row = cart.map((item) => <ProductSummary 
                                             cart={item} 
                                             product={product.find(product => product.id === item.id)} 
                                             key={item.id}/>)
-        if(row){
+        if(row.length>0){
             return (
                 <div className="container Site-content">
                 <h5>장바구니</h5>
@@ -45,7 +45,7 @@ class Cart extends Component {
         return(
             <div className="container Site-content">
                 <h5>장바구니</h5>
-                <span className="center">장바구니에 담긴 상품이 없습니다.</span>
+                <span>장바구니에 담긴 상품이 없습니다.</span>
             </div>
         )
     }

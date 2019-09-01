@@ -38,7 +38,7 @@ const initState = {
             company: 'Heinz',
             madein: '영국',
             img: 'http://img.danawa.com/prod_img/500000/994/744/img/4744994_1.jpg?shrink=500:500&_v=20161212162320',
-            tag: '베이크드빈즈',
+            tag: '',
             content: [
                 "베이크드 빈즈의 본고장 영국의 브랜드인",
                 "하인즈의 베이크드 빈즈입니다.",

@@ -44,12 +44,9 @@ const initState = {
 const authReducer = (state=initState, action) => {
     switch (action.type) {
         case 'ADD_USER':
-            return state
-            break;
-    
+            return state    
         default:
             return state
-            break;
     }
 }
 

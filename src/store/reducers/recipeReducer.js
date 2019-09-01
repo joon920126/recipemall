@@ -320,7 +320,7 @@ const initState = {
             time: 15,
             difficulty: '중상',
             tag: ['마늘', '파스타'],
-            ingredients: ['마늘','고추','올리브유','파스타', '파슬리'],
+            ingredients: ['마늘','고추','올리브유','롱파스타', '파슬리'],
             img: 'https://cdn.apartmenttherapy.info/image/fetch/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F07%2Fe77cb676a9408994b6b07b673d46d17bdbf8814c.jpeg',
             contentimg: [
                 'https://cdn.apartmenttherapy.info/image/fetch/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2018%2F07%2Fe77cb676a9408994b6b07b673d46d17bdbf8814c.jpeg',
