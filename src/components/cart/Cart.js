@@ -5,7 +5,7 @@ import ProductSummary from './ProductSummary'
 
 class Cart extends Component {
     render(){
-        const {product} = this.props.product
+        const product = this.props.product
         const {cart} = this.props.cart
 
         const total = cart.map(item => 
@@ -54,7 +54,7 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        product: state.product,
+        product: state.recipeAndProduct.product,
         cart: state.cart
     }
 }

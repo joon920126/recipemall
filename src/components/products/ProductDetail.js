@@ -15,6 +15,7 @@ class ProductDetail extends Component {
 
     putIntoCart = () => {
         this.props.addToCart(this.props.product.id, this.state.quantity)
+        alert('장바구니에 '+this.state.quantity+'개 추가되었습니다.')
     }
 
     buy = () => {
