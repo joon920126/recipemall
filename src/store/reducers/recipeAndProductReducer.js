@@ -3,7 +3,7 @@ const initState = {
     recipe: [
         {
             type: 'recipe',
-            id: '1',
+            id: '1001',
             name: '연어 타르타르',
             time: 15,
             difficulty: '중',
@@ -38,7 +38,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '2',
+            id: '1002',
             name: '치킨 누들 수프',
             time: 20,
             tag: ['닭고기', '닭가슴살', '닭'],
@@ -73,7 +73,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '3',
+            id: '1003',
             name: '마파두부',
             time: 15,
             difficulty: '중',
@@ -109,7 +109,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '4',
+            id: '1004',
             name: '문어 샐러드',
             time: 40,
             difficulty: '하',
@@ -138,7 +138,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '11',
+            id: '1011',
             name: '두부김치',
             time: 15,
             difficulty: '하',
@@ -171,7 +171,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '12',
+            id: '1012',
             name: '두부조림',
             time: 30,
             difficulty: '하',
@@ -208,7 +208,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '13',
+            id: '1013',
             name: '두부부침',
             time: 10,
             difficulty: '하',
@@ -247,7 +247,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '14',
+            id: '1014',
             name: '만두밥',
             time: 5,
             difficulty: '하',
@@ -286,7 +286,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '15',
+            id: '1015',
             name: '눈꽃만두',
             time: 15,
             difficulty: '중',
@@ -325,7 +325,7 @@ const initState = {
         },
         {
             type: 'recipe',
-            id: '16',
+            id: '1016',
             name: '알리오 올리오',
             time: 15,
             difficulty: '중상',
@@ -366,7 +366,7 @@ const initState = {
     product: [
         {
             type: 'product',
-            id: '1',
+            id: '2001',
             name: '풀무원 소가 부침두부 300g',
             price: 1500,
             stock: 15,
@@ -382,7 +382,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '2',
+            id: '2002',
             name: '비비고 왕교자',
             price: 8500,
             stock: 15,
@@ -398,7 +398,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '3',
+            id: '2003',
             name: '하인즈 베이크드 빈즈',
             price: 1800,
             stock: 15,
@@ -416,7 +416,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '4',
+            id: '2004',
             name: '오뚜기카레 순한맛',
             price: 2000,
             stock: 15,
@@ -434,7 +434,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '5',
+            id: '2005',
             name: '데체코 스파게티 500g',
             price: 2500,
             stock: 15,
@@ -452,7 +452,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '6',
+            id: '2006',
             name: '필라델피아 크림치즈',
             price: 3300,
             stock: 15,
@@ -467,7 +467,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '7',
+            id: '2007',
             name: '안티코 파르미지아노 레지아노',
             price: 6000,
             stock: 15,
@@ -484,7 +484,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '8',
+            id: '2008',
             name: '루지에 푸아그라 블록',
             price: 30000,
             stock: 15,
@@ -499,7 +499,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '9',
+            id: '2009',
             name: '이금기 중화 두반장 226g',
             price: 2520,
             stock: 15,
@@ -514,7 +514,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '10',
+            id: '2010',
             name: 'CJ 하선정 국산다진마늘 250g',
             price: 7940,
             stock: 15,
@@ -529,7 +529,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '11',
+            id: '2011',
             name: '미림 500g',
             price: 5000,
             stock: 15,
@@ -544,7 +544,7 @@ const initState = {
         },
         {
             type: 'product',
-            id: '12',
+            id: '2012',
             name: '풀무원 국산콩 연두부 250g',
             price: 1000,
             stock: 15,

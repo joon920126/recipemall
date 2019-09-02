@@ -16,7 +16,7 @@ class Search extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.search(this.state.keyword)
-        this.props.history.push('/list/1')
+        this.props.history.push('/list/')
     }
     render(){
         return (
@@ -29,6 +29,22 @@ class Search extends Component {
                             <label htmlFor="search-keyword">찾으시는 재료나 레시피를 입력하세요</label>
                         </div>
                     </form>
+                </div>
+                <div className="container col s12 l4">
+                    <div style={{marginTop:'28px'}}>
+                        <label style={{marginRight:'12px'}}>
+                            <input className="with-gap" name="group1" type="radio"  />
+                            <span>통합검색</span>
+                        </label>
+                        <label style={{marginRight:'12px'}}>
+                            <input className="with-gap" name="group1" type="radio"  />
+                            <span>레시피</span>
+                        </label>
+                        <label>
+                            <input className="with-gap" name="group1" type="radio"  />
+                            <span>상품</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         )
