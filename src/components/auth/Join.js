@@ -27,7 +27,7 @@ class Join extends Component {
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5>회원가입</h5>
                     <div className="input-field">
-                        <label htmlFor="email">이메일</label>
+                        <label htmlFor="email">이메일123123</label>
                         <input type="email" id="email" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
