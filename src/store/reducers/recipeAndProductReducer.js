@@ -578,6 +578,12 @@ const recipeAndProductReducer = (state=initState, action) => {
                 ...state,
                 favorite: state.favorite.filter(item => item.id!==action.id)
             }
+        case 'ADD_PRODUCT':
+            console.log('created project', action.project)
+            return state
+        case 'ADD_PRODUCT_ERROR':
+            console.log('create project error', action.err)
+            return state 
         default: return state
     }
 }

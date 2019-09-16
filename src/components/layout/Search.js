@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {search} from '../../store/actions/searchActions'
 
 class Search extends Component {
     state={
@@ -15,8 +16,32 @@ class Search extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.search(this.state.keyword)
-        this.props.history.push('/list/')
+        this.props.search(this.state.keyword, this.state.includeRecipe, this.state.includeProduct)
+        this.props.history.push('/list/1')
+    }
+    handleRadioChange = (e) => {
+        switch(e.target.id){
+            case "all":
+                this.setState({
+                    includeRecipe:true,
+                    includeProduct:true
+                })
+                break
+            case "recipe":
+                this.setState({
+                    includeRecipe:true,
+                    includeProduct:false
+                })
+                break
+            case "product":
+                this.setState({
+                    includeRecipe:false,
+                    includeProduct:true
+                })
+                break
+            default: break
+        }
+        this.props.search(this.state.keyword, this.state.includeRecipe, this.state.includeProduct)
     }
     render(){
         return (
@@ -33,15 +58,15 @@ class Search extends Component {
                 <div className="container col s12 l4">
                     <div style={{marginTop:'28px'}}>
                         <label style={{marginRight:'12px'}}>
-                            <input className="with-gap" name="group1" type="radio"  />
+                            <input className="with-gap" name="filter" type="radio" onChange={this.handleRadioChange} id="all" />
                             <span>통합검색</span>
                         </label>
                         <label style={{marginRight:'12px'}}>
-                            <input className="with-gap" name="group1" type="radio"  />
+                            <input className="with-gap" name="filter" type="radio" onChange={this.handleRadioChange} id="recipe" />
                             <span>레시피</span>
                         </label>
                         <label>
-                            <input className="with-gap" name="group1" type="radio"  />
+                            <input className="with-gap" name="filter" type="radio" onChange={this.handleRadioChange} id="product" />
                             <span>상품</span>
                         </label>
                     </div>
@@ -53,7 +78,7 @@ class Search extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        search: (keyword) => {dispatch({type:"SEARCH", keyword:keyword})}
+        search: (keyword, includeRecipe, includeProduct) => dispatch(search(keyword, includeRecipe, includeProduct))
     }
 }
 

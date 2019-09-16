@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import ImageUploader from 'react-images-upload'
+import {createProduct} from '../../store/actions/productActions'
 
 class CreateProduct extends Component {
 
@@ -34,7 +36,7 @@ class CreateProduct extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        this.props.createProduct(this.state)
     }
 
     render() {
@@ -81,4 +83,10 @@ class CreateProduct extends Component {
     }
 }
 
-export default CreateProduct
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createProduct: (product) => dispatch(createProduct(product))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProduct)

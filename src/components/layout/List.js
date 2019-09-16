@@ -4,11 +4,18 @@ import RecipeButton from '../recipes/RecipeButton'
 import Search from '../layout/Search'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
 
 class List extends Component {
 
     componentDidMount(){
         window.scrollTo(0,0)
+    }
+
+    shouldComponentUpdate(){
+        console.log(this.props.recipeAndProduct)
+        return this.props.recipeAndProduct? true:false
     }
 
     render() {
@@ -18,7 +25,8 @@ class List extends Component {
         // const recipe = this.props.recipe
         // const productAndRecipe = [...product,...recipe].sort((a,b)=>parseInt(a.id,10)-parseInt(b.id,10))
         // console.log(productAndRecipe)
-        const recipeAndProduct = this.props.recipeAndProduct.slice(8*(page-1), 8*page)
+        const RnP=this.props.recipeAndProduct||[]
+        const recipeAndProduct = RnP.slice(8*(page-1), 8*page)
 
         return (
             <div className="container Site-content">
@@ -31,9 +39,13 @@ class List extends Component {
                     {recipeAndProduct && recipeAndProduct.map(item => {
                         switch(item.type){
                             case 'recipe':
-                                return <RecipeButton recipe={item} key={'recipe'+item.id}/>
+                                if(this.props.includeRecipe) {
+                                    return <RecipeButton recipe={item} key={'recipe'+item.id}/>
+                                } else return null
                             case 'product':
-                                return <ProductButton product={item} key={'product'+item.id}/>
+                                if(this.props.includeProduct) {
+                                    return <ProductButton product={item} key={'product'+item.id}/>
+                                } else return null
                             default: return null
                         }
                     })}
@@ -41,7 +53,7 @@ class List extends Component {
                 <div className="row">
                     <ul className="pagination center">
                         {page>1?<li className="waves-effect"><Link to={'/list/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
-                        {Object.keys(Array.apply(0,Array(Math.ceil(this.props.recipeAndProduct.length/8))))
+                        {Object.keys(Array.apply(0,Array(Math.ceil(RnP.length/8))))
                                .map(idx=><li className="waves-effect" key={idx}>
                                             <Link to={'/list/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                                          </li>)}
@@ -57,14 +69,23 @@ const mapStateToProps = (state,ownProps) => {
     return {
         keyword: state.search.keyword,
         // product: state.product.product.filter(prod => prod.name.includes(state.search.keyword)
-        //                                             ||prod.tag.includes(state.search.keyword)),
+        // //                                             ||prod.tag.includes(state.search.keyword)),
         // recipe: state.recipe.recipe.filter(rec => rec.name.includes(state.search.keyword)
         //                                         ||rec.tag.includes(state.search.keyword))
-        recipeAndProduct: [...state.recipeAndProduct.product, ...state.recipeAndProduct.recipe]
-                          .sort((a,b)=>parseInt(a.id)-parseInt(b.id))
-                          .filter(item => item.name.includes(state.search.keyword)||item.tag.includes(state.search.keyword)),
-        page:parseInt(ownProps.match.params.page)
+        // recipeAndProduct: [...state.recipeAndProduct.product, ...state.recipeAndProduct.recipe]
+        //                   //.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
+        //                   .filter(item => item.name.includes(state.search.keyword)
+        //                                 ||item.tag.includes(state.search.keyword)),
+        page:parseInt(ownProps.match.params.page),
+        includeRecipe: state.search.includeRecipe,
+        includeProduct: state.search.includeProduct,
+        RecipeAndProduct: state.firestore.ordered.recipeAndProduct
     }
 }
 
-export default connect(mapStateToProps)(List)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        {collection:'recipeAndProduct'}
+    ])
+)(List)
