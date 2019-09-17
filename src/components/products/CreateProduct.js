@@ -36,6 +36,7 @@ class CreateProduct extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        console.log(this.state)
         this.props.createProduct(this.state)
     }
 

@@ -13,11 +13,6 @@ class List extends Component {
         window.scrollTo(0,0)
     }
 
-    shouldComponentUpdate(){
-        console.log(this.props.recipeAndProduct)
-        return this.props.recipeAndProduct? true:false
-    }
-
     render() {
         const keyword = this.props.keyword
         const page = this.props.page
@@ -25,8 +20,10 @@ class List extends Component {
         // const recipe = this.props.recipe
         // const productAndRecipe = [...product,...recipe].sort((a,b)=>parseInt(a.id,10)-parseInt(b.id,10))
         // console.log(productAndRecipe)
-        const RnP=this.props.recipeAndProduct||[]
+        const RnP=(this.props.recipeAndProduct||[])
         const recipeAndProduct = RnP.slice(8*(page-1), 8*page)
+                            .filter(item => item.name.includes(keyword)
+                                          ||item.tag.includes(keyword))
 
         return (
             <div className="container Site-content">
@@ -57,7 +54,7 @@ class List extends Component {
                                .map(idx=><li className="waves-effect" key={idx}>
                                             <Link to={'/list/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                                          </li>)}
-                        {page<Math.ceil(this.props.recipeAndProduct.length/8)? <li className="waves-effect"><Link to={'/list/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+                        {page<Math.ceil(RnP.length/8)? <li className="waves-effect"><Link to={'/list/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                     </ul>
                 </div>
             </div>
@@ -66,20 +63,21 @@ class List extends Component {
 }
 
 const mapStateToProps = (state,ownProps) => {
+    console.log(state);
+    
     return {
         keyword: state.search.keyword,
         // product: state.product.product.filter(prod => prod.name.includes(state.search.keyword)
         // //                                             ||prod.tag.includes(state.search.keyword)),
         // recipe: state.recipe.recipe.filter(rec => rec.name.includes(state.search.keyword)
         //                                         ||rec.tag.includes(state.search.keyword))
-        // recipeAndProduct: [...state.recipeAndProduct.product, ...state.recipeAndProduct.recipe]
-        //                   //.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
-        //                   .filter(item => item.name.includes(state.search.keyword)
-        //                                 ||item.tag.includes(state.search.keyword)),
+        recipeAndProduct: state.firestore.ordered.recipeAndProduct,
+                          //.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
+                        //   .filter(item => item.name.includes(state.search.keyword)
+                        //                 ||item.tag.includes(state.search.keyword)),
         page:parseInt(ownProps.match.params.page),
         includeRecipe: state.search.includeRecipe,
         includeProduct: state.search.includeProduct,
-        RecipeAndProduct: state.firestore.ordered.recipeAndProduct
     }
 }
 

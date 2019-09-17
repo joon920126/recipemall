@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import Search from '../layout/Search'
 import RecipeButton from '../recipes/RecipeButton'
 import {connect} from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase';
+import {compose} from 'redux'
 
 class ProductDetail extends Component {
 
@@ -43,8 +45,11 @@ class ProductDetail extends Component {
     }
 
     render(){
-        const product = this.props.product
-        const recipe = this.props.recipe
+        console.log(this.props.recipeAndProduct)
+        const id = this.props.id
+        const product = this.props.recipeAndProduct.find(product => product.id===id)
+        const recipe = this.props.recipeAndProduct.filter(recipe => recipe.type==='recipe'
+                                                                  &&recipe.ingredients.indexOf(product.tag)!== -1)
         
         return (
             <div className="container Site-content">
@@ -101,7 +106,7 @@ class ProductDetail extends Component {
                 </div>
                 <div className="row">
                     <div className="flow-text center-align">
-                        {product.content && product.content.map((content, index) => <p key={index}>{content}</p>)}
+                        {product.content}
                     </div>
                     <hr/>
                     <h4 className="center">관련 레시피</h4>
@@ -119,15 +124,16 @@ class ProductDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    
     let id=ownProps.match.params.id
-    let product = state.recipeAndProduct.product.find(item => item.id === id)
-    let recipe = state.recipeAndProduct.recipe
     let cart = state.cart
 
     return {
-        product: product,
-        recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1),
-        cart: cart
+        // product: product,
+        // recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1),
+        recipeAndProduct: state.firestore.ordered.recipeAndProduct,
+        cart: cart,
+        id:id
     }
     /**
      * recipe의 ingredients 배열 내에 
@@ -141,4 +147,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([{collection:'recipeAndProduct'}])
+)(ProductDetail)

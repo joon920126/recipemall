@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Search from '../layout/Search'
 import ProductButton from '../products/ProductButton'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
 
 class RecipeDetail extends Component {
 
@@ -10,8 +12,10 @@ class RecipeDetail extends Component {
     }
     
     render(){
-        const recipe=this.props.recipe
-        const product=this.props.product
+        const id=this.props.id
+        const recipe=this.props.recipeAndProduct.find(recipe=>recipe.id===id)
+        const product=this.props.recipeAndProduct.filter(product => product.type==='product'
+                                                                  &&recipe.ingredients.indexOf(product.tag)!== -1)
 
         return (
             <div className="container Site-content">
@@ -49,7 +53,7 @@ class RecipeDetail extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    {recipe.introduction && recipe.introduction.map((intro, index) => <p className="flow-text center-align" key={index}>{intro}</p>)}
+                    <p className="flow-text center-align">{recipe.introduction}</p>
                     {recipe.content && recipe.content.map((content, index) => {
                         return (
                             <div className="row valign-wrapper" key={index}>
@@ -75,11 +79,13 @@ class RecipeDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     let id = ownProps.match.params.id
-    let recipe = state.recipeAndProduct.recipe.find(recipe => recipe.id === id)
     return {
-        recipe: recipe,
-        product: state.recipeAndProduct.product.filter(product=>recipe.ingredients.indexOf(product.tag)!==-1)
+        recipeAndProduct: state.firestore.ordered.recipeAndProduct,
+        id: id
     }
 }
 
-export default connect(mapStateToProps)(RecipeDetail)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([{collection:'recipeAndProduct'}])
+)(RecipeDetail)
