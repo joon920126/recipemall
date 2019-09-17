@@ -1,28 +1,33 @@
 import React from 'react'
-import {Button, Dropdown} from 'react-materialize'
+import {Button} from 'react-materialize'
 import { NavLink } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {logOut} from '../../store/actions/authActions'
 
-const AdminLinks = () => {
+const AdminLinks = (props) => {
     return (
         <div>
             <ul className="right">
+                <li><NavLink to='/CreateProduct'>상품등록</NavLink></li>
+                <li><NavLink to='/CreateRecipe'>레시피등록</NavLink></li>
+                <li><NavLink to='/Member'>회원관리</NavLink></li>
+                <li><NavLink to='/AdminQnA'>고객센터</NavLink></li>
+                <li><NavLink to='/AdminShipping'>배송관리</NavLink></li>
+                <li><a onClick={props.logOut}>로그아웃</a></li>
                 <li>
-                    <Dropdown trigger={
                         <Button className="transparent z-depth-0" tooltip="관리자 계정으로 접속중입니다.">
                             <i className="fas fa-user-cog"></i>
-                        </Button>
-                    }>
-                        <NavLink to='/CreateProduct' className="brown-text">상품등록</NavLink>
-                        <NavLink to='/CreateRecipe' className="brown-text">레시피등록</NavLink>
-                        <NavLink to='/Member' className="brown-text">회원관리</NavLink>
-                        <NavLink to='/AdminQnA' className="brown-text">고객센터</NavLink>
-                        <NavLink to='/AdminShipping' className="brown-text">배송관리</NavLink>
-                        <NavLink to='/' className="brown-text">로그아웃</NavLink>
-                    </Dropdown>
+                        </Button>   
                 </li>
             </ul>
         </div>
     )
 }
 
-export default AdminLinks
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logOut: () => dispatch(logOut())
+    }
+
+}
+export default connect(null, mapDispatchToProps)(AdminLinks)

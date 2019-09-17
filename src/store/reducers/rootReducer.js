@@ -5,6 +5,7 @@ import authReducer from './authReducer'
 import cartReducer from './cartReducer'
 import searchReducer from './searchReducer'
 import {firestoreReducer} from 'redux-firestore'
+import {firebaseReducer} from 'react-redux-firebase'
 
 const rootReducer = combineReducers ({
     recipeAndProduct: recipeAndProductReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers ({
     auth: authReducer,
     cart: cartReducer,
     search: searchReducer,
-    firestore: firestoreReducer
+    firestore: firestoreReducer,
+    firebase: firebaseReducer
 })
 
 export default rootReducer
