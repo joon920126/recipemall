@@ -4,11 +4,16 @@ import Search from '../layout/Search'
 import ProductButton from '../products/ProductButton'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
+import {addToFavorite} from '../../store/actions/recipeActions'
 
 class RecipeDetail extends Component {
 
     componentDidMount(){
         window.scrollTo(0,0)
+    }
+
+    addToFav = () => {
+        this.props.addToFavorite(this.props.recipeAndProduct.find(recipe=>recipe.id===this.props.id))
     }
     
     render(){
@@ -47,6 +52,7 @@ class RecipeDetail extends Component {
                             </tbody>
                         </table>
                         <div style={{marginTop:"12px"}}>
+                            <button style={{marginRight:"4px"}} className="btn brown" onClick={this.addToFav}>즐겨찾기에 추가</button>
                             <button style={{marginRight:"4px"}} className="btn brown" onClick={this.buyAll}>모든 재료 구매</button>
                             <a href="#ingredients" className="btn brown">개별 재료 보러가기</a>
                         </div>
@@ -85,7 +91,13 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToFavorite : (recipe) => {dispatch(addToFavorite(recipe))}
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([{collection:'recipeAndProduct'}])
 )(RecipeDetail)

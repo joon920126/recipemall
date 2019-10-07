@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
+import {addToCart} from '../../store/actions/cartActions'
 
 const ProductButton = ({product, dispatch}) => {
 
     const handleClick = (e) => {
         alert('장바구니에 추가되었습니다.')
-        dispatch({type:'ADD_TO_CART', id:product.id, qty:1})
+        dispatch(addToCart(product,1))
     }
 
     return (

@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import Search from '../layout/Search'
 import RecipeButton from '../recipes/RecipeButton'
 import {connect} from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase';
+import { firestoreConnect, getFirebase } from 'react-redux-firebase';
 import {compose} from 'redux'
+import {addToCart} from '../../store/actions/cartActions'
 
 class ProductDetail extends Component {
 
@@ -16,7 +17,7 @@ class ProductDetail extends Component {
     }
 
     putIntoCart = () => {
-        this.props.addToCart(this.props.product.id, this.state.quantity)
+        this.props.addToCart(this.props.recipeAndProduct.find(product => product.id===this.props.id), this.state.quantity)
         alert('장바구니에 '+this.state.quantity+'개 추가되었습니다.')
     }
 
@@ -26,13 +27,17 @@ class ProductDetail extends Component {
 
     plus = (e) => {
         e.preventDefault()
-        const product = this.props.product
-        if(this.state.quantity<product.stock){
+        const id = this.props.id
+        const product = this.props.recipeAndProduct.find(product => product.id===id)
+        const firebase = getFirebase()
+        const userCart = (this.props.user||[]).filter((user)=>user.id===firebase.auth().currentUser.uid)[0]
+                                              .cart.find(item=>item.id===product.id).qty
+        if(this.state.quantity+userCart<product.stock){
             this.setState({
                 quantity: this.state.quantity+1
             })
         }else{
-            
+            alert(`현재 장바구니에 넣을 수 있는 최대 수량은 ${this.state.quantity}개입니다.`)
         }
     }
     
@@ -45,7 +50,6 @@ class ProductDetail extends Component {
     }
 
     render(){
-        console.log(this.props.recipeAndProduct)
         const id = this.props.id
         const product = this.props.recipeAndProduct.find(product => product.id===id)
         const recipe = this.props.recipeAndProduct.filter(recipe => recipe.type==='recipe'
@@ -133,7 +137,8 @@ const mapStateToProps = (state, ownProps) => {
         // recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1),
         recipeAndProduct: state.firestore.ordered.recipeAndProduct,
         cart: cart,
-        id:id
+        id:id,
+        user: state.firestore.ordered.users
     }
     /**
      * recipe의 ingredients 배열 내에 
@@ -143,11 +148,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart : (id, qty) => {dispatch({type:"ADD_TO_CART", id:id , qty:qty})}
+        addToCart : (product, quantity) => {dispatch(addToCart(product, quantity))}
     }
 }
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([{collection:'recipeAndProduct'}])
+    firestoreConnect([{collection:'recipeAndProduct'}]),
+    firestoreConnect([{collection:'users'}])
 )(ProductDetail)

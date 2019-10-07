@@ -2,21 +2,22 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import ProductSummary from './ProductSummary'
+import {firestoreConnect, getFirebase} from 'react-redux-firebase'
+import {compose} from 'redux'
 
 class Cart extends Component {
     render(){
-        const product = this.props.product
-        const {cart} = this.props.cart
-
-        const total = cart.map(item => 
-                                product.find(product=>product.id===item.id).price 
-                                * item.qty)
-                          .reduce(((a,b)=>a+b),0)
-
-        const row = cart.map((item) => <ProductSummary 
-                                            cart={item} 
-                                            product={product.find(product => product.id === item.id)} 
-                                            key={item.id}/>)
+        const firebase = getFirebase()
+        const product = (this.props.product||[]).filter(item=>item.type==="product")
+        const user = (this.props.user||[]).filter((user)=>user.id===firebase.auth().currentUser.uid)
+        
+        const testPrice= user.map(item=>item.cart.map(item1=>product.find(product=>product.id===item1.id).price*item1.qty))
+        const testPrice2 = testPrice? testPrice[0] : []
+        const total = testPrice2? testPrice2.reduce(((a,b)=>a+b),0) : undefined
+        const row = user.map((item) => item.cart.map(item1=> <ProductSummary 
+                                            cart={item1} 
+                                            product={product.find(product => product.id === item1.id)} 
+                                            key={item1.id}/>))
         if(row.length>0){
             return (
                 <div className="container Site-content">
@@ -54,8 +55,8 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        product: state.recipeAndProduct.product,
-        cart: state.cart
+        product: state.firestore.ordered.recipeAndProduct,
+        user: state.firestore.ordered.users
     }
 }
 
@@ -65,4 +66,8 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([{collection:'recipeAndProduct'}]),
+    firestoreConnect([{collection:'users'}])
+)(Cart)

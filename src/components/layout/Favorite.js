@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import RecipeButton from '../recipes/RecipeButton'
+import RecipeButtonAlt from '../recipes/RecipeButtonAlt'
 import Search from '../layout/Search'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {firestoreConnect, getFirebase} from 'react-redux-firebase'
+import {compose} from 'redux'
 
 class Favorite extends Component {
 
@@ -11,10 +13,14 @@ class Favorite extends Component {
     }
 
     render() {
+        const firebase = getFirebase()
         const page = this.props.page
-        const favorite = this.props.favorite.slice(8*(page-1), 8*page)
+        const recipe = (this.props.recipe||[]).filter(item=>item.type==='recipe')||[]
+        const favoriteWhole = (((this.props.users||[]).filter(user=>user.id===firebase.auth().currentUser.uid)[0]||{})
+                                                      .favorite||[]).map(item=>recipe.find(rec=>rec.id===item.id))
+        const favorite = favoriteWhole.slice(8*(page-1), 8*page)
 
-        if(this.props.favorite.length===0) {
+        if(favoriteWhole===0) {
             return(
                 <div className="container Site-content">
                     <Search/>
@@ -30,7 +36,7 @@ class Favorite extends Component {
                     <div className="row">
                         {favorite && favorite.map(favorite => {
                             return(
-                                <RecipeButton recipe={favorite} key={favorite.id}/>
+                                <RecipeButtonAlt recipe={favorite} key={favorite.id}/>
                             )
                         })}
                     </div>
@@ -56,8 +62,14 @@ const mapStateToProps = (state, ownProps) => {
     let favorite = state.recipeAndProduct.favorite.map(fav => state.recipeAndProduct.recipe.find(rec => rec.id===fav))
     return {
          favorite: favorite,
-         page: parseInt(ownProps.match.params.page)
+         page: parseInt(ownProps.match.params.page),
+         users: state.firestore.ordered.users,
+         recipe: state.firestore.ordered.recipeAndProduct
     }
 }
 
-export default connect(mapStateToProps)(Favorite)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([{collection:'recipeAndProduct'}]),
+    firestoreConnect([{collection:'users'}])
+)(Favorite)

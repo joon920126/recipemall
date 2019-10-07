@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import ProductButton from '../products/ProductButton'
 import RecipeButton from '../recipes/RecipeButton'
+import RecipeButtonAlt from '../recipes/RecipeButtonAlt'
 import Search from '../layout/Search'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {firestoreConnect} from 'react-redux-firebase'
+import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
 
 class List extends Component {
@@ -16,6 +17,7 @@ class List extends Component {
     render() {
         const keyword = this.props.keyword
         const page = this.props.page
+        const firebase = getFirebase()
         // const product = this.props.product
         // const recipe = this.props.recipe
         // const productAndRecipe = [...product,...recipe].sort((a,b)=>parseInt(a.id,10)-parseInt(b.id,10))
@@ -24,6 +26,7 @@ class List extends Component {
         const recipeAndProduct = RnP.slice(8*(page-1), 8*page)
                             .filter(item => item.name.includes(keyword)
                                           ||item.tag.includes(keyword))
+        const favorite = ((this.props.users||[]).find(user=>user.id===firebase.auth().currentUser.uid)||{}).favorite||[]
 
         return (
             <div className="container Site-content">
@@ -37,7 +40,11 @@ class List extends Component {
                         switch(item.type){
                             case 'recipe':
                                 if(this.props.includeRecipe) {
-                                    return <RecipeButton recipe={item} key={'recipe'+item.id}/>
+                                    if(favorite.filter(fav=>fav.id===item.id).length!==0){
+                                        return <RecipeButtonAlt recipe={item} key={'recipe'+item.id}/>
+                                    }else{
+                                        return <RecipeButton recipe={item} key={'recipe'+item.id}/>
+                                    }
                                 } else return null
                             case 'product':
                                 if(this.props.includeProduct) {
@@ -63,7 +70,6 @@ class List extends Component {
 }
 
 const mapStateToProps = (state,ownProps) => {
-    console.log(state);
     
     return {
         keyword: state.search.keyword,
@@ -75,6 +81,7 @@ const mapStateToProps = (state,ownProps) => {
                           //.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
                         //   .filter(item => item.name.includes(state.search.keyword)
                         //                 ||item.tag.includes(state.search.keyword)),
+        users: state.firestore.ordered.users,
         page:parseInt(ownProps.match.params.page),
         includeRecipe: state.search.includeRecipe,
         includeProduct: state.search.includeProduct,
@@ -83,7 +90,6 @@ const mapStateToProps = (state,ownProps) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        {collection:'recipeAndProduct'}
-    ])
+    firestoreConnect([{collection:'recipeAndProduct'}]),
+    firestoreConnect([{collection:'users'}])
 )(List)
