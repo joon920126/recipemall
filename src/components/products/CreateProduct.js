@@ -1,30 +1,18 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import ImageUploader from 'react-images-upload'
 import {createProduct} from '../../store/actions/productActions'
+import {storage} from '../../config/fbconfig'
+import axios from 'axios'
 
 class CreateProduct extends Component {
-
-    constructor(props) {
-		super(props);
-		 this.state = { img: [] };
-		 this.onDrop = this.onDrop.bind(this);
-	}
-
-	onDrop(pictureFiles, pictureDataURLs) {
-		this.setState({
-            img: this.state.img.concat(pictureFiles),
-        });
-        console.log(this.state);
-        
-	}
 
     state = {
         name: '',
         price: 0,
         company: '',
         madeIn: '',
-        img: [],
+        img: null,
+        imgUrl: '',
         content: ''
     }
 
@@ -34,10 +22,47 @@ class CreateProduct extends Component {
         })
     }
 
+    handleFileInput = (e) => {
+        this.setState({
+            img: e.target.files[0]
+        })
+        console.log(this.state.img)
+    }
+
     handleSubmit = (e) => {
         e.preventDefault()
         console.log(this.state)
         this.props.createProduct(this.state)
+    }
+
+    handleUpload = (e) => {
+        e.preventDefault()
+        // const image = this.state.img
+        // console.log(image)
+        // const uploadTask = storage.ref(`images/${image.name}`).put(image)  
+        // uploadTask.on('state_changed', 
+        // (snapshot) => {
+        //     //progress function
+
+        // },
+        // (error) => {
+        //     //error function
+        //     console.log('image upload error', error);
+        // },
+        // () => {
+        //     //conplete function
+        //     storage.ref('images').child(image.name).getDownloadURL().then(url => {
+        //         console.log(url)
+        //     })
+        // })
+        const formData = new FormData();
+        formData.append('file', this.state.selectedFile)
+
+        return axios.post('/api/upload', formData).then(res => {
+            console.log('file uploaded')
+        }).catch(err => {
+            console.log('error');
+        })
     }
 
     render() {
@@ -66,8 +91,9 @@ class CreateProduct extends Component {
                                 <label htmlFor="madeIn">원산지</label>
                                 <input type="text" id="madeIn" onChange={this.handleChange}/>
                             </div>
-                            <div className="input-field">
-                                <ImageUploader withIcon={true} buttonText='이미지 등록' onChange={this.ondrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/>
+                            <div>
+                                <input type="file" id='img' onChange={e=> this.handleFileInput(e)}/>
+                                <button className="btn brown lighten-2" onClick={this.handleUpload}>이미지 업로드</button>
                             </div>
                         </div>
                     </div>

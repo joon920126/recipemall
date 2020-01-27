@@ -40,7 +40,7 @@ class App extends Component {
             <Route path="/createrecipe" component={CreateRecipe}/>
             <Route path="/favorite/:page" component={Favorite}/>
             <Route exact path="/member" component={Member}/>
-            <Route path="/qna" component={QnA}/>
+            <Route path="/qna/:page" component={QnA}/>
             <Route path="/cart" component={Cart}/>
             <Route path="/order" component={Order}/>
             <Route path="/ordercompleted" component={OrderCompleted}/>

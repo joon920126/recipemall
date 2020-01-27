@@ -30,6 +30,7 @@ class List extends Component {
 
         return (
             <div className="container Site-content">
+                
             <Search/>
                 <h5 className="center">'{keyword}' 검색결과</h5>
                 <div className="row">

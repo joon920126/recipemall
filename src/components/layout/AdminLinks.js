@@ -11,7 +11,6 @@ const AdminLinks = (props) => {
                 <li><NavLink to='/CreateProduct'>상품등록</NavLink></li>
                 <li><NavLink to='/CreateRecipe'>레시피등록</NavLink></li>
                 <li><NavLink to='/Member'>회원관리</NavLink></li>
-                <li><NavLink to='/AdminQnA'>고객센터</NavLink></li>
                 <li><NavLink to='/AdminShipping'>배송관리</NavLink></li>
                 <li><a onClick={props.logOut}>로그아웃</a></li>
                 <li>
