@@ -10,6 +10,7 @@ import CreateProduct from './components/products/CreateProduct'
 import CreateRecipe from './components/recipes/CreateRecipe'
 import Member from './components/auth/Member'
 import QnA from './components/customerService/QnA'
+import QnADetail from './components/customerService/QnADetail'
 import Shipping from './components/customerService/Shipping'
 import Cart from './components/cart/Cart'
 import Order from './components/cart/Order'
@@ -41,6 +42,7 @@ class App extends Component {
             <Route path="/favorite/:page" component={Favorite}/>
             <Route exact path="/member" component={Member}/>
             <Route path="/qna/:page" component={QnA}/>
+            <Route path="/qnaDetail/:id" component={QnADetail}/>
             <Route path="/cart" component={Cart}/>
             <Route path="/order" component={Order}/>
             <Route path="/ordercompleted" component={OrderCompleted}/>

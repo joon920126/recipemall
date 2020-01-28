@@ -9,9 +9,8 @@ class QnA extends Component {
     render() {
         const qna = (this.props.qna||[])
         const page = this.props.page
-        const qnaSlice = (qna.sort((a,b)=>b.createdAt.seconds-a.createdAt.seconds)
+        const qnaSlice = (qna.slice().sort((a,b)=>b.createdAt.seconds-a.createdAt.seconds)
                              .slice(15*(page-1),15*page))
-        qnaSlice[0]&&console.log(qnaSlice[0].createdAt)
 
         return (
             <div className="container Site-content">
@@ -29,7 +28,11 @@ class QnA extends Component {
                             return (
                                 <tr key={qna.id}>
                                     <td>{qna.name}</td>
-                                    <td>{qna.title}</td>
+                                    <td>
+                                        <Link to={'/qnaDetail/'+qna.id} className='black-text'>
+                                            {qna.title}
+                                        </Link>
+                                    </td>
                                     <td>{moment(qna.createdAt.miliseconds).format('YYYY/MM/DD')}</td>
                                 </tr>
                             )

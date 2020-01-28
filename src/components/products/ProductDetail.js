@@ -30,8 +30,9 @@ class ProductDetail extends Component {
         const id = this.props.id
         const product = this.props.recipeAndProduct.find(product => product.id===id)
         const firebase = getFirebase()
-        const userCart = (this.props.user||[]).filter((user)=>user.id===firebase.auth().currentUser.uid)[0]
-                                              .cart.find(item=>item.id===product.id).qty
+        const userCart0 = (this.props.user||[]).filter((user)=>user.id===firebase.auth().currentUser.uid)[0]
+                                              .cart.find(item=>item.id===product.id)
+        const userCart = userCart0? userCart0.qty : 0
         if(this.state.quantity+userCart<product.stock){
             this.setState({
                 quantity: this.state.quantity+1
@@ -51,9 +52,16 @@ class ProductDetail extends Component {
 
     render(){
         const id = this.props.id
-        const product = this.props.recipeAndProduct.find(product => product.id===id)
-        const recipe = this.props.recipeAndProduct.filter(recipe => recipe.type==='recipe'
-                                                                  &&recipe.ingredients.indexOf(product.tag)!== -1)
+        const RnP = this.props.recipeAndProduct
+        const product = RnP?RnP.find(product => product.id===id):{
+            img: '',
+            name: '',
+            price: '',
+            company: '',
+            madein: ''
+        }
+        const recipe = RnP&&RnP.filter(recipe => recipe.type==='recipe'
+                                          &&recipe.ingredients.indexOf(product.tag)!== -1)
         
         return (
             <div className="container Site-content">
