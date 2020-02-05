@@ -15,6 +15,7 @@ class QnA extends Component {
         return (
             <div className="container Site-content">
                 <h4 className="grey-text text-darken-1">고객센터</h4>
+                
                 <table className="highlight centered">
                     <thead>
                         <tr>

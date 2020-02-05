@@ -15,6 +15,8 @@ class QnADetail extends Component {
 
         return (
             <div className="container Site-content">
+                <h4 className="grey-text text-darken-1">고객센터</h4>
+                <hr/>
                 <div className="row">
                     <div className="col s12 l3">
                         <h6>이름: {qna.name}</h6>
@@ -23,6 +25,7 @@ class QnADetail extends Component {
                         <h6>제목: {qna.title}</h6>
                     </div>
                 </div>
+                <hr/>
                 <div className="row">
                     <div className="col s12 l12">
                         <h6>{qna.content}</h6>
