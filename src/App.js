@@ -23,6 +23,7 @@ import List from './components/layout/List'
 import ProductDetail from './components/products/ProductDetail'
 import RecipeDetail from './components/recipes/RecipeDetail'
 import MemberDetail from './components/auth/MemberDetail'
+import Profile from './components/auth/Profile'
 import Favorite from './components/layout/Favorite'
 
 
@@ -48,6 +49,7 @@ class App extends Component {
             <Route path="/ordercompleted" component={OrderCompleted}/>
             <Route path="/shipping" component={Shipping}/>
             <Route path="/myPage" component={MyPage}/>
+            <Route path="/profile" component={Profile}/>
             <Route path="/createqna" component={CreateQnA}/>
             <Route path="/adminqna" component={AdminQnA}/>
             <Route path="/adminshipping" component={AdminShipping}/>
