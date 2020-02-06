@@ -8,6 +8,8 @@ class Join extends Component {
     state = {
         email: '',
         password: '',
+        passwordConfirm: '',
+        passwordError: false,
         name: '',
         address: '',
         phone: ''
@@ -21,7 +23,12 @@ class Join extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.signUp(this.state) 
+        if(this.state.password === this.state.passwordConfirm){
+            this.props.signUp(this.state)
+            this.setState({passwordError:false})
+        } else {
+            this.setState({passwordError:true})
+        }
     }
 
     render(){
@@ -40,6 +47,10 @@ class Join extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
+                        <label className="active" htmlFor="passwordConfirm">비밀번호 확인</label>
+                        <input className='validate' placeholder="비밀번호를 다시 입력해주세요" type="password" id="passwordConfirm" onChange={this.handleChange}/>
+                    </div>
+                    <div className="input-field">
                         <label htmlFor="name">이름</label>
                         <input type="text" id="name" onChange={this.handleChange}/>
                     </div>
@@ -55,6 +66,7 @@ class Join extends Component {
                         <button className="btn brown lighten-2">회원가입</button>
                         <div className="red-text center">
                             {authError? <p>{authError}</p>: null}
+                            {this.state.passwordError? <p>비밀번호를 다시 입력해주세요</p>:null}
                         </div>
                     </div>
                 </form>
