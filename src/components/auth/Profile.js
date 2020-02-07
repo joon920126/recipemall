@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {compose} from 'redux'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
+import { change } from '../../store/actions/authActions'
 
 class Profile extends Component {
 
@@ -24,7 +25,7 @@ class Profile extends Component {
         e.preventDefault()
         if(this.state.password === this.state.passwordConfirm){
             this.setState({passwordError:false})
-            console.log("submit complete", this.state);
+            this.props.change(this.state)
         } else {
             this.setState({passwordError: true})
         }
@@ -78,7 +79,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return 
+    return {
+        change: (user) => dispatch(change(user))
+    }
 }
 
 export default compose(

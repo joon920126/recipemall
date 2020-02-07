@@ -31,6 +31,15 @@ const authReducer = (state=initState, action) => {
         case 'LOGOUT_SUCCESS':
             console.log('logout success')
             return state
+        case 'CHANGE_SUCCESS':
+            console.log('회원정보 변경 성공')
+            return state
+        case 'CHANGE_ERROR':
+            console.log('회원정보 변경 에러')
+            return {
+                ...state,
+                authError: action.err.message
+            }
         default:
             return state
     }

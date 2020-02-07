@@ -42,3 +42,31 @@ export const signUp = (newUser) => {
                         })
     }
 }
+
+export const change = (user) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase()
+        const firestore = getFirestore()
+        const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
+        userDoc.get().then(doc => {
+            if(user.name) {
+                userDoc.update({name: user.name})
+            }
+            if(user.address) {
+                userDoc.update({address: user.address})
+            }
+            if(user.phone) {
+                userDoc.update({phone: user.phone})
+            }
+            if(user.password) {
+                firebase.auth().currentUser.updatePassword(user.password).then(() => {
+                    console.log('password successfully updated')
+                }).catch((err) => {
+                    console.log('password change error', err)
+                })
+            }
+        }).catch((err) => {
+            console.log('document change error', err)
+        })
+    }
+}
