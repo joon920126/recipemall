@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import MemberSummary from './MemberSummary'
 import {connect} from 'react-redux'
+import { firestoreConnect, getFirebase, getFirestore } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 class Member extends Component {
 
@@ -8,8 +10,9 @@ class Member extends Component {
 
         const auth = this.props.auth.auth
         const user = this.props.auth.user
+        console.log(this.props)
 
-        const rows = auth.map(member => <MemberSummary
+        const rows = auth&& auth.map(member => <MemberSummary
                                             member={member}
                                             info={user.find(user=>user.uid === member.uid)}
                                             key={member.uid}
@@ -38,10 +41,14 @@ class Member extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         auth: state.auth,
         user: state.user
     }
 }
 
-export default connect(mapStateToProps)(Member)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([{collection: 'users'}])
+)(Member)
