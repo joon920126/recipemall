@@ -7,17 +7,12 @@ import { compose } from 'redux'
 class Member extends Component {
 
     render() {
-
-        const auth = this.props.auth.auth
-        const user = this.props.auth.user
-        console.log(this.props)
-
-        const rows = auth&& auth.map(member => <MemberSummary
+        const user = this.props.user
+        const rows = user&& user.map(member => <MemberSummary
                                             member={member}
-                                            info={user.find(user=>user.uid === member.uid)}
-                                            key={member.uid}
+                                            info={user.find(user=>user.id === member.id)}
+                                            key={member.id}
                                         />)
-
         return (
             <div className="container Site-content">
                 <h5>회원관리</h5>
@@ -41,10 +36,8 @@ class Member extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
-        auth: state.auth,
-        user: state.user
+        user: state.firestore.ordered.users
     }
 }
 
