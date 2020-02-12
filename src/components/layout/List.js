@@ -23,7 +23,7 @@ class List extends Component {
         // const productAndRecipe = [...product,...recipe].sort((a,b)=>parseInt(a.id,10)-parseInt(b.id,10))
         // console.log(productAndRecipe)
         const RnP=(this.props.recipeAndProduct||[])
-        const recipeAndProduct = RnP.slice(8*(page-1), 8*page)
+        const recipeAndProduct = RnP.slice(60*(page-1), 60*page)
                             .filter(item => item.name.includes(keyword)
                                           ||item.tag.includes(keyword))
         const favorite = ((this.props.users||[]).find(user=>user.id===firebase.auth().currentUser.uid)||{}).favorite||[]
@@ -58,11 +58,11 @@ class List extends Component {
                 <div className="row">
                     <ul className="pagination center">
                         {page>1?<li className="waves-effect"><Link to={'/list/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
-                        {Object.keys(Array.apply(0,Array(Math.ceil(RnP.length/8))))
+                        {Object.keys(Array.apply(0,Array(Math.ceil(RnP.length/60))))
                                .map(idx=><li className="waves-effect" key={idx}>
                                             <Link to={'/list/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                                          </li>)}
-                        {page<Math.ceil(RnP.length/8)? <li className="waves-effect"><Link to={'/list/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+                        {page<Math.ceil(RnP.length/60)? <li className="waves-effect"><Link to={'/list/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                     </ul>
                 </div>
             </div>

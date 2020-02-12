@@ -36,7 +36,7 @@ class Member extends Component {
                 case 'email' : return a.email < b.email ? -1 : a.email > b.email ? 1 : 0
                 case 'phone' : return a.phone < b.phone ? -1 : a.phone > b.phone ? 1 : 0
             }
-        }).slice(2*(page-1), 2*page)
+        }).slice(20*(page-1), 20*page)
         const rows = sortedUser&& sortedUser.map(member => <MemberSummary
                                                     member={member}
                                                     info={user.find(user=>user.id === member.id)}
@@ -62,13 +62,13 @@ class Member extends Component {
                 <div className="row">
                     <ul className="pagination center">
                         {page>1?<li className="waves-effect"><Link to={'/member/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
-                        {user&& Object.keys(Array.apply(0,Array(Math.ceil(user.length/2))))
+                        {user&& Object.keys(Array.apply(0,Array(Math.ceil(user.length/20))))
                                .map(idx => <li className='waves-effect' key={idx}>
                                         <Link to={'/Member/'+(parseInt(idx)+1)}>
                                             {parseInt(idx)+1}
                                         </Link>
                                    </li>)}
-                        {user&&page<Math.ceil(user.length/2)? <li className="waves-effect"><Link to={'/member/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+                        {user&&page<Math.ceil(user.length/20)? <li className="waves-effect"><Link to={'/member/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                     </ul>
                 </div>
                 <button className="btn brown" onClick={this.sortByEmail} style={{marginRight:'4px'}}>이메일 순으로 정렬</button>
