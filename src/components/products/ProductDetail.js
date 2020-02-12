@@ -22,7 +22,7 @@ class ProductDetail extends Component {
     }
 
     buy = () => {
-
+        console.log('buy '+this.state.quantity)
     }
 
     plus = (e) => {

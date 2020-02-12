@@ -41,7 +41,7 @@ class App extends Component {
             <Route path="/createproduct" component={CreateProduct}/>
             <Route path="/createrecipe" component={CreateRecipe}/>
             <Route path="/favorite/:page" component={Favorite}/>
-            <Route exact path="/member" component={Member}/>
+            <Route exact path="/member/:page" component={Member}/>
             <Route path="/qna/:page" component={QnA}/>
             <Route path="/qnaDetail/:id" component={QnADetail}/>
             <Route path="/cart" component={Cart}/>
@@ -56,7 +56,7 @@ class App extends Component {
             <Route path="/list/:page" component={List}/>
             <Route path="/product/:id" component={ProductDetail}/>
             <Route path="/recipe/:id" component={RecipeDetail}/>
-            <Route path="/member/:id" component={MemberDetail}/>
+            <Route path="/memberDetail/:id" component={MemberDetail}/>
           </Switch>
           <Footer/>
         </div>

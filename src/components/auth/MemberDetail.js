@@ -39,10 +39,6 @@ class MemberDetail extends Component {
                             <td>연락처</td>
                             <td>{user.contact}</td>
                         </tr>
-                        <tr>
-                            <td>상태</td>
-                            <td>{user.status}</td>
-                        </tr>
                     </tbody>
                 </table>
                 <h5>주문내역</h5>
