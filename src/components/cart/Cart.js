@@ -38,7 +38,7 @@ class Cart extends Component {
                 </table>
                 <div className="center flow-text">
                     총 {total}원 
-                    <Link style={{margin:"8px"}} className="btn brown" to='/Order'>Order</Link>
+                    <Link style={{margin:"8px"}} className="btn brown" to='/Order'>주문하기</Link>
                 </div>
             </div>
         )

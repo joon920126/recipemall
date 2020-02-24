@@ -73,3 +73,17 @@ export const removeFromCart = (product) => {
         })
     }
 }
+
+export const order = (cart) => {
+    return(dispatchEvent, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase()
+        const firestore = getFirestore()
+        const user = firebase.auth().currentUser.uid
+        firestore.collection('shipping').doc(Date.now().toString()).set({
+            cart,
+            user
+        }).catch((err) => {
+            console.log('order error', err)
+        })
+    }
+}

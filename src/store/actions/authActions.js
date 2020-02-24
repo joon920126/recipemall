@@ -66,8 +66,10 @@ export const change = (user) => {
                     console.log('password change error', err)
                 })
             }
+        }).then(() => {
+            dispatch({type:'CHANGE_SUCCESS'})
         }).catch((err) => {
-            console.log('document change error', err)
+            dispatch({type:'CHANGE_ERROR'})
         })
     }
 }

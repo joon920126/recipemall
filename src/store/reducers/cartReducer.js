@@ -22,15 +22,14 @@ const cartReducer = (state=initState, action) => {
                 ...state,
                 cart: state.cart.filter(item => item.id !== action.id)
             }
-        case 'ORDER':
-            return {
-                ...state,
-                cart: []
-            }
         case 'REMOVE_ONE_FROM_CART':
             return {
                  ...state,
                  cart: state.cart.map(item => item.id === action.id? {id:item.id, qty:item.qty-1} : item)
+            }
+        case 'ORDER':
+            return {
+                ...state
             }
         default: return state
     }

@@ -10,7 +10,7 @@ const Footer = () => {
                     <h5>레시피몰</h5>
                     <h6><i className="fas fa-phone prefix"></i> 1588-0000</h6>
                     <p className="grey-text">
-                        대표자: 박준희 &nbsp;&nbsp;&nbsp;&nbsp; 서울시 은평구 증산로 123 홀롤롤로빌딩 123호<br/>
+                        대표자: 박준희 &nbsp;&nbsp;&nbsp;&nbsp; 서울시 은평구 증산로 000 ㅁㅁㅁㅁ빌딩 000호<br/>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </p>
                 </div>
