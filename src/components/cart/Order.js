@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect, getFirebase } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { order } from '../../store/actions/cartActions'
-import Postcode from '../layout/Postcode'
+import DaumPostcode from 'react-daum-postcode';
 
 class Order extends Component {
 
@@ -12,12 +12,41 @@ class Order extends Component {
         name: '',
         address: '',
         phone: '',
-        message: ''
+        message: '',
+        addressApi: false
     }
+
+    handleAddress = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = ''; 
+        
+        if (data.addressType === 'R') {
+          if (data.bname !== '') {
+            extraAddress += data.bname;
+          }
+          if (data.buildingName !== '') {
+            extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+          }
+          fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+        }
+        this.setState({address:fullAddress})
+        document.getElementById('address').value = fullAddress
+      }
 
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+
+    handleCheck = (e) => {
+        document.getElementById('name').value = '박준희'
+        document.getElementById('address').value = '은평구 증산로 291 306호'
+        document.getElementById('phone').value = '01032048595'
+        this.setState({
+            name: '박준희',
+            address: '은평구 증산로 291 306호',
+            phone: '01032048595'
         })
     }
 
@@ -32,7 +61,11 @@ class Order extends Component {
         }).then(() => {
             this.props.order(this.state)
         })
-        
+    }
+
+    handleOpenPostCode = (e) => {
+        e.preventDefault()
+        this.setState({addressApi:true})
     }
 
     render(){
@@ -40,6 +73,7 @@ class Order extends Component {
         const user = (this.props.user||[]).filter((user) => user.id===firebase.auth().currentUser.uid)[0]
         const cart = user && user.cart
         const productList = (this.props.product||[]).filter(item => item.type==='product')
+        const apiAddress = (this.props.address)
         const row = cart&&cart.map(item => {
             const product = productList.filter(product=>product.id===item.id)[0]
             return (
@@ -87,22 +121,23 @@ class Order extends Component {
                             <div className="col s8 l8">
                                 <p>
                                     <label>
-                                        <input type="checkbox" />
+                                        <input type="checkbox" onChange={this.handleCheck}/>
                                         <span>주문자 정보와 동일</span>
                                     </label>
                                 </p>
                             </div>
                         </div>
                         <div className="input-field">
-                            <label htmlFor="name">이름</label>
+                            <label htmlFor="name" name="autofill">이름</label>
                             <input type="text" id="name" onChange={this.handleChange}/>
                         </div>
                         <div className="input-field">
-                            <label htmlFor="address">배송지</label>
-                            <input type="text" id="address" onChange={this.handleChange}/>
+                            <label htmlFor="address" name="autofill">배송지</label>
+                            <input disabled type="text" id="address" onChange={this.handleChange} value={apiAddress? apiAddress:null}/>
+                            <button className="btn brown" onClick={this.handleOpenPostCode}>배송지 입력</button>
                         </div>
                         <div className="input-field">
-                            <label htmlFor="phone">연락처</label>
+                            <label htmlFor="phone" name="autofill">연락처</label>
                             <input type="text" id="phone" onChange={this.handleChange}/>
                         </div>
                         <div className="input-field">
@@ -111,7 +146,7 @@ class Order extends Component {
                         </div>
                     </div>
                     <div className="col s6 l6">
-                        {/* <Postcode/> */}
+                        {this.state.addressApi === true? <DaumPostcode onComplete={this.handleAddress}/> : null}
                     </div>
                 </div>
                 <div className="flow-text center" style={{marginTop:'16px'}}>주문하시겠습니까?
@@ -125,7 +160,7 @@ class Order extends Component {
 const mapStateToProps = (state) => {
     return {
         product : state.firestore.ordered.recipeAndProduct,
-        user: state.firestore.ordered.users
+        user: state.firestore.ordered.users,
     }
 }
 

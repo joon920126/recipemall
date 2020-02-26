@@ -13,6 +13,7 @@
     "react-dom": "^16.9.0",
     "react-images-upload": "^1.2.7",
     "react-materialize": "^3.4.1",
+    "react-new-window": "^0.1.2",
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^2.4.1",
     "react-router-dom": "^5.0.1",

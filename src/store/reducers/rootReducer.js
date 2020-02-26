@@ -4,6 +4,7 @@ import qnaReducer from './qnaReducer'
 import authReducer from './authReducer'
 import cartReducer from './cartReducer'
 import searchReducer from './searchReducer'
+
 import {firestoreReducer} from 'redux-firestore'
 import {firebaseReducer} from 'react-redux-firebase'
 
@@ -14,7 +15,7 @@ const rootReducer = combineReducers ({
     cart: cartReducer,
     search: searchReducer,
     firestore: firestoreReducer,
-    firebase: firebaseReducer
+    firebase: firebaseReducer,
 })
 
 export default rootReducer
