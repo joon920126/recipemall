@@ -32,6 +32,8 @@ export const signUp = (newUser) => {
                                email: newUser.email,
                                name: newUser.name,
                                address: newUser.address,
+                               address2: newUser.address2,
+                               zonecode: newUser.zonecode,
                                phone: newUser.phone,
                                cart: [],
                                favorite: []

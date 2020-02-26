@@ -76,7 +76,7 @@ class Order extends Component {
             resolve()
         }).then(() => {
             this.setState({
-                cart: this.props.user.filter(user => user.id === getFirebase().auth().currentUser.uid).cart
+                cart: this.props.user.find(user => user.id === getFirebase().auth().currentUser.uid).cart
             })
         }).then(() => {
             this.props.order(this.state)
@@ -143,6 +143,7 @@ class Order extends Component {
                                         <input type="checkbox" onClick={this.handleCheck}/>
                                         <span>주문자 정보와 동일</span>
                                     </label>
+                                    
                                     <button style={{marginLeft:'16px'}} className="btn brown lighten-2" onClick={this.handleOpenPostCode}>우편번호 찾기</button>
                                 </p>
                             </div>
@@ -178,7 +179,7 @@ class Order extends Component {
                         {this.state.addressApi === true? <DaumPostcode onComplete={this.handleAddress}/> : null}
                     </div>
                 </div>
-                <div className="flow-text center" style={{marginTop:'16px'}}>주문하시겠습니까?
+                <div className="flow-text center" style={{marginTop:'16px', marginBottom:'16px'}}>주문하시겠습니까?
                     <button style={{marginLeft:'12px'}} className="btn brown lighten-2" onClick={this.handleOrder}>주문</button>
                 </div>
             </div>

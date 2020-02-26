@@ -13,7 +13,9 @@ class Join extends Component {
         passwordError: false,
         name: '',
         address: '',
+        address2: '',
         phone: '',
+        zonecode: '',
         addressApi: false
     }
 
@@ -35,10 +37,12 @@ class Join extends Component {
           fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
         this.setState({
+            zonecode: data.zonecode,
             address: fullAddress,
             addressApi: false
         })
         document.getElementById('address').value = fullAddress
+        document.getElementById('zonecode').value = data.zonecode
       }
 
     handleChange = (e) => {
@@ -81,11 +85,19 @@ class Join extends Component {
                         <input type="text" id="name" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
+                        <label htmlFor="zonecode" className={this.state.zonecode? 'active':null}>우편번호</label>
+                        <input type="text" disabled onChange={this.handleChange} id="zonecode"/>
+                        {this.state.addressApi? <DaumPostcode onComplete={this.handleAddress}/> : 
+                                                <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>우편번호 찾기</button>}
+                    </div>
+                    <div className="input-field">
                         <label className={this.state.address? 'active' : null} htmlFor="address">배송지</label>
                         <input disabled type="text" id="address" onChange={this.handleChange}/>
-                        <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>배송지 입력</button>
                     </div>
-                    {this.state.addressApi === true? <DaumPostcode onComplete={this.handleAddress}/> : null}
+                    <div className="input-field">
+                        <label htmlFor="address2">상세주소</label>
+                        <input type="text" onChange={this.handleChange} id="address2"/>
+                    </div>
                     <div className="input-field">
                         <label htmlFor="phone">연락처</label>
                         <input type="text" id="phone" onChange={this.handleChange}/>

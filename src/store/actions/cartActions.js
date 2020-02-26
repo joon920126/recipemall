@@ -74,14 +74,20 @@ export const removeFromCart = (product) => {
     }
 }
 
-export const order = (cart) => {
+export const order = (cred) => {
     return(dispatchEvent, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase()
         const firestore = getFirestore()
-        const user = firebase.auth().currentUser.uid
+        const id = firebase.auth().currentUser.uid
         firestore.collection('shipping').doc(Date.now().toString()).set({
-            cart,
-            user
+            id,
+            name: cred.name,
+            phone: cred.phone,
+            zonecode: cred.zonecode,
+            address: cred.address,
+            address2: cred.address2,
+            cart: cred.cart,
+            message: cred.message
         }).catch((err) => {
             console.log('order error', err)
         })

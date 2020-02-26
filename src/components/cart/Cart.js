@@ -9,15 +9,14 @@ class Cart extends Component {
     render(){
         const firebase = getFirebase()
         const product = (this.props.product||[]).filter(item=>item.type==="product")
-        const user = (this.props.user||[]).filter((user)=>user.id===firebase.auth().currentUser.uid)
-        
-        const testPrice= user.map(item=>item.cart.map(item1=>product.find(product=>product.id===item1.id).price*item1.qty))
-        const testPrice2 = testPrice? testPrice[0] : []
+        const user = (this.props.user||[]).find((user)=>user.id===firebase.auth().currentUser.uid)
+        const testPrice= user&& user.cart.map(item1=>product.find(product=>product.id===item1.id).price*item1.qty)
+        const testPrice2 = testPrice? testPrice : []
         const total = testPrice2? testPrice2.reduce(((a,b)=>a+b),0) : undefined
-        const row = user.map((item) => item.cart.map(item1=> <ProductSummary 
-                                            cart={item1} 
-                                            product={product.find(product => product.id === item1.id)} 
-                                            key={item1.id}/>))
+        const row = user? user.cart.map(item=> <ProductSummary 
+                                            cart={item} 
+                                            product={product.find(product => product.id === item.id)} 
+                                            key={item.id}/>) : []
         if(row.length>0){
             return (
                 <div className="container Site-content">
