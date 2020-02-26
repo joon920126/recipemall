@@ -10,7 +10,9 @@ class Order extends Component {
     state = {
         cart: [],
         name: '',
+        zonecode: '',
         address: '',
+        address2: '',
         phone: '',
         message: '',
         addressApi: false
@@ -30,10 +32,12 @@ class Order extends Component {
           fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
         this.setState({
+            zonecode: data.zonecode,
             address: fullAddress,
             addressApi: false
         })
         document.getElementById('address').value = fullAddress
+        document.getElementById('zonecode').value = data.zonecode
       }
 
     handleChange = (e) => {
@@ -41,16 +45,18 @@ class Order extends Component {
             [e.target.id]: e.target.value
         })
     }
-
+    
     handleCheck = (e) => {
+        const firebase = getFirebase()
+        const user = (this.props.user||[]).find((user) => user.id===firebase.auth().currentUser.uid)
         if(e.target.checked) {
-            document.getElementById('name').value = '박준희'
-            document.getElementById('address').value = '은평구 증산로 291 306호'
-            document.getElementById('phone').value = '01032048595'
+            document.getElementById('name').value = user.name
+            document.getElementById('address').value = user.address
+            document.getElementById('phone').value = user.phone
             this.setState({
-                name: '박준희',
-                address: '은평구 증산로 291 306호',
-                phone: '01032048595'
+                name: user.name,
+                address: user.address,
+                phone: user.phone
             })
         }else{
             document.getElementById('name').value = ''
@@ -70,7 +76,7 @@ class Order extends Component {
             resolve()
         }).then(() => {
             this.setState({
-                cart: this.props.user.filter(user => user.id === getFirebase().auth().currentUser.uid)[0].cart
+                cart: this.props.user.filter(user => user.id === getFirebase().auth().currentUser.uid).cart
             })
         }).then(() => {
             this.props.order(this.state)
@@ -84,10 +90,9 @@ class Order extends Component {
 
     render(){
         const firebase = getFirebase()
-        const user = (this.props.user||[]).filter((user) => user.id===firebase.auth().currentUser.uid)[0]
+        const user = (this.props.user||[]).find((user) => user.id===firebase.auth().currentUser.uid)
         const cart = user && user.cart
         const productList = (this.props.product||[]).filter(item => item.type==='product')
-        const apiAddress = (this.props.address)
         const row = cart&&cart.map(item => {
             const product = productList.find(product=>product.id===item.id)
             return (
@@ -128,7 +133,7 @@ class Order extends Component {
                 </table>
                 <div className="row">
                     <div className="col s6 l6">
-                        <div className="row">
+                        <div className="row" style={{marginBottom:'0px'}}>
                             <div className="col s4 l4">
                                 <h5 className="grey-text text-darken-2">배송지 정보</h5>
                             </div>
@@ -138,20 +143,30 @@ class Order extends Component {
                                         <input type="checkbox" onClick={this.handleCheck}/>
                                         <span>주문자 정보와 동일</span>
                                     </label>
+                                    <button style={{marginLeft:'16px'}} className="btn brown lighten-2" onClick={this.handleOpenPostCode}>우편번호 찾기</button>
                                 </p>
                             </div>
                         </div>
-                        <div className="input-field">
-                            <label className={this.state.address? 'active' : null} htmlFor="name" name="autofill">이름</label>
-                            <input type="text" id="name" onChange={this.handleChange}/>
+                        <div className="row" style={{marginBottom:'0px'}}>
+                            <div className="input-field col s6 l6" style={{marginTop:'0px'}}>
+                                <label className={this.state.name? 'active' : null} htmlFor="name" name="autofill">이름</label>
+                                <input type="text" id="name" onChange={this.handleChange}/>
+                            </div>
+                            <div className="input-field col s6 l6" style={{marginTop:'0px'}}>
+                                <label className={this.state.zonecode? 'active' : null} htmlFor="zonecode" name="autofill">우편번호</label>
+                                <input disabled type="text" id="zonecode" onChange={this.handleChange}/>
+                            </div>
                         </div>
-                        <div className="input-field">
+                        <div className="input-field" style = {{marginTop:'0px'}}>
                             <label className={this.state.address? 'active' : null} htmlFor="address" name="autofill">배송지</label>
-                            <input disabled type="text" id="address" onChange={this.handleChange} value={apiAddress? apiAddress:null}/>
-                            <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>배송지 입력</button>
+                            <input disabled type="text" id="address" onChange={this.handleChange}/>
                         </div>
                         <div className="input-field">
-                            <label className={this.state.address? 'active' : null} htmlFor="phone" name="autofill">연락처</label>
+                            <label className={this.state.address2? 'active' : null} htmlFor="address2" name="autofill">상세주소</label>
+                            <input type="text" id="address2" onChange={this.handleChange}/>
+                        </div>
+                        <div className="input-field">
+                            <label className={this.state.phone? 'active' : null} htmlFor="phone" name="autofill">연락처</label>
                             <input type="text" id="phone" onChange={this.handleChange}/>
                         </div>
                         <div className="input-field">
