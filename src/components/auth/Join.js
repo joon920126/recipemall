@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom'
 import { connect } from "react-redux";
 import { signUp } from '../../store/actions/authActions'
+import DaumPostcode from 'react-daum-postcode';
 
 class Join extends Component {
 
@@ -12,8 +13,33 @@ class Join extends Component {
         passwordError: false,
         name: '',
         address: '',
-        phone: ''
+        phone: '',
+        addressApi: false
     }
+
+    handleOpenPostCode = (e) => {
+        e.preventDefault()
+        this.setState({addressApi:true})
+    }
+    handleAddress = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = ''; 
+        
+        if (data.addressType === 'R') {
+          if (data.bname !== '') {
+            extraAddress += data.bname;
+          }
+          if (data.buildingName !== '') {
+            extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+          }
+          fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+        }
+        this.setState({
+            address: fullAddress,
+            addressApi: false
+        })
+        document.getElementById('address').value = fullAddress
+      }
 
     handleChange = (e) => {
         this.setState({
@@ -56,8 +82,10 @@ class Join extends Component {
                     </div>
                     <div className="input-field">
                         <label htmlFor="address">배송지</label>
-                        <input type="text" id="address" onChange={this.handleChange}/>
+                        <input disabled type="text" id="address" onChange={this.handleChange}/>
+                        <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>배송지 입력</button>
                     </div>
+                    {this.state.addressApi === true? <DaumPostcode onComplete={this.handleAddress}/> : null}
                     <div className="input-field">
                         <label htmlFor="phone">연락처</label>
                         <input type="text" id="phone" onChange={this.handleChange}/>

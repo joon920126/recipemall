@@ -29,7 +29,10 @@ class Order extends Component {
           }
           fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
-        this.setState({address:fullAddress})
+        this.setState({
+            address: fullAddress,
+            addressApi: false
+        })
         document.getElementById('address').value = fullAddress
       }
 
@@ -134,7 +137,7 @@ class Order extends Component {
                         <div className="input-field">
                             <label htmlFor="address" name="autofill">배송지</label>
                             <input disabled type="text" id="address" onChange={this.handleChange} value={apiAddress? apiAddress:null}/>
-                            <button className="btn brown" onClick={this.handleOpenPostCode}>배송지 입력</button>
+                            <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>배송지 입력</button>
                         </div>
                         <div className="input-field">
                             <label htmlFor="phone" name="autofill">연락처</label>
