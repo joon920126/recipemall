@@ -73,15 +73,15 @@ class Join extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                        <label className="active" htmlFor="passwordConfirm">비밀번호 확인</label>
-                        <input className='validate' placeholder="비밀번호를 다시 입력해주세요" type="password" id="passwordConfirm" onChange={this.handleChange}/>
+                        <label htmlFor="passwordConfirm">비밀번호 확인</label>
+                        <input className='validate' type="password" id="passwordConfirm" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
                         <label htmlFor="name">이름</label>
                         <input type="text" id="name" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="address">배송지</label>
+                        <label className={this.state.address? 'active' : null} htmlFor="address">배송지</label>
                         <input disabled type="text" id="address" onChange={this.handleChange}/>
                         <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>배송지 입력</button>
                     </div>

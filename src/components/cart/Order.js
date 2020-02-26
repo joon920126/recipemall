@@ -43,14 +43,25 @@ class Order extends Component {
     }
 
     handleCheck = (e) => {
-        document.getElementById('name').value = '박준희'
-        document.getElementById('address').value = '은평구 증산로 291 306호'
-        document.getElementById('phone').value = '01032048595'
-        this.setState({
-            name: '박준희',
-            address: '은평구 증산로 291 306호',
-            phone: '01032048595'
-        })
+        if(e.target.checked) {
+            document.getElementById('name').value = '박준희'
+            document.getElementById('address').value = '은평구 증산로 291 306호'
+            document.getElementById('phone').value = '01032048595'
+            this.setState({
+                name: '박준희',
+                address: '은평구 증산로 291 306호',
+                phone: '01032048595'
+            })
+        }else{
+            document.getElementById('name').value = ''
+            document.getElementById('address').value = ''
+            document.getElementById('phone').value = ''
+            this.setState({
+                name: '',
+                address: '',
+                phone: ''
+            })
+        }
     }
 
     handleOrder = (e) => {
@@ -78,7 +89,7 @@ class Order extends Component {
         const productList = (this.props.product||[]).filter(item => item.type==='product')
         const apiAddress = (this.props.address)
         const row = cart&&cart.map(item => {
-            const product = productList.filter(product=>product.id===item.id)[0]
+            const product = productList.find(product=>product.id===item.id)
             return (
                 <tr key={item.id}>
                     <td className="center" style={{width:'15%'}}>
@@ -124,23 +135,23 @@ class Order extends Component {
                             <div className="col s8 l8">
                                 <p>
                                     <label>
-                                        <input type="checkbox" onChange={this.handleCheck}/>
+                                        <input type="checkbox" onClick={this.handleCheck}/>
                                         <span>주문자 정보와 동일</span>
                                     </label>
                                 </p>
                             </div>
                         </div>
                         <div className="input-field">
-                            <label htmlFor="name" name="autofill">이름</label>
+                            <label className={this.state.address? 'active' : null} htmlFor="name" name="autofill">이름</label>
                             <input type="text" id="name" onChange={this.handleChange}/>
                         </div>
                         <div className="input-field">
-                            <label htmlFor="address" name="autofill">배송지</label>
+                            <label className={this.state.address? 'active' : null} htmlFor="address" name="autofill">배송지</label>
                             <input disabled type="text" id="address" onChange={this.handleChange} value={apiAddress? apiAddress:null}/>
                             <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>배송지 입력</button>
                         </div>
                         <div className="input-field">
-                            <label htmlFor="phone" name="autofill">연락처</label>
+                            <label className={this.state.address? 'active' : null} htmlFor="phone" name="autofill">연락처</label>
                             <input type="text" id="phone" onChange={this.handleChange}/>
                         </div>
                         <div className="input-field">
