@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {compose} from 'redux'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import { change } from '../../store/actions/authActions'
+import DaumPostcode from 'react-daum-postcode'
 
 class Profile extends Component {
 
@@ -12,7 +13,15 @@ class Profile extends Component {
         passwordError: false,
         name: '',
         address: '',
+        address2: '',
+        zonecode: '',
+        addressApi: false,
         phone: ''
+    }
+
+    handleOpenPostCode = (e) => {
+        e.preventDefault()
+        this.setState({addressApi:true})
     }
 
     handleChange = (e) => {
@@ -30,6 +39,28 @@ class Profile extends Component {
             this.setState({passwordError: true})
         }
     }
+
+    handleAddress = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = ''; 
+        
+        if (data.addressType === 'R') {
+          if (data.bname !== '') {
+            extraAddress += data.bname;
+          }
+          if (data.buildingName !== '') {
+            extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+          }
+          fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+        }
+        this.setState({
+            zonecode: data.zonecode,
+            address: fullAddress,
+            addressApi: false
+        })
+        document.getElementById('address').value = fullAddress
+        document.getElementById('zonecode').value = data.zonecode
+      }
 
     render() {
         const auth = this.props.auth
@@ -51,9 +82,20 @@ class Profile extends Component {
                         <label className="active" htmlFor="passwordConfirm">비밀번호 확인</label>
                         <input className='validate' placeholder="비밀번호를 다시 입력해주세요" type="password" id="passwordConfirm" onChange={this.handleChange}/>
                     </div>
+
+                    <div className="input-field">
+                        <label className="active" htmlFor="zonecode">우편번호</label>
+                        <input disabled className='validate' placeholder={user? user.zonecode:''} type="text" id="zonecode" onChange={this.handleChange}/>
+                        {this.state.addressApi? <DaumPostcode onComplete={this.handleAddress}/> : 
+                                                <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>우편번호 찾기</button>}
+                    </div>
                     <div className="input-field">
                         <label className="active" htmlFor="address">배송지</label>
-                        <input className='validate' placeholder={user? user.address:''} type="text" id="address" onChange={this.handleChange}/>
+                        <input disabled className='validate' placeholder={user? user.address:''} type="text" id="address" onChange={this.handleChange}/>
+                    </div>
+                    <div className="input-field">
+                        <label className="active" htmlFor="address2">상세주소</label>
+                        <input className='validate' placeholder={user? user.address2:''} type="text" id="address2" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
                         <label className="active" htmlFor="phone">연락처</label>

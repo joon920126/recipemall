@@ -58,6 +58,12 @@ export const change = (user) => {
             if(user.address) {
                 userDoc.update({address: user.address})
             }
+            if(user.address2) {
+                userDoc.update({address2: user.address2})
+            }
+            if(user.zonecode) {
+                userDoc.update({zonecode: user.zonecode})
+            }
             if(user.phone) {
                 userDoc.update({phone: user.phone})
             }
