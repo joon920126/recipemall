@@ -53,18 +53,26 @@ class Order extends Component {
             document.getElementById('name').value = user.name
             document.getElementById('address').value = user.address
             document.getElementById('phone').value = user.phone
+            document.getElementById('address2').value = user.address2
+            document.getElementById('zonecode').value = user.zonecode
             this.setState({
                 name: user.name,
                 address: user.address,
-                phone: user.phone
+                phone: user.phone,
+                address2: user.address2,
+                zonecode: user.zonecode
             })
         }else{
             document.getElementById('name').value = ''
-            document.getElementById('address').value = ''
             document.getElementById('phone').value = ''
+            document.getElementById('zonecode').value = ''
+            document.getElementById('address').value = ''
+            document.getElementById('address2').value = ''
             this.setState({
                 name: '',
                 address: '',
+                address2: '',
+                zonecode: '',
                 phone: ''
             })
         }

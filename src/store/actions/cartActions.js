@@ -1,5 +1,5 @@
 export const addToCart = (product, quantity) => {
-    return (dispatchEvent, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
         //파이어스토어, 파이어베이스 트리거
         const firebase = getFirebase()
         const firestore = getFirestore()
@@ -10,13 +10,11 @@ export const addToCart = (product, quantity) => {
             //만약 cart에 product의 아이디를 가진 오브젝트가 있다
             //console.log(product, quantity)
             if(doc.data().cart.filter(item=>item.id===product.id).length!==0){
-                console.log("true triggered")
                 //newCart는 cart를 복사한 뒤 그 오브젝트의 수를 두번째 인자만큼 늘린다
                 const newCart = doc.data().cart.map(item=>item.id===product.id? {id:item.id, qty:item.qty+quantity}:item)
                 return newCart
             //만약 그렇지 않다면
             }else{
-                console.log("false triggered")
                 //newCart는 cart를 복사한 뒤 product의 아이디를 가지고 수량은 두번째 인자만큼 가진 오브젝트를 새로 생성한다
                 const newCart = [
                     ...doc.data().cart,
@@ -28,14 +26,16 @@ export const addToCart = (product, quantity) => {
             //newCart를 cart로 입력하기
             userDoc.update({cart:newCart})
         //에러 캐치하기
-        }).catch(error => {
-            console.log('addToCart error', error)
+        }).then(() => {
+            dispatch({type:'ADD_TO_CART_SUCCESS'})
+        }).catch(err => {
+            dispatch({type:'ADD_TO_CART_ERROR'}, err)
         })
     }
 }
 
 export const removeOneFromCart = (product) => {
-    return (dispatchEvent, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
         //파이어스토어, 파이어베이스 메소드 발동
         const firebase = getFirebase()
         const firestore = getFirestore()
@@ -50,15 +50,16 @@ export const removeOneFromCart = (product) => {
             firestore.collection('users').doc(firebase.auth().currentUser.uid).update({
                 cart:newCart
             })
-        }).catch((error)=>{
-            //에러 캐치하기
-            console.log('removeOneFromCart error', error)
+        }).then(() => {
+            dispatch({type:'REMOVE_ONE_FROM_CART_SUCCESS'})
+        }).catch((err)=>{
+            dispatch({type:'REMOVE_ONE_FROM_CART_ERROR'}, err)
         })
     }
 }
 
 export const removeFromCart = (product) => {
-    return (dispatchEvent, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase()
         const firestore = getFirestore()
         firestore.collection('users').doc(firebase.auth().currentUser.uid).get().then((doc)=>{
@@ -68,19 +69,22 @@ export const removeFromCart = (product) => {
             firestore.collection('users').doc(firebase.auth().currentUser.uid).update({
                 cart:newCart
             })
-        }).catch((error)=>{
-            console.log('removeFromCart error', error)
+        }).then(() => {
+            dispatch({type:'REMOVE_FROM_CART_SUCCESS'})
+        })
+        .catch((err)=>{
+            dispatch({type:'REMOVE_FROM_CART_ERROR'}, err)
         })
     }
 }
 
 export const order = (cred) => {
-    return(dispatchEvent, getState, {getFirebase, getFirestore}) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase()
         const firestore = getFirestore()
-        const id = firebase.auth().currentUser.uid
+        const user = firebase.auth().currentUser.uid
         firestore.collection('shipping').doc(Date.now().toString()).set({
-            id,
+            id: user,
             name: cred.name,
             phone: cred.phone,
             zonecode: cred.zonecode,
@@ -88,8 +92,17 @@ export const order = (cred) => {
             address2: cred.address2,
             cart: cred.cart,
             message: cred.message
-        }).catch((err) => {
-            console.log('order error', err)
+        }).then(() => {
+            alert('주문이 완료되었습니다.')
+        }).then(() => {
+            firestore.collection('users').doc(user).update({
+                cart: []
+            })
+        }).then(() => {
+            dispatch({type:'ORDER_SUCCESS'})
+        })
+        .catch((err) => {
+            dispatch({type:'ORDER_ERROR'}, err)
         })
     }
 }

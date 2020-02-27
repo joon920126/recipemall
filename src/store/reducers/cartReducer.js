@@ -1,35 +1,56 @@
 const initState = {
-    cart: [
-    ]
+    cartError: null
 }
 
 const cartReducer = (state=initState, action) => {
     switch(action.type){
-        case 'ADD_TO_CART':
-            if(state.cart.map(item => item.id === action.id).reduce(((a,b)=>a||b),false)){
-                return {
-                    ...state,
-                    cart: state.cart.map(item => item.id===action.id? {id:item.id, qty:item.qty+action.qty} : item)
-                }
-            } else {
-                return {
-                    ...state,
-                    cart: [...state.cart.splice(0), {id:action.id, qty:action.qty}]
-                }
-            }
-        case 'REMOVE_FROM_CART':
+        case 'ADD_TO_CART_SUCCESS':
+            console.log('add to cart success')
             return {
                 ...state,
-                cart: state.cart.filter(item => item.id !== action.id)
+                cartError: null
             }
-        case 'REMOVE_ONE_FROM_CART':
+        case 'ADD_TO_CART_ERROR':
+            console.log('add to cart error', action.err.message)
             return {
-                 ...state,
-                 cart: state.cart.map(item => item.id === action.id? {id:item.id, qty:item.qty-1} : item)
+                ...state,
+                cartError: action.err.message
             }
-        case 'ORDER':
+        case 'REMOVE_FROM_CART_SUCCESS':
+            console.log('remove from cart success')
             return {
-                ...state
+                ...state,
+                cartError: null
+            }
+        case 'REMOVE_FROM_CART_ERROR':
+            console.log('remove from cart error', action.err.message)
+            return {
+                ...state,
+                cartError: action.err.message
+            }
+        case 'REMOVE_ONE_FROM_CART_SUCCESS':
+            console.log('remove one from cart success')
+            return {
+                ...state,
+                cartError: null
+            }
+        case 'REMOVE_ONE_FROM_CART_ERROR':
+            console.log('remove one from cart error', action.err.message)
+            return {
+                ...state,
+                cartError: action.err.message
+            }
+        case 'ORDER_SUCCESS':
+            console.log('order success')
+            return {
+                ...state,
+                cartError: null
+            }
+        case 'ORDER_ERROR':
+            console.log('order error', action.err.message)
+            return {
+                ...state,
+                cartError: action.err.message
             }
         default: return state
     }
