@@ -78,20 +78,20 @@ export const removeFromCart = (product) => {
     }
 }
 
-export const order = (cred) => {
+export const order = (order) => {
     return(dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase()
         const firestore = getFirestore()
         const user = firebase.auth().currentUser.uid
         firestore.collection('shipping').doc(Date.now().toString()).set({
             id: user,
-            name: cred.name,
-            phone: cred.phone,
-            zonecode: cred.zonecode,
-            address: cred.address,
-            address2: cred.address2,
-            cart: cred.cart,
-            message: cred.message
+            name: order.name,
+            phone: order.phone,
+            zonecode: order.zonecode,
+            address: order.address,
+            address2: order.address2,
+            cart: order.cart,
+            message: order.message
         }).then(() => {
             alert('주문이 완료되었습니다.')
         }).then(() => {

@@ -1,5 +1,5 @@
 export const addToFavorite = (recipe) => {
-    return (dispatchEvent, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase()
         const firestore = getFirestore()
         const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
@@ -18,14 +18,16 @@ export const addToFavorite = (recipe) => {
             }
         }).then(newFavorite => {
             userDoc.update({favorite:newFavorite})
-        }).catch(error => {
-            console.log('addToFavorite error', error)
+        }).then(() => {
+            dispatch({type:'ADD_TO_FAVORITE_SUCCESS'})
+        }).catch(err => {
+            dispatch({type:'ADD_TO_FAVORITE_ERROR'}, err)
         })
     }
 }
 
 export const removeFromFavorite = (recipe) => {
-    return (dispatchEvent, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase()
         const firestore = getFirestore()
         const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
@@ -34,9 +36,11 @@ export const removeFromFavorite = (recipe) => {
             return newFavorite
         }).then(newFavorite => {
             userDoc.update({favorite:newFavorite})
-            alert('즐겨찾기에서 제거되었습니다.')
-        }).catch(error => {
-            console.log('removeFromFavorite error', error)
+        }).then(() => {
+            dispatch({type:'REMOVE_FROM_FAVORITE_SUCCESS'})
+        })
+        .catch(err => {
+            dispatch({type:'REMOVE_FROM_FAVORITE_ERROR'}, err)
         })
     }
 }
