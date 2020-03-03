@@ -4,14 +4,15 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect, getFirebase } from 'react-redux-firebase'
 import moment from 'moment'
+import { Redirect } from 'react-router-dom'
 
 class QnA extends Component {
     render() {
+        if(!this.props.auth.uid) return <Redirect to='/'/>
         const qna = (this.props.qna||[])
         const page = this.props.page
         const qnaSlice = (qna.slice().sort((a,b)=>b.createdAt.seconds-a.createdAt.seconds)
                              .slice(15*(page-1),15*page))
-
         return (
             <div className="container Site-content">
                 <h4 className="grey-text text-darken-1">고객센터</h4>
@@ -67,7 +68,8 @@ class QnA extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         page: parseInt(ownProps.match.params.page),
-        qna: state.firestore.ordered.qna
+        qna: state.firestore.ordered.qna,
+        auth: state.firebase.auth
     }
 }
 

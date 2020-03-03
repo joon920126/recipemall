@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+import {connect} from 'react-redux'
 import MyPageButton from './MyPageButton'
 
 class MyPage extends Component {
 
     render() {
+        if(!this.props.auth.uid) return <Redirect to='/'/>
         return (
             <div className="container Site-content">
                 <h5>마이페이지</h5>
@@ -35,4 +38,10 @@ class MyPage extends Component {
     }
 }
 
-export default MyPage
+const mapStateToProps = (state) => {
+    return { 
+        auth: state.firebase.auth
+    }
+}
+
+export default connect(mapStateToProps)(MyPage)

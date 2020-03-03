@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {compose} from 'redux'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import { change } from '../../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
 import DaumPostcode from 'react-daum-postcode'
 
 class Profile extends Component {
@@ -66,6 +67,7 @@ class Profile extends Component {
         const auth = this.props.auth
         const users = this.props.users
         const user = users&&users.find(user => user.id===auth.uid)
+        if(!this.props.auth.uid) return <Redirect to='/'/>
         return (
             <div className="container Site-content">
                 <h5 className="grey-text">회원정보 확인 및 수정</h5>
@@ -116,7 +118,7 @@ class Profile extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
-        users: state.firestore.ordered.users,
+        users: state.firestore.ordered.users
     }
 }
 

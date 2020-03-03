@@ -4,6 +4,7 @@ import { firestoreConnect, getFirebase } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { order } from '../../store/actions/cartActions'
 import DaumPostcode from 'react-daum-postcode';
+import { Redirect } from 'react-router-dom'
 
 class Order extends Component {
 
@@ -78,7 +79,7 @@ class Order extends Component {
         }
     }
 
-    handleOrder = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault()
         return new Promise(function(resolve, reject){
             resolve()
@@ -88,6 +89,9 @@ class Order extends Component {
             })
         }).then(() => {
             this.props.order(this.state)
+        }).then(() => {
+            alert('주문이 완료되었습니다.')
+            this.props.history.push('/ordercompleted', {isOrdered: true})
         })
     }
 
@@ -97,9 +101,14 @@ class Order extends Component {
     }
 
     render(){
+        if(!this.props.auth.uid) return <Redirect to='/'/>
         const firebase = getFirebase()
         const user = (this.props.user||[]).find((user) => user.id===firebase.auth().currentUser.uid)
         const cart = user && user.cart
+        if(!cart) {
+            alert('장바구니에 상품이 없습니다.')
+            return <Redirect to='/'/>
+        }
         const productList = (this.props.product||[]).filter(item => item.type==='product')
         const row = cart&&cart.map(item => {
             const product = productList.find(product=>product.id===item.id)
@@ -188,7 +197,7 @@ class Order extends Component {
                     </div>
                 </div>
                 <div className="flow-text center" style={{marginTop:'16px', marginBottom:'16px'}}>주문하시겠습니까?
-                    <button style={{marginLeft:'12px'}} className="btn brown lighten-2" onClick={this.handleOrder}>주문</button>
+                    <button style={{marginLeft:'12px'}} className="btn brown lighten-2" onClick={this.handleSubmit}>주문</button>
                 </div>
             </div>
         )
@@ -199,6 +208,7 @@ const mapStateToProps = (state) => {
     return {
         product : state.firestore.ordered.recipeAndProduct,
         user: state.firestore.ordered.users,
+        auth: state.firebase.auth
     }
 }
 

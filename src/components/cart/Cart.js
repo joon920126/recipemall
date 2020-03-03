@@ -4,9 +4,11 @@ import {connect} from 'react-redux'
 import ProductSummary from './ProductSummary'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
+import { Redirect } from 'react-router-dom'
 
 class Cart extends Component {
     render(){
+        if(!this.props.auth.uid) return <Redirect to='/'/>
         const firebase = getFirebase()
         const product = (this.props.product||[]).filter(item=>item.type==="product")
         const user = (this.props.user||[]).find((user)=>user.id===firebase.auth().currentUser.uid)
@@ -55,7 +57,8 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
     return {
         product: state.firestore.ordered.recipeAndProduct,
-        user: state.firestore.ordered.users
+        user: state.firestore.ordered.users,
+        auth: state.firebase.auth
     }
 }
 

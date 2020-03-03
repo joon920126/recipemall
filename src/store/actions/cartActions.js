@@ -93,8 +93,6 @@ export const order = (order) => {
             cart: order.cart,
             message: order.message
         }).then(() => {
-            alert('주문이 완료되었습니다.')
-        }).then(() => {
             firestore.collection('users').doc(user).update({
                 cart: []
             })
