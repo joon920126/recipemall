@@ -77,7 +77,7 @@ export const change = (user) => {
         }).then(() => {
             dispatch({type:'CHANGE_SUCCESS'})
         }).catch((err) => {
-            dispatch({type:'CHANGE_ERROR'})
+            dispatch({type:'CHANGE_ERROR', err})
         })
     }
 }

@@ -27,7 +27,7 @@ export const addToCart = (product, quantity) => {
             userDoc.update({cart:newCart})
         //에러 캐치하기
         }).then(() => {
-            dispatch({type:'ADD_TO_CART_SUCCESS'})
+            dispatch({type:'ADD_TO_CART_SUCCESS', product})
         }).catch(err => {
             dispatch({type:'ADD_TO_CART_ERROR'}, err)
         })
@@ -51,7 +51,7 @@ export const removeOneFromCart = (product) => {
                 cart:newCart
             })
         }).then(() => {
-            dispatch({type:'REMOVE_ONE_FROM_CART_SUCCESS'})
+            dispatch({type:'REMOVE_ONE_FROM_CART_SUCCESS', product})
         }).catch((err)=>{
             dispatch({type:'REMOVE_ONE_FROM_CART_ERROR'}, err)
         })
@@ -70,7 +70,7 @@ export const removeFromCart = (product) => {
                 cart:newCart
             })
         }).then(() => {
-            dispatch({type:'REMOVE_FROM_CART_SUCCESS'})
+            dispatch({type:'REMOVE_FROM_CART_SUCCESS', product})
         })
         .catch((err)=>{
             dispatch({type:'REMOVE_FROM_CART_ERROR'}, err)
@@ -97,7 +97,7 @@ export const order = (order) => {
                 cart: []
             })
         }).then(() => {
-            dispatch({type:'ORDER_SUCCESS'})
+            dispatch({type:'ORDER_SUCCESS', order})
         })
         .catch((err) => {
             dispatch({type:'ORDER_ERROR'}, err)
