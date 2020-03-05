@@ -132,6 +132,7 @@ class Order extends Component {
                 </tr>
             )
         })
+        console.log(this.props)
         return (
             <div className="container Site-content">
                 <table>
