@@ -91,7 +91,8 @@ export const order = (order) => {
             address: order.address,
             address2: order.address2,
             cart: order.cart,
-            message: order.message
+            message: order.message,
+            deliver: 0
         }).then(() => {
             firestore.collection('users').doc(user).update({
                 cart: []
