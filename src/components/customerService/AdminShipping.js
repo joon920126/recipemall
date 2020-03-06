@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import ShippingSummary from './ShippingSummary'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 class AdminShipping extends Component {
 
@@ -9,6 +12,11 @@ class AdminShipping extends Component {
     }
 
     render() {
+        const {page, shipping} = this.props
+        const test = shipping&& shipping.map(shipping => shipping.id)
+        console.log(test)
+        const rows = shipping&& shipping.map(shipping => <ShippingSummary customClickEvent={this.handleclick}/>)
+
         return (
             <div className="container Site-content">
                 <h5>주문관리</h5>
@@ -24,11 +32,7 @@ class AdminShipping extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <ShippingSummary customClickEvent={this.handleClick}/>
-                        <ShippingSummary customClickEvent={this.handleClick}/>
-                        <ShippingSummary customClickEvent={this.handleClick}/>
-                        <ShippingSummary customClickEvent={this.handleClick}/>
-                        <ShippingSummary customClickEvent={this.handleClick}/>
+                        {rows}
                     </tbody>
                 </table>
             </div>
@@ -36,4 +40,14 @@ class AdminShipping extends Component {
     }
 }
 
-export default AdminShipping
+const mapStateToProps = (state, ownProps) => {
+    return {
+        page: parseInt(ownProps.match.params.page),
+        shipping: state.firestore.ordered.shipping
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([{collection: 'shipping'}])
+)(AdminShipping)

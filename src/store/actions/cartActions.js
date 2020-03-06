@@ -84,7 +84,7 @@ export const order = (order) => {
         const firestore = getFirestore()
         const user = firebase.auth().currentUser.uid
         firestore.collection('shipping').doc(Date.now().toString()).set({
-            id: user,
+            userid: user,
             name: order.name,
             phone: order.phone,
             zonecode: order.zonecode,
