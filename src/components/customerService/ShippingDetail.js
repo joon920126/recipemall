@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import ShippingSummary from './ShippingSummary'
+import { firestoreConnect, getFirebase } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { changeDeliver } from '../../store/actions/cartActions'
 
 class ShippingDetail extends Component {
-    render() {
 
-        const row = (
-            <tr>
-                <td className='center'>(이미지)</td>
-                <td className='center'>데체코 스파게티</td>
-                <td className='center'>3개</td>
-            </tr>
-            )
+    state = {
+        
+    }
+
+    handleChange = (e) => {
+        this.props.changeDeliver(this.props.id, parseInt(e.target.id))
+    }
+
+    render() {
+        const id = this.props.id
+        const product = this.props.recipeAndProduct
+        const shipping = this.props.shipping&& this.props.shipping.find(order => order.id === id)
         return (
             <div className="container Site-content">
                 <h5>배송조회</h5>
@@ -19,29 +26,56 @@ class ShippingDetail extends Component {
                     <thead>
                         <tr>
                             <th className="center">주문번호</th>
-                            <th className='center'>아이디</th>
                             <th className='center'>이름</th>
                             <th className='center'>연락처</th>
-                            <th className='center'>주소</th>
-                            <th className='center'>배송여부</th>
+                            <th className='center'>주문일자</th>
+                            <th className='center'>진행상황</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ShippingSummary/>
+                        {shipping&&<ShippingSummary
+                            key={shipping.id}
+                            name={shipping.name}
+                            phone={shipping.phone}
+                            orderedAt={shipping.orderedAt}
+                            shipId={shipping.id}
+                            deliver={shipping.deliver}
+                        />}
                     </tbody>
                 </table>
                 <table>
                     <thead>
                         <tr>
                             <th className="center">이미지</th>
+                            <th className="center">상품번호</th>
                             <th className="center">상품정보</th>
                             <th className="center">수량</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {row}
-                        {row}
-                        {row}
+                        {shipping&&product? shipping.cart.map(item => <tr key={item.id}>
+                                                                 <td style={{width: '15%'}} className="center"><img className='responsive-img materialboxed' src={product.find(item1 => item1.id===item.id).img}/></td>
+                                                                 <td style={{width: '35%'}} className="center">{item.id}</td>
+                                                                 <td style={{width: '40%'}} className="center">{product.find(item1 => item1.id===item.id).name}</td>
+                                                                 <td style={{width: '10%'}} className="center">{item.qty}개</td>
+                                                             </tr>)
+                        : null}
+                        {shipping&& <tr>
+                            <td className="center" colSpan="2">배송메시지: {shipping.message}</td>
+                            <td className="center" colSpan="2">
+                                <form onChange={this.handleChange}>
+                                    <label style={{marginRight:"8px"}}>
+                                        <input className="with-gap" name="delivered" type="radio" id="0"/><span>배송준비중</span>
+                                    </label>
+                                    <label style={{marginRight:"8px"}}>
+                                        <input className="with-gap" name="delivered" type="radio" id="1"/><span>배송중</span>
+                                    </label>
+                                    <label>
+                                        <input className="with-gap" name="delivered" type="radio" id="2"/><span>배송완료</span>
+                                    </label>
+                                </form>
+                            </td>
+                        </tr>}
                     </tbody>
                 </table>
             </div>
@@ -49,4 +83,22 @@ class ShippingDetail extends Component {
     }
 }
 
-export default ShippingDetail
+const mapStateToProps = (state, ownProps) => {
+    return {
+        id: ownProps.match.params.id,
+        shipping: state.firestore.ordered.shipping,
+        recipeAndProduct: state.firestore.ordered.recipeAndProduct
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeDeliver: (order, delivered) => dispatch(changeDeliver(order, delivered))
+    }
+}
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([{collection: 'shipping'}]),
+    firestoreConnect([{collection: 'recipeAndProduct'}])
+)(ShippingDetail)

@@ -34,9 +34,6 @@ class List extends Component {
             <Search/>
                 <h5 className="center">'{keyword}' 검색결과</h5>
                 <div className="row">
-                    {/* {recipe && recipe.map(recipe => <RecipeButton recipe={recipe} key={recipe.id}/>)}
-                    {product && product.map(product => <ProductButton product={product} key={product.id}/>)} */}
-                    {/* {productAndRecipe && productAndRecipe.map(item => item.madein? <ProductButton product={item} key={'product'+item.id}/>:<RecipeButton recipe={item} key={'recipe'+item.id}/>)} */}
                     {recipeAndProduct && recipeAndProduct.map(item => {
                         switch(item.type){
                             case 'recipe':
@@ -74,14 +71,7 @@ const mapStateToProps = (state,ownProps) => {
     
     return {
         keyword: state.search.keyword,
-        // product: state.product.product.filter(prod => prod.name.includes(state.search.keyword)
-        // //                                             ||prod.tag.includes(state.search.keyword)),
-        // recipe: state.recipe.recipe.filter(rec => rec.name.includes(state.search.keyword)
-        //                                         ||rec.tag.includes(state.search.keyword))
         recipeAndProduct: state.firestore.ordered.recipeAndProduct,
-                          //.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
-                        //   .filter(item => item.name.includes(state.search.keyword)
-                        //                 ||item.tag.includes(state.search.keyword)),
         users: state.firestore.ordered.users,
         page:parseInt(ownProps.match.params.page),
         includeRecipe: state.search.includeRecipe,

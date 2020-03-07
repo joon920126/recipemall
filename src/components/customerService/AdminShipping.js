@@ -3,19 +3,27 @@ import ShippingSummary from './ShippingSummary'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Link } from 'react-router-dom'
+
 
 class AdminShipping extends Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        this.props.history.push('/shippingdetail/1')
+        this.props.history.push('/shippingdetail/'+e.currentTarget.id)
     }
 
     render() {
         const {page, shipping} = this.props
-        const test = shipping&& shipping.map(shipping => shipping.id)
-        console.log(test)
-        const rows = shipping&& shipping.map(shipping => <ShippingSummary customClickEvent={this.handleclick}/>)
+        const rows = shipping&& shipping.map(shipping => <ShippingSummary 
+                                                            customClickEvent={this.handleClick} 
+                                                            key={shipping.id}
+                                                            name={shipping.name}
+                                                            phone={shipping.phone}
+                                                            orderedAt={shipping.orderedAt}
+                                                            deliver={shipping.deliver}
+                                                            shipId={shipping.id}
+                                                            />)
 
         return (
             <div className="container Site-content">
@@ -24,10 +32,9 @@ class AdminShipping extends Component {
                     <thead>
                         <tr>
                             <th className="center">주문번호</th>
-                            <th className='center'>아이디</th>
                             <th className='center'>이름</th>
                             <th className='center'>연락처</th>
-                            <th className='center'>주소</th>
+                            <th className='center'>주문일자</th>
                             <th className='center'>진행상황</th>
                         </tr>
                     </thead>
@@ -35,6 +42,18 @@ class AdminShipping extends Component {
                         {rows}
                     </tbody>
                 </table>
+                <div className="row">
+                    <ul className="pagination center">
+                        {page>1?<li className="waves-effect"><Link to={'/adminshipping/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
+                        {rows&& Object.keys(Array.apply(0,Array(Math.ceil(rows.length/20))))
+                               .map(idx => <li className='waves-effect' key={idx}>
+                                        <Link to={'/adminshipping/'+(parseInt(idx)+1)}>
+                                            {parseInt(idx)+1}
+                                        </Link>
+                                   </li>)}
+                        {rows&&page<Math.ceil(rows.length/20)? <li className="waves-effect"><Link to={'/adminshipping/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+                    </ul>
+                </div>
             </div>
         )
     }

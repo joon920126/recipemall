@@ -92,7 +92,8 @@ export const order = (order) => {
             address2: order.address2,
             cart: order.cart,
             message: order.message,
-            deliver: 0
+            deliver: 0,
+            orderedAt: Date()
         }).then(() => {
             firestore.collection('users').doc(user).update({
                 cart: []
@@ -102,6 +103,15 @@ export const order = (order) => {
         })
         .catch((err) => {
             dispatch({type:'ORDER_ERROR'}, err)
+        })
+    }
+}
+
+export const changeDeliver = (order, delivered) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore()
+        firestore.collection('shipping').doc(order).update({
+            deliver: delivered
         })
     }
 }
