@@ -58,8 +58,11 @@ class ShippingDetail extends Component {
                                                                  <td style={{width: '35%'}} className="center">{item.id}</td>
                                                                  <td style={{width: '40%'}} className="center">{product.find(item1 => item1.id===item.id).name}</td>
                                                                  <td style={{width: '10%'}} className="center">{item.qty}개</td>
-                                                             </tr>)
-                        : null}
+                                                             </tr>
+                        ): null}
+                        {shipping&&<tr>
+                            <td className="center" colSpan="4">배송지: ({shipping.zonecode}) {shipping.address} {shipping.address2}</td>
+                            </tr>}
                         {shipping&& <tr>
                             <td className="center" colSpan="2">배송메시지: {shipping.message}</td>
                             <td className="center" colSpan="2">
@@ -75,7 +78,8 @@ class ShippingDetail extends Component {
                                     </label>
                                 </form>
                             </td>
-                        </tr>}
+                        </tr>
+                        }
                     </tbody>
                 </table>
             </div>
