@@ -25,6 +25,7 @@ import RecipeDetail from './components/recipes/RecipeDetail'
 import MemberDetail from './components/auth/MemberDetail'
 import Profile from './components/auth/Profile'
 import Favorite from './components/layout/Favorite'
+import AdminShippingDetail from './components/customerService/AdminShippingDetail'
 import ShippingDetail from './components/customerService/ShippingDetail'
 
 
@@ -58,7 +59,8 @@ class App extends Component {
             <Route path="/product/:id" component={ProductDetail}/>
             <Route path="/recipe/:id" component={RecipeDetail}/>
             <Route path="/memberDetail/:id" component={MemberDetail}/>
-            <Route path="/shippingDetail/:id" component={ShippingDetail}/>
+            <Route path="/adminshippingdetail/:id" component={AdminShippingDetail}/>
+            <Route path="/shippingdetail/:id" component={ShippingDetail}/>
           </Switch>
           <Footer/>
         </div>

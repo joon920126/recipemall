@@ -1,14 +1,36 @@
 import React, { Component } from 'react'
+import ShippingSummary from './ShippingSummary'
 import { firestoreConnect, getFirebase } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { changeDeliver } from '../../store/actions/cartActions'
-import moment from 'moment'
 
-class ShippingDetail extends Component {
+class AdminShippingDetail extends Component {
 
     state = {
-        
+        deliver: null
+    }
+
+    componentDidUpdate = () => {
+        window.scrollTo(0,0)
+        const deliver = this.props.shipping&& this.props.shipping.find(order => order.id === this.props.id).deliver
+        switch(deliver){
+            case 0: {
+                document.getElementById('0').setAttribute('checked', true)
+                return
+            }
+            case 1: {
+                document.getElementById('1').setAttribute('checked', true)
+                return
+            }
+            case 2: {
+                document.getElementById('2').setAttribute('checked', true)
+            }
+        }
+    }
+
+    handleChange = (e) => {
+        this.props.changeDeliver(this.props.id, parseInt(e.target.id))
     }
 
     render() {
@@ -22,19 +44,21 @@ class ShippingDetail extends Component {
                     <thead>
                         <tr>
                             <th className="center">주문번호</th>
+                            <th className='center'>이름</th>
+                            <th className='center'>연락처</th>
                             <th className='center'>주문일자</th>
                             <th className='center'>진행상황</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {shipping&&<tr onClick={this.handleClick} key={shipping.id} id={shipping.id}>
-                                <td className='center'>{shipping.id}</td>
-                                <td className='center'>{moment(shipping.orderedAt).format('YYYY-MM-DD')}</td>
-                                <td className='center'>{shipping.deliver===0? "배송준비중" 
-                                                                    : shipping.deliver===1? "배송중"
-                                                                                : "배송완료"}
-                                </td>
-                            </tr>}
+                        {shipping&&<ShippingSummary
+                            key={shipping.id}
+                            name={shipping.name}
+                            phone={shipping.phone}
+                            orderedAt={shipping.orderedAt}
+                            shipId={shipping.id}
+                            deliver={shipping.deliver}
+                        />}
                     </tbody>
                 </table>
                 <table>
@@ -55,9 +79,25 @@ class ShippingDetail extends Component {
                                                              </tr>
                         ): null}
                         {shipping&&<tr>
-                            <td className="center" colSpan="2">배송지: ({shipping.zonecode}) {shipping.address} {shipping.address2}</td>
-                            <td className="center" colSpan="2">배송메시지: {shipping.message}</td>
+                            <td className="center" colSpan="4">배송지: ({shipping.zonecode}) {shipping.address} {shipping.address2}</td>
                             </tr>}
+                        {shipping&& <tr>
+                            <td className="center" colSpan="2">배송메시지: {shipping.message}</td>
+                            <td className="center" colSpan="2">
+                                <form onChange={this.handleChange}>
+                                    <label style={{marginRight:"8px"}}>
+                                        <input className="with-gap" name="delivered" type="radio" id="0"/><span>배송준비중</span>
+                                    </label>
+                                    <label style={{marginRight:"8px"}}>
+                                        <input className="with-gap" name="delivered" type="radio" id="1"/><span>배송중</span>
+                                    </label>
+                                    <label>
+                                        <input className="with-gap" name="delivered" type="radio" id="2"/><span>배송완료</span>
+                                    </label>
+                                </form>
+                            </td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -83,4 +123,4 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([{collection: 'shipping'}]),
     firestoreConnect([{collection: 'recipeAndProduct'}])
-)(ShippingDetail)
+)(AdminShippingDetail)

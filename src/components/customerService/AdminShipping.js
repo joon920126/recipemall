@@ -10,7 +10,7 @@ class AdminShipping extends Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        this.props.history.push('/shippingdetail/'+e.currentTarget.id)
+        this.props.history.push('/adminshippingdetail/'+e.currentTarget.id)
     }
 
     render() {
