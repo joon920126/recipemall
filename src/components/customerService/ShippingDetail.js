@@ -22,6 +22,8 @@ class ShippingDetail extends Component {
                     <thead>
                         <tr>
                             <th className="center">주문번호</th>
+                            <th className="center">받는사람</th>
+                            <th className="center">연락처</th>
                             <th className='center'>주문일자</th>
                             <th className='center'>진행상황</th>
                         </tr>
@@ -29,6 +31,8 @@ class ShippingDetail extends Component {
                     <tbody>
                         {shipping&&<tr onClick={this.handleClick} key={shipping.id} id={shipping.id}>
                                 <td className='center'>{shipping.id}</td>
+                                <td className='center'>{shipping.name}</td>
+                                <td className='center'>{shipping.phone}</td>
                                 <td className='center'>{moment(shipping.orderedAt).format('YYYY-MM-DD')}</td>
                                 <td className='center'>{shipping.deliver===0? "배송준비중" 
                                                                     : shipping.deliver===1? "배송중"

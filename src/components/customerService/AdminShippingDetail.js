@@ -44,7 +44,7 @@ class AdminShippingDetail extends Component {
                     <thead>
                         <tr>
                             <th className="center">주문번호</th>
-                            <th className='center'>이름</th>
+                            <th className='center'>받는사람</th>
                             <th className='center'>연락처</th>
                             <th className='center'>주문일자</th>
                             <th className='center'>진행상황</th>
