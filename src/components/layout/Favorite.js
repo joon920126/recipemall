@@ -16,7 +16,7 @@ class Favorite extends Component {
         const firebase = getFirebase()
         const page = this.props.page
         const recipe = (this.props.recipe||[]).filter(item=>item.type==='recipe')||[]
-        const favoriteWhole = (((this.props.users||[]).filter(user=>user.id===firebase.auth().currentUser.uid)[0]||{})
+        const favoriteWhole = (((this.props.users||[]).find(user=>user.id===firebase.auth().currentUser.uid)||{})
                                                       .favorite||[]).map(item=>recipe.find(rec=>rec.id===item.id))
         const favorite = favoriteWhole.slice(8*(page-1), 8*page)
 
@@ -44,11 +44,11 @@ class Favorite extends Component {
                         <ul className="pagination center">
                         <ul className="pagination center">
                             {page>1?<li className="waves-effect"><Link to={'/favorite/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
-                            {Object.keys(Array.apply(0,Array(Math.ceil(this.props.favorite.length/8))))
+                            {Object.keys(Array.apply(0,Array(Math.ceil(favoriteWhole.length/8))))
                                    .map(idx=><li className="waves-effect" key={idx}>
                                                 <Link to={'/favorite/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                                              </li>)}
-                            {page<Math.ceil(this.props.favorite.length/8)? <li className="waves-effect"><Link to={'/favorite/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+                            {page<Math.ceil(favoriteWhole.length/8)? <li className="waves-effect"><Link to={'/favorite/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                         </ul>
                         </ul>
                     </div>
@@ -59,9 +59,7 @@ class Favorite extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let favorite = state.recipeAndProduct.favorite.map(fav => state.recipeAndProduct.recipe.find(rec => rec.id===fav))
     return {
-         favorite: favorite,
          page: parseInt(ownProps.match.params.page),
          users: state.firestore.ordered.users,
          recipe: state.firestore.ordered.recipeAndProduct
