@@ -15,13 +15,9 @@ class List extends Component {
     }
 
     render() {
-        const keyword = this.props.keyword
+        const keyword = this.props.location.state.keyword
         const page = this.props.page
         const firebase = getFirebase()
-        // const product = this.props.product
-        // const recipe = this.props.recipe
-        // const productAndRecipe = [...product,...recipe].sort((a,b)=>parseInt(a.id,10)-parseInt(b.id,10))
-        // console.log(productAndRecipe)
         const RnP=(this.props.recipeAndProduct||[])
         const recipeAndProduct = RnP.slice(60*(page-1), 60*page)
                             .filter(item => item.name.includes(keyword)
@@ -37,7 +33,7 @@ class List extends Component {
                     {recipeAndProduct && recipeAndProduct.map(item => {
                         switch(item.type){
                             case 'recipe':
-                                if(this.props.includeRecipe) {
+                                if(this.props.location.state.includeRecipe) {
                                     if(favorite.filter(fav=>fav.id===item.id).length!==0){
                                         return <RecipeButtonAlt recipe={item} key={'recipe'+item.id}/>
                                     }else{
@@ -45,7 +41,7 @@ class List extends Component {
                                     }
                                 } else return null
                             case 'product':
-                                if(this.props.includeProduct) {
+                                if(this.props.location.state.includeProduct) {
                                     return <ProductButton product={item} key={'product'+item.id}/>
                                 } else return null
                             default: return null
@@ -70,12 +66,9 @@ class List extends Component {
 const mapStateToProps = (state,ownProps) => {
     
     return {
-        keyword: state.search.keyword,
         recipeAndProduct: state.firestore.ordered.recipeAndProduct,
         users: state.firestore.ordered.users,
         page:parseInt(ownProps.match.params.page),
-        includeRecipe: state.search.includeRecipe,
-        includeProduct: state.search.includeProduct,
     }
 }
 

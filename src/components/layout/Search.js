@@ -17,27 +17,21 @@ class Search extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.search(this.state.keyword, this.state.includeRecipe, this.state.includeProduct)
-        this.props.history.push('/list/1')
+        this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe:this.state.includeRecipe, includeProduct:this.state.includeProduct})
     }
     handleRadioChange = (e) => {
         switch(e.target.id){
             case "all":
-                this.setState({
-                    includeRecipe:true,
-                    includeProduct:true
-                })
+                    this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe:true, includeProduct:true})
+
                 break
             case "recipe":
-                this.setState({
-                    includeRecipe:true,
-                    includeProduct:false
-                })
+                    this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe:true, includeProduct:false})
+
                 break
             case "product":
-                this.setState({
-                    includeRecipe:false,
-                    includeProduct:true
-                })
+                    this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe:false, includeProduct:true})
+
                 break
             default: break
         }
