@@ -12,3 +12,21 @@ export const createProduct = (product) => {
         })
     }
 }
+
+export const reduceStock = (product, quantity) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore()
+        firestore.collection('recipeAndProduct').doc(product).get().then((doc)=> {
+            const newStock = doc.data().stock-quantity
+            return newStock
+        }).then(newStock => {
+            firestore.collection('recipeAndProduct').doc(product).update({
+                stock: newStock
+            })
+        }).then(() => {
+            dispatch({type:'REDUCE_STOCK', product, quantity})
+        }).catch((err) => {
+            dispatch({type:'REDUCE_STOCK_ERROR', err})
+        })
+    }
+}

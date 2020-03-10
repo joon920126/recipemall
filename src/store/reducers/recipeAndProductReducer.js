@@ -20,6 +20,12 @@ const recipeAndProductReducer = (state=initState, action) => {
         case 'ADD_PRODUCT_ERROR':
             console.log('create project error', action.err)
             return state
+        case 'REDUCE_STOCK':
+            console.log('item stock reduced', action.product, action.quantity)
+            return state
+        case 'REDUCE_STOCK_ERROR':
+            console.log('reduceStock error', action.err)
+            return state
         default: return state
     }
 }

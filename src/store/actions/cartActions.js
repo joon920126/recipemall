@@ -1,3 +1,5 @@
+import {reduceStock} from './productActions'
+
 export const addToCart = (product, quantity) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         //파이어스토어, 파이어베이스 트리거
@@ -98,6 +100,7 @@ export const order = (order) => {
             firestore.collection('users').doc(user).update({
                 cart: []
             })
+            order.cart.map(item => dispatch(reduceStock(item.id, item.qty)))
         }).then(() => {
             dispatch({type:'ORDER_SUCCESS', order})
         })
