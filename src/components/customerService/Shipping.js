@@ -15,7 +15,7 @@ class Shipping extends Component {
     render() {
         if(!this.props.auth.uid) return <Redirect to='/'/>
         const {page, shipping} = this.props
-        const rows = shipping&& shipping.filter((order) => order.userid===this.props.auth.uid)
+        const rows = shipping&& shipping.filter((order) => order.userid===this.props.auth.uid).sort((a,b) => b.id-a.id)
                         .map(shipping => 
                             <tr onClick={this.handleClick} key={shipping.id} id={shipping.id}>
                                 <td className='center'>{shipping.id}</td>

@@ -15,7 +15,7 @@ class AdminShipping extends Component {
 
     render() {
         const {page, shipping} = this.props
-        const rows = shipping&& shipping.map(shipping => <ShippingSummary 
+        const rows = shipping&& shipping.slice().sort((a,b) => b.id-a.id).map(shipping => <ShippingSummary 
                                                             customClickEvent={this.handleClick} 
                                                             key={shipping.id}
                                                             name={shipping.name}
