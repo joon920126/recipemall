@@ -8,33 +8,21 @@ import { Link } from 'react-router-dom'
 class Member extends Component {
 
     state = {
-        sortBy: "email"
+        sortBy: "byEmail"
     }
 
-    sortByEmail = (e) => {
-        e.preventDefault()
-        this.setState({sortBy: "email"})
+    handleRadioChange = (e) => {
+        this.setState({sortBy: e.target.id})
     }
-
-    sortByPhone = (e) => {
-        e.preventDefault()
-        this.setState({sortBy: "phone"})
-    }
-
-    sortByName = (e) => {
-        e.preventDefault()
-        this.setState({sortBy: "name"})
-    }
-
 
     render() {
         const user = this.props.user
         const page = this.props.page
         const sortedUser = user&& user.slice().sort((a,b) => {
             switch(this.state.sortBy) {
-                case 'name' : return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-                case 'email' : return a.email < b.email ? -1 : a.email > b.email ? 1 : 0
-                case 'phone' : return a.phone < b.phone ? -1 : a.phone > b.phone ? 1 : 0
+                case 'byName' : return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+                case 'byEmail' : return a.email < b.email ? -1 : a.email > b.email ? 1 : 0
+                case 'byPhone' : return a.phone < b.phone ? -1 : a.phone > b.phone ? 1 : 0
             }
         }).slice(20*(page-1), 20*page)
         const rows = sortedUser&& sortedUser.map(member => <MemberSummary
@@ -44,7 +32,27 @@ class Member extends Component {
                                                 />)
         return (
             <div className="container Site-content">
-                <h5>회원관리</h5>
+                <div className="row">
+                    <div className="col s8 l8">
+                        <h5>회원관리</h5>
+                    </div>
+                    <div className="col s4 l4" style={{marginTop:'22px'}}>
+                        <span style={{marginRight:'12px'}}>정렬</span>
+                        <label style={{marginRight:'12px'}}>
+                            <input type="radio" name="filter" className="with-gap" id="byEmail" onChange={this.handleRadioChange}/>
+                            <span>이메일</span>
+                        </label>
+                        <label style={{marginRight:'12px'}}>
+                            <input type="radio" name="filter" className="with-gap" id="byName" onChange={this.handleRadioChange}/>
+                            <span>이름</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="filter" className="with-gap" id="byPhone" onChange={this.handleRadioChange}/>
+                            <span>전화번호</span>
+                        </label>
+                        
+                    </div>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -59,6 +67,8 @@ class Member extends Component {
                         {rows}
                     </tbody>
                 </table>
+                <div>
+                </div>
                 <div className="row">
                     <ul className="pagination center">
                         {page>1?<li className="waves-effect"><Link to={'/member/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
@@ -71,9 +81,6 @@ class Member extends Component {
                         {user&&page<Math.ceil(user.length/20)? <li className="waves-effect"><Link to={'/member/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                     </ul>
                 </div>
-                <button className="btn brown" onClick={this.sortByEmail} style={{marginRight:'4px'}}>이메일 순으로 정렬</button>
-                <button className="btn brown" onClick={this.sortByName} style={{marginRight:'4px'}}>이름 순으로 정렬</button>
-                <button className="btn brown" onClick={this.sortByPhone}>전화번호 순으로 정렬</button>
             </div>
         )
     }
