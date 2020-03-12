@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {search} from '../../store/actions/searchActions'
 
 class Search extends Component {
     state={
@@ -16,7 +14,6 @@ class Search extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.search(this.state.keyword, this.state.includeRecipe, this.state.includeProduct)
         this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe:this.state.includeRecipe, includeProduct:this.state.includeProduct})
     }
     handleRadioChange = (e) => {
@@ -70,10 +67,4 @@ class Search extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-        search: (keyword, includeRecipe, includeProduct) => dispatch(search(keyword, includeRecipe, includeProduct))
-    }
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(Search))
+export default withRouter(Search)
