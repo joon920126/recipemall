@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Link } from 'react-router-dom'
+import ShippingSearch from '../layout/ShippingSearch'
 
 
 class AdminShipping extends Component {
@@ -15,7 +16,13 @@ class AdminShipping extends Component {
 
     render() {
         const {page, shipping} = this.props
-        const rows = shipping&& shipping.slice().sort((a,b) => b.id-a.id).map(shipping => <ShippingSummary 
+        const keyword = this.props.location.state? this.props.location.state.keyword : ''
+        const filter = this.props.location.state? this.props.location.state.filter : 'all'
+        const searched = filter === 'shipId'? shipping&& shipping.slice().filter(order => order.id.includes(keyword)) :
+                         filter === 'name'? shipping&& shipping.slice().filter(order => order.name.includes(keyword)) :
+                         filter === 'phone'? shipping&& shipping.slice().filter(order => order.phone.includes(keyword)) :
+                         filter === 'all'? shipping&& shipping.slice().filter(order => order.id.includes(keyword) || order.name.includes(keyword) || order.phone.includes(keyword)) : null
+        const rows = searched && searched.sort((a,b) => b.id-a.id).map(shipping => <ShippingSummary 
                                                             customClickEvent={this.handleClick} 
                                                             key={shipping.id}
                                                             name={shipping.name}
@@ -54,6 +61,7 @@ class AdminShipping extends Component {
                         {rows&&page<Math.ceil(rows.length/20)? <li className="waves-effect"><Link to={'/adminshipping/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                     </ul>
                 </div>
+                <ShippingSearch/>
             </div>
         )
     }

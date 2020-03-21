@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MemberSummary from './MemberSummary'
+import MemberSearch from '../layout/MemberSearch'
 import {connect} from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
@@ -16,9 +17,22 @@ class Member extends Component {
     }
 
     render() {
+        const keyword = this.props.location.state? this.props.location.state.keyword : ''
+        const filter = this.props.location.state? this.props.location.state.filter : 'all'
+
         const user = this.props.user
         const page = this.props.page
-        const sortedUser = user&& user.slice().sort((a,b) => {
+        const searchedUser = filter==='phone'? 
+                            user&& user.slice().filter(member => member.phone.includes(keyword))
+                            : filter === 'name'?
+                            user&& user.slice().filter(member => member.name.includes(keyword))
+                            : filter === 'email'?
+                            user&& user.slice().filter(member => member.email.includes(keyword))
+                            : filter === 'all' ?
+                            user&& user.slice().filter(member => member.phone.includes(keyword) || member.name.includes(keyword) || member.email.includes(keyword)) : null
+
+                                
+        const sortedUser = searchedUser && searchedUser.sort((a,b) => {
             switch(this.state.sortBy) {
                 case 'byName' : return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
                 case 'byEmail' : return a.email < b.email ? -1 : a.email > b.email ? 1 : 0
@@ -50,7 +64,6 @@ class Member extends Component {
                             <input type="radio" name="filter" className="with-gap" id="byPhone" onChange={this.handleRadioChange}/>
                             <span>전화번호</span>
                         </label>
-                        
                     </div>
                 </div>
                 <table>
@@ -81,6 +94,7 @@ class Member extends Component {
                         {user&&page<Math.ceil(user.length/20)? <li className="waves-effect"><Link to={'/member/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
                     </ul>
                 </div>
+                <MemberSearch/>
             </div>
         )
     }

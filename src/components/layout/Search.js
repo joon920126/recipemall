@@ -32,7 +32,6 @@ class Search extends Component {
                 break
             default: break
         }
-        this.props.search(this.state.keyword, this.state.includeRecipe, this.state.includeProduct)
     }
     render(){
         return (
