@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {createProduct} from '../../store/actions/productActions'
-import {storage} from '../../config/fbconfig'
-import axios from 'axios'
+import {createProduct } from '../../store/actions/productActions'
 
 class CreateProduct extends Component {
 
@@ -13,7 +11,8 @@ class CreateProduct extends Component {
         madeIn: '',
         img: null,
         imgUrl: '',
-        content: ''
+        content: '',
+        tag: ''
     }
 
     handleChange = (e) => {
@@ -24,45 +23,14 @@ class CreateProduct extends Component {
 
     handleFileInput = (e) => {
         this.setState({
-            img: e.target.files[0]
+            img: e.target.files[0],
+            imgUrl: URL.createObjectURL(e.target.files[0])
         })
-        console.log(this.state.img)
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
         this.props.createProduct(this.state)
-    }
-
-    handleUpload = (e) => {
-        e.preventDefault()
-        // const image = this.state.img
-        // console.log(image)
-        // const uploadTask = storage.ref(`images/${image.name}`).put(image)  
-        // uploadTask.on('state_changed', 
-        // (snapshot) => {
-        //     //progress function
-
-        // },
-        // (error) => {
-        //     //error function
-        //     console.log('image upload error', error);
-        // },
-        // () => {
-        //     //conplete function
-        //     storage.ref('images').child(image.name).getDownloadURL().then(url => {
-        //         console.log(url)
-        //     })
-        // })
-        const formData = new FormData();
-        formData.append('file', this.state.selectedFile)
-
-        return axios.post('/api/upload', formData).then(res => {
-            console.log('file uploaded')
-        }).catch(err => {
-            console.log('error');
-        })
     }
 
     render() {
@@ -72,7 +40,7 @@ class CreateProduct extends Component {
                     <h4 className="grey-text text-darken-1">상품 등록</h4>
                     <div className="row">
                         <div className="col s12 l6">
-                            <img className="responsive-img" src={this.state.img} alt=""/>
+                            <img className="responsive-img" src={this.state.imgUrl} alt=""/>
                         </div>
                         <div className="col s12 l6">
                             <div className="input-field">
@@ -91,9 +59,18 @@ class CreateProduct extends Component {
                                 <label htmlFor="madeIn">원산지</label>
                                 <input type="text" id="madeIn" onChange={this.handleChange}/>
                             </div>
-                            <div>
-                                <input type="file" id='img' onChange={e=> this.handleFileInput(e)}/>
-                                <button className="btn brown lighten-2" onClick={this.handleUpload}>이미지 업로드</button>
+                            <div className="input-field">
+                                <label htmlFor="tag">태그</label>
+                                <input type="text" id="tag" onChange={this.handleChange}/>
+                            </div>
+                            <div className='file-field input-field'>
+                                <div className="btn brown lighten-2">
+                                    <span>이미지 업로드</span>
+                                    <input type="file" onChange={this.handleFileInput}/>
+                                </div>
+                                <div className="file-path-wrapper">
+                                    <input type="text" className="file-path validate"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -112,7 +89,7 @@ class CreateProduct extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createProduct: (product) => dispatch(createProduct(product))
+        createProduct: (product) => dispatch(createProduct(product)),
     }
 }
 

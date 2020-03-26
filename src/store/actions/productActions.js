@@ -1,10 +1,22 @@
+
+
 export const createProduct = (product) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         //make async call to database
+        const firebase = getFirebase()
         const firestore = getFirestore()
-        firestore.collection('recipeAndProduct').add({
-             ...product,
-             type:product
+        return new Promise(function(resolve, reject){
+            resolve()
+        }).then(() => {
+            firebase.uploadFile('productImage', product.img).then(() => {
+                firebase.storage().ref('productImage'+'/'+product.img.name).getDownloadURL().then(url => {
+                    firestore.collection('recipeAndProduct').add({
+                        ...product,
+                        type: 'product',
+                        img: url
+                    })
+               })
+            })
         }).then(()=> {
             dispatch({type:'ADD_PRODUCT', product:product})
         }).catch((err) => {
