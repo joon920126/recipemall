@@ -38,9 +38,9 @@ class CreateProduct extends Component {
             <div className="container Site-content">
                 <form onSubmit={this.handleSubmit}>
                     <h4 className="grey-text text-darken-1">상품 등록</h4>
-                    <div className="row">
+                    <div className="row valign-wrapper">
                         <div className="col s12 l6">
-                            <img className="responsive-img" src={this.state.imgUrl} alt=""/>
+                            {this.state.imgUrl? <img className="responsive-img" src={this.state.imgUrl} alt=""/> : <h5 className="center grey-text text-lighten-1">이미지 없음</h5>}
                         </div>
                         <div className="col s12 l6">
                             <div className="input-field">
