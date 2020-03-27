@@ -12,6 +12,11 @@ export const createProduct = (product) => {
                 firebase.storage().ref('productImage'+'/'+product.img.name).getDownloadURL().then(url => {
                     firestore.collection('recipeAndProduct').add({
                         ...product,
+                        name: product.name,
+                        content: product.content,
+                        madeIn: product.madeIn,
+                        price: product.price,
+                        tag: product.tag,
                         type: 'product',
                         img: url
                     })
