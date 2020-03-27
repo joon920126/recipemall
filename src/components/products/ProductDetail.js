@@ -117,7 +117,7 @@ class ProductDetail extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="flow-text center-align">
+                    <div style={{whiteSpace:'pre-wrap'}} className="flow-text center-align">
                         {product.content}
                     </div>
                     <hr/>

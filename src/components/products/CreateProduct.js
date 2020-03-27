@@ -21,6 +21,13 @@ class CreateProduct extends Component {
         })
     }
 
+    handleTextAreaChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+        console.log(this.state.content)
+    }
+
     handleFileInput = (e) => {
         this.setState({
             img: e.target.files[0],
