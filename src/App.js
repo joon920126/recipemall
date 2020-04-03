@@ -27,6 +27,7 @@ import Profile from './components/auth/Profile'
 import Favorite from './components/layout/Favorite'
 import AdminShippingDetail from './components/customerService/AdminShippingDetail'
 import ShippingDetail from './components/customerService/ShippingDetail'
+import RecipeContextProvider from './contexts/recipeContext';
 
 
 class App extends Component {
@@ -41,7 +42,9 @@ class App extends Component {
             <Route path="/join" component={Join}/>
             <Route path="/joincompleted" component={JoinCompleted}/>
             <Route path="/createproduct" component={CreateProduct}/>
-            <Route path="/createrecipe" component={CreateRecipe}/>
+            <RecipeContextProvider>
+              <Route path="/createrecipe" component={CreateRecipe}/>
+            </RecipeContextProvider>
             <Route path="/favorite/:page" component={Favorite}/>
             <Route exact path="/member/:page" component={Member}/>
             <Route path="/qna/:page" component={QnA}/>

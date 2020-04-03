@@ -1,17 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import RecipeContent from './RecipeContent'
+import { RecipeContext } from '../../contexts/recipeContext'
 
 const CreateRecipe = () => {
 
-    const [recipe, setRecipe] = useState({
-        name: '',
-        time: 0,
-        ingredients: [],
-        difficulty: '',
-        img: '',
-        content: [],
-        contentImg: []
-    })
+    const {recipe, setRecipe} = useContext(RecipeContext)
 
     const handleChange = (e) => {
         setRecipe({...recipe, [e.target.id]: e.target.value})
@@ -39,7 +32,7 @@ const CreateRecipe = () => {
 
     const handleImageButtonClick = (e) => {
         e.preventDefault()
-        console.log('handle image button clicked')
+    console.log('handle image button clicked')
     }
 
     return ( 
