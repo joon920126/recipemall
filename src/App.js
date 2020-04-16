@@ -36,15 +36,14 @@ class App extends Component {
       <BrowserRouter>
         <div className="App Site">
           <Navbar/>
+            <RecipeContextProvider>
           <Switch>
             <Route exact path="/" component={Main}/>
             <Route path="/login" component={Login}/>
             <Route path="/join" component={Join}/>
             <Route path="/joincompleted" component={JoinCompleted}/>
             <Route path="/createproduct" component={CreateProduct}/>
-            <RecipeContextProvider>
               <Route path="/createrecipe" component={CreateRecipe}/>
-            </RecipeContextProvider>
             <Route path="/favorite/:page" component={Favorite}/>
             <Route exact path="/member/:page" component={Member}/>
             <Route path="/qna/:page" component={QnA}/>
@@ -55,16 +54,17 @@ class App extends Component {
             <Route path="/shipping" component={Shipping}/>
             <Route path="/myPage" component={MyPage}/>
             <Route path="/profile" component={Profile}/>
+            <Route path="/list/:page" component={List}/>
             <Route path="/createqna" component={CreateQnA}/>
             <Route path="/adminqna" component={AdminQnA}/>
             <Route path="/adminshipping" component={AdminShipping}/>
-            <Route path="/list/:page" component={List}/>
             <Route path="/product/:id" component={ProductDetail}/>
             <Route path="/recipe/:id" component={RecipeDetail}/>
             <Route path="/memberDetail/:id" component={MemberDetail}/>
             <Route path="/adminshippingdetail/:id" component={AdminShippingDetail}/>
             <Route path="/shippingdetail/:id" component={ShippingDetail}/>
           </Switch>
+            </RecipeContextProvider>
           <Footer/>
         </div>
       </BrowserRouter>

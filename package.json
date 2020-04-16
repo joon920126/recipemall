@@ -14,7 +14,7 @@
     "react-images-upload": "^1.2.7",
     "react-materialize": "^3.4.1",
     "react-new-window": "^0.1.2",
-    "react-redux": "^5.1.1",
+    "react-redux": "^7.2.0",
     "react-redux-firebase": "^2.4.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.4.0",

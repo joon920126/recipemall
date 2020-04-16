@@ -1,15 +1,40 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { RecipeContext } from '../../contexts/recipeContext'
 
 const RecipeContent = (step) => {
+
+    const {recipe, setRecipe} = useContext(RecipeContext)
+
+    const handleChange = (e) => {
+        recipe.steps.splice(step.step, 1, e.target.value)
+    }
+
+    const handleFileInput = (e) => {
+        e.preventDefault()
+        recipe.stepImg.splice(step.step, 1, e.target.files[0])
+        recipe.stepImgUrl.splice(step.step, 1, URL.createObjectURL(e.target.files[0]))
+    }
+
     return (
-        <div className="row">
-            <div className="col s12 l4 input-field">
-                <h4>image</h4>
-                <h4>image</h4>
-                <h4>image</h4>
+        <div>
+            <div className="row" style={{marginBottom:'0px'}}>
+                <div className="col s12 l4 center responsive-img materialboxed">
+                    <h5>이미지 없음</h5>
+                </div>
+                <div className="col s12 l8 input-field valign-wrapper">
+                    <textarea className="materialize-textarea" id={'step'+step} onChange={handleChange}></textarea>
+                </div>
             </div>
-            <div className="col s12 l8 input-field valign-wrapper">
-                <textarea className="materialize-textarea" id={'step'+step}></textarea>
+            <div className="row valign-wrapper">
+                <div className="col s12 l8 file-field input-field offset-l4" style={{marginTop:'0px', marginBottom:'0px'}}>
+                    <div className="btn brown lighten-2">
+                        <span>이미지 업로드</span>
+                        <input type="file" onChange={handleFileInput}/>
+                    </div>
+                    <div className="file-path-wrapper">
+                        <input type="text" className="file-path wrapper"/>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -9,9 +9,13 @@ const RecipeContextProvider = (props) => {
         ingredients: [],
         difficulty: '',
         img: '',
-        content: [],
-        contentImg: []
+        steps: [''],
+        stepImg: [''],
+        stepImgUrl: [''],
+        introduction: ''
     })
+
+    
 
     return (
         <RecipeContext.Provider value={{recipe, setRecipe}}>

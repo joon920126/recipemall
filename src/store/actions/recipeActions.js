@@ -44,3 +44,15 @@ export const removeFromFavorite = (recipe) => {
         })
     }
 }
+
+export const createRecipe = (recipe) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase()
+        const firestore = getFirestore()
+        return new Promise((resolve, reject) => {
+            resolve()
+        }).then(() => {
+            console.log(recipe)
+        })
+    }
+}
