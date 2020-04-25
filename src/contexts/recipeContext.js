@@ -4,6 +4,7 @@ export const RecipeContext = createContext()
 
 const RecipeContextProvider = (props) => {
     const [recipe, setRecipe] = useState({
+        id: '',
         name: '',
         time: 0,
         ingredients: [],
@@ -12,7 +13,8 @@ const RecipeContextProvider = (props) => {
         steps: [''],
         stepImg: [''],
         stepImgUrl: [''],
-        introduction: ''
+        introduction: '',
+        tag: []
     })
 
     

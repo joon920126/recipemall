@@ -27,7 +27,7 @@ const CreateRecipe = () => {
         dispatch(createRecipe(recipe))
     }
 
-    const handleIngredientChange = (e) => {
+    const handleArrayChange = (e) => {
         setRecipe({...recipe, 
         //정규식으로 띄어쓰기 상관없게 만들기
             [e.target.id]: e.target.value.split(', ')})
@@ -52,6 +52,10 @@ const CreateRecipe = () => {
                     </div>
                     <div className="col s12 l6">
                         <div className="input-field">
+                            <label htmlFor="id">레시피 번호</label>
+                            <input type="text" id="id" onChange={handleChange}/>
+                        </div>
+                        <div className="input-field">
                             <label htmlFor="name">레시피명</label>
                             <input type="text" id="name" onChange={handleChange}/>
                         </div>
@@ -61,11 +65,15 @@ const CreateRecipe = () => {
                         </div>
                         <div className="input-field">
                             <label htmlFor="ingredients">재료</label>
-                            <input type="text" id="ingredients" onChange={handleIngredientChange}/>
+                            <input type="text" id="ingredients" onChange={handleArrayChange}/>
                         </div>
                         <div className="input-field">
                             <label htmlFor="difficulty">난이도</label>
                             <input type="text" id="difficulty" onChange={handleChange}/>
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="tag">태그</label>
+                            <input type="text" id="tag" onChange={handleArrayChange}/>
                         </div>
                         <div className="file-field input-field">
                             <div className="btn brown lighten-2">
