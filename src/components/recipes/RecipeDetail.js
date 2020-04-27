@@ -92,7 +92,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToFavorite: (recipe) => {
+        addToFavorite: (recipe)=> {
             dispatch(addToFavorite(recipe))
         },
     }

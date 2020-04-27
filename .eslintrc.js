@@ -26,6 +26,9 @@ module.exports = {
     'react/prop-types': 0,
     'require-jsdoc': 0,
     'max-len': 0,
-    'semi': ["error", "never"]
+    'semi': ["error", "never"],
+    "quotes": [2, "single", "avoid-escape"],
+    'jsx-quotes': [2, 'prefer-single'],
+    "indent": ["error", 4]
   },
 };
