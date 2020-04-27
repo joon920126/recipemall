@@ -18,11 +18,11 @@ class RecipeDetail extends Component {
     
     render(){
         const id=this.props.id
-        const recipe=this.props.recipeAndProduct.find(recipe=>recipe.id===id)
-        const product=this.props.recipeAndProduct.filter(product => product.type==='product'
+        const recipe=this.props.recipeAndProduct && this.props.recipeAndProduct.find(recipe=>recipe.id===id)
+        const product=this.props.recipeAndProduct && this.props.recipeAndProduct.filter(product => product.type==='product'
                                                                   &&recipe.ingredients.indexOf(product.tag)!== -1)
-
-        return (
+                                                           
+        return recipe&&product? (
             <div className="container Site-content">
                 <Search/>
                 <div className="row">
@@ -64,7 +64,7 @@ class RecipeDetail extends Component {
                         return (
                             <div className="row valign-wrapper" key={index}>
                                 <div className="col s4 l4">
-                                    <img src={recipe.contentimg[index]} alt="" className="responsive-img"/>
+                                    <img src={recipe.contentImg[index]} alt="" className="responsive-img"/>
                                 </div>
                                 <div className="col s8 l7 offset-l1">
                                     <h6>{content}</h6>
@@ -79,7 +79,7 @@ class RecipeDetail extends Component {
                     </div>
                 </div>
             </div>
-        )
+        ) : <div/>
     }
 }
 
