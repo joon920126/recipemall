@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Search from '../layout/Search'
 import ProductButton from '../products/ProductButton'
-import {firestoreConnect} from 'react-redux-firebase'
+import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {addToFavorite} from '../../store/actions/recipeActions'
 
@@ -16,12 +16,14 @@ class RecipeDetail extends Component {
     }
 
     render() {
-        const id=this.props.id
-        const recipe=this.props.recipeAndProduct && this.props.recipeAndProduct.find((recipe)=>recipe.id===id)
-        const product=this.props.recipeAndProduct && this.props.recipeAndProduct.filter((product) => product.type==='product'&&
-                                                                  recipe.ingredients.indexOf(product.tag)!== -1)
-
-        return recipe&&product? (
+        const firebase = getFirebase()
+        const id = this.props.id
+        const rnp = this.props.recipeAndProduct
+        const recipe = rnp ? rnp.find((recipe)=>recipe.id===id) : {ingredients: []}
+        const product = rnp && rnp.filter((product) => product.type==='product' &&
+                                                       recipe.ingredients.indexOf(product.tag)!== -1)
+        const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
+        return (
             <div className='container Site-content'>
                 <Search/>
                 <div className='row'>
@@ -36,6 +38,10 @@ class RecipeDetail extends Component {
                                         <h4>{recipe.name}</h4>
                                     </td>
                                 </tr>
+                                {isAdmin? <tr>
+                                    <td width='40%'>레시피번호</td>
+                                    <td>{recipe.id}</td>
+                                </tr> : null}
                                 <tr>
                                     <td width='40%'>소요시간</td>
                                     <td>{recipe.time}분</td>
@@ -78,7 +84,7 @@ class RecipeDetail extends Component {
                     </div>
                 </div>
             </div>
-        ) : <div/>
+        )
     }
 }
 

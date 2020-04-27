@@ -61,7 +61,8 @@ class ProductDetail extends Component {
         }
         const recipe = RnP&&RnP.filter((recipe) => recipe.type==='recipe'&&
                                           recipe.ingredients.indexOf(product.tag)!== -1)
-
+        const firebase = getFirebase()
+        const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
         return (
             <div className='container Site-content'>
                 <Search/>
