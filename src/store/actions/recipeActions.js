@@ -76,6 +76,10 @@ export const createRecipe = (recipe) => {
                             })
                         }))
                     })
+            }).then(() => {
+                dispatch({type: 'ADD_RECIPE'}, recipe)
+            }).catch((err) => {
+                dispatch({type: 'ADD_RECIPE_ERROR'}, err)
             })
     }
 }
