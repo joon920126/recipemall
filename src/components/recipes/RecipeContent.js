@@ -20,22 +20,22 @@ const RecipeContent = ({step}) => {
 
   return (
     <div>
-      <div className="row" style={{marginBottom: '0px'}}>
-        <div className="col s12 l4 center responsive-img materialboxed">
-          {recipe.stepImgUrl[step]? <img className="responsive-img" src={recipe.stepImgUrl[step]} alt=""/> : <h5 className="center grey-text text-lighten-1">이미지 없음</h5>}
+      <div className='row' style={{marginBottom: '0px'}}>
+        <div className='col s12 l4 center responsive-img materialboxed'>
+          {recipe.stepImgUrl[step]? <img className='responsive-img' src={recipe.stepImgUrl[step]} alt=''/> : <h5 className='center grey-text text-lighten-1'>이미지 없음</h5>}
         </div>
-        <div className="col s12 l8 input-field valign-wrapper">
-          <textarea className="materialize-textarea" id={'step'+step} onChange={handleChange}></textarea>
+        <div className='col s12 l8 input-field valign-wrapper'>
+          <textarea className='materialize-textarea' id={'step'+step} onChange={handleChange}></textarea>
         </div>
       </div>
-      <div className="row valign-wrapper">
-        <div className="col s12 l8 file-field input-field offset-l4" style={{marginTop: '0px', marginBottom: '0px'}}>
-          <div className="btn brown lighten-2">
+      <div className='row valign-wrapper'>
+        <div className='col s12 l8 file-field input-field offset-l4' style={{marginTop: '0px', marginBottom: '0px'}}>
+          <div className='btn brown lighten-2'>
             <span>이미지 업로드</span>
-            <input type="file" onChange={handleFileInput}/>
+            <input type='file' onChange={handleFileInput}/>
           </div>
-          <div className="file-path-wrapper">
-            <input type="text" className="file-path wrapper"/>
+          <div className='file-path-wrapper'>
+            <input type='text' className='file-path wrapper'/>
           </div>
         </div>
       </div>

@@ -26,12 +26,12 @@ class Shipping extends Component {
             </tr>)
 
       return (
-        <div className="container Site-content">
+        <div className='container Site-content'>
           <h5>배송조회</h5>
-          <table className="highlight">
+          <table className='highlight'>
             <thead>
               <tr>
-                <th className="center">주문번호</th>
+                <th className='center'>주문번호</th>
                 <th className='center'>주문일자</th>
                 <th className='center'>진행상황</th>
               </tr>
@@ -40,16 +40,16 @@ class Shipping extends Component {
               {rows}
             </tbody>
           </table>
-          <div className="row">
-            <ul className="pagination center">
-              {page>1?<li className="waves-effect"><Link to={'/adminshipping/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
+          <div className='row'>
+            <ul className='pagination center'>
+              {page>1?<li className='waves-effect'><Link to={'/adminshipping/'+(page-1)}><i className='material-icons'>chevron_left</i></Link></li>:null}
               {rows&& Object.keys(Array.apply(0, Array(Math.ceil(rows.length/20))))
                   .map((idx) => <li className='waves-effect' key={idx}>
                     <Link to={'/adminshipping/'+(parseInt(idx)+1)}>
                       {parseInt(idx)+1}
                     </Link>
                   </li>)}
-              {rows&&page<Math.ceil(rows.length/20)? <li className="waves-effect"><Link to={'/adminshipping/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+              {rows&&page<Math.ceil(rows.length/20)? <li className='waves-effect'><Link to={'/adminshipping/'+(page+1)}><i className='material-icons'>chevron_right</i></Link></li> : null}
             </ul>
           </div>
         </div>

@@ -44,23 +44,23 @@ class Member extends Component {
         key={member.id}
       />)
       return (
-        <div className="container Site-content">
-          <div className="row">
-            <div className="col s8 l8">
+        <div className='container Site-content'>
+          <div className='row'>
+            <div className='col s8 l8'>
               <h5>회원관리</h5>
             </div>
-            <div className="col s4 l4" style={{marginTop: '22px'}}>
+            <div className='col s4 l4' style={{marginTop: '22px'}}>
               <span style={{marginRight: '12px'}}>정렬</span>
               <label style={{marginRight: '12px'}}>
-                <input type="radio" name="filter" className="with-gap" id="byEmail" onChange={this.handleRadioChange}/>
+                <input type='radio' name='filter' className='with-gap' id='byEmail' onChange={this.handleRadioChange}/>
                 <span>이메일</span>
               </label>
               <label style={{marginRight: '12px'}}>
-                <input type="radio" name="filter" className="with-gap" id="byName" onChange={this.handleRadioChange}/>
+                <input type='radio' name='filter' className='with-gap' id='byName' onChange={this.handleRadioChange}/>
                 <span>이름</span>
               </label>
               <label>
-                <input type="radio" name="filter" className="with-gap" id="byPhone" onChange={this.handleRadioChange}/>
+                <input type='radio' name='filter' className='with-gap' id='byPhone' onChange={this.handleRadioChange}/>
                 <span>전화번호</span>
               </label>
             </div>
@@ -81,16 +81,16 @@ class Member extends Component {
           </table>
           <div>
           </div>
-          <div className="row">
-            <ul className="pagination center">
-              {page>1?<li className="waves-effect"><Link to={'/member/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
+          <div className='row'>
+            <ul className='pagination center'>
+              {page>1?<li className='waves-effect'><Link to={'/member/'+(page-1)}><i className='material-icons'>chevron_left</i></Link></li>:null}
               {user&& Object.keys(Array.apply(0, Array(Math.ceil(user.length/20))))
                   .map((idx) => <li className='waves-effect' key={idx}>
                     <Link to={'/Member/'+(parseInt(idx)+1)}>
                       {parseInt(idx)+1}
                     </Link>
                   </li>)}
-              {user&&page<Math.ceil(user.length/20)? <li className="waves-effect"><Link to={'/member/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+              {user&&page<Math.ceil(user.length/20)? <li className='waves-effect'><Link to={'/member/'+(page+1)}><i className='material-icons'>chevron_right</i></Link></li> : null}
             </ul>
           </div>
           <MemberSearch/>

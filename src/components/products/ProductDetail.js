@@ -63,65 +63,65 @@ class ProductDetail extends Component {
                                           recipe.ingredients.indexOf(product.tag)!== -1)
 
       return (
-        <div className="container Site-content">
+        <div className='container Site-content'>
           <Search/>
-          <div className="row">
-            <div className="col s12 l6">
-              <img className="responsive-img materialboxed" src={product.img} alt=""/>
+          <div className='row'>
+            <div className='col s12 l6'>
+              <img className='responsive-img materialboxed' src={product.img} alt=''/>
             </div>
-            <div className="col s12 l6">
+            <div className='col s12 l6'>
               <table>
                 <tbody>
                   <tr>
-                    <td colSpan="2">
+                    <td colSpan='2'>
                       <h4>{product.name}</h4>
                     </td>
                   </tr>
                   <tr>
-                    <td width="40%" className="blue-text text-lighten-2 flow-text">가격</td>
-                    <td className="blue-text text-lighten-2 flow-text">{product.price}원</td>
+                    <td width='40%' className='blue-text text-lighten-2 flow-text'>가격</td>
+                    <td className='blue-text text-lighten-2 flow-text'>{product.price}원</td>
                   </tr>
                   <tr>
-                    <td width="40%">제조사</td>
+                    <td width='40%'>제조사</td>
                     <td>{product.company}</td>
                   </tr>
                   <tr>
-                    <td width="40%">원산지</td>
+                    <td width='40%'>원산지</td>
                     <td>{product.madein}</td>
                   </tr>
                 </tbody>
               </table>
-              <div className="grey lighten-3">
-                <div className="card">
-                  <div className="card-content">
-                    <div className="row" style={{marginBottom: '0px'}}>
-                      <div className="col s3 l3 flow-text center-align">
+              <div className='grey lighten-3'>
+                <div className='card'>
+                  <div className='card-content'>
+                    <div className='row' style={{marginBottom: '0px'}}>
+                      <div className='col s3 l3 flow-text center-align'>
                         {this.state.quantity}
                       </div>
-                      <div className="col s4 l4 valign-wrapper">
-                        <button className="btn white black-text" type="button" onClick={this.minus}><i className="material-icons">remove</i></button>
-                        <button className="btn white black-text" type="button" onClick={this.plus}><i className="material-icons">add</i></button>
+                      <div className='col s4 l4 valign-wrapper'>
+                        <button className='btn white black-text' type='button' onClick={this.minus}><i className='material-icons'>remove</i></button>
+                        <button className='btn white black-text' type='button' onClick={this.plus}><i className='material-icons'>add</i></button>
                       </div>
-                      <div className="col s5 l5 flow-text right-align">
+                      <div className='col s5 l5 flow-text right-align'>
                         {this.state.quantity*product.price}원
                       </div>
                     </div>
                   </div>
-                  <div className="card-action">
-                    <button style={{marginRight: '4px'}} className="btn brown" onClick={this.buy}>바로구매</button>
-                    <button className="btn brown waves-effect waves-light" onClick={this.putIntoCart}>장바구니</button>
+                  <div className='card-action'>
+                    <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buy}>바로구매</button>
+                    <button className='btn brown waves-effect waves-light' onClick={this.putIntoCart}>장바구니</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row">
-            <div style={{whiteSpace: 'pre-wrap'}} className="flow-text center-align">
+          <div className='row'>
+            <div style={{whiteSpace: 'pre-wrap'}} className='flow-text center-align'>
               {product.content}
             </div>
             <hr/>
-            <h4 className="center">관련 레시피</h4>
-            <div className="row" id="recipe">
+            <h4 className='center'>관련 레시피</h4>
+            <div className='row' id='recipe'>
               {recipe && recipe.map((recipe) => {
                 return (
                   <RecipeButton recipe={recipe} key={recipe.id}/>

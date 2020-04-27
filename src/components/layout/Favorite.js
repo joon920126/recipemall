@@ -21,7 +21,7 @@ class Favorite extends Component {
 
     if (favoriteWhole===0) {
       return (
-        <div className="container Site-content">
+        <div className='container Site-content'>
           <Search/>
           <h5>즐겨찾기</h5>
           <span>즐겨찾기에 등록된 레시피가 없습니다.</span>
@@ -29,25 +29,25 @@ class Favorite extends Component {
       )
     } else {
       return (
-        <div className="container Site-content">
+        <div className='container Site-content'>
           <Search/>
           <h5>즐겨찾기</h5>
-          <div className="row">
+          <div className='row'>
             {favorite && favorite.map((favorite) => {
               return (
                 <RecipeButtonAlt recipe={favorite} key={favorite.id}/>
               )
             })}
           </div>
-          <div className="row">
-            <ul className="pagination center">
-              <ul className="pagination center">
-                {page>1?<li className="waves-effect"><Link to={'/favorite/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
+          <div className='row'>
+            <ul className='pagination center'>
+              <ul className='pagination center'>
+                {page>1?<li className='waves-effect'><Link to={'/favorite/'+(page-1)}><i className='material-icons'>chevron_left</i></Link></li>:null}
                 {Object.keys(Array.apply(0, Array(Math.ceil(favoriteWhole.length/8))))
-                    .map((idx)=><li className="waves-effect" key={idx}>
+                    .map((idx)=><li className='waves-effect' key={idx}>
                       <Link to={'/favorite/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                     </li>)}
-                {page<Math.ceil(favoriteWhole.length/8)? <li className="waves-effect"><Link to={'/favorite/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+                {page<Math.ceil(favoriteWhole.length/8)? <li className='waves-effect'><Link to={'/favorite/'+(page+1)}><i className='material-icons'>chevron_right</i></Link></li> : null}
               </ul>
             </ul>
           </div>

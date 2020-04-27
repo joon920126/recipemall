@@ -14,10 +14,10 @@ class QnA extends Component {
     const qnaSlice = (qna.slice().sort((a, b)=>b.createdAt.seconds-a.createdAt.seconds)
         .slice(15*(page-1), 15*page))
     return (
-      <div className="container Site-content">
-        <h4 className="grey-text text-darken-1">고객센터</h4>
+      <div className='container Site-content'>
+        <h4 className='grey-text text-darken-1'>고객센터</h4>
 
-        <table className="highlight centered">
+        <table className='highlight centered'>
           <thead>
             <tr>
               <th>작성자</th>
@@ -41,25 +41,25 @@ class QnA extends Component {
             })}
           </tbody>
         </table>
-        <div className="row">
-          <ul className="pagination center">
-            {page>1? <li className="waves-effect">
+        <div className='row'>
+          <ul className='pagination center'>
+            {page>1? <li className='waves-effect'>
               <Link to={'/qna/'+(page-1)}>
-                <i className="material-icons">chevron_left</i>
+                <i className='material-icons'>chevron_left</i>
               </Link>
             </li> :null}
             {Object.keys(Array.apply(0, Array(Math.ceil(qna.length/15))))
-                .map((idx) => <li className="waves-effect" key={idx}>
+                .map((idx) => <li className='waves-effect' key={idx}>
                   <Link to={'/qna/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                 </li>)}
-            {page<Math.ceil(qna.length/15)? <li className="waves-effect">
+            {page<Math.ceil(qna.length/15)? <li className='waves-effect'>
               <Link to={'/qna/'+(page+1)}>
-                <i className="material-icons">chevron_right</i>
+                <i className='material-icons'>chevron_right</i>
               </Link>
             </li> : null}
           </ul>
         </div>
-        <Link className="btn brown lighten-2" to='/CreateQnA'>글쓰기</Link>
+        <Link className='btn brown lighten-2' to='/CreateQnA'>글쓰기</Link>
       </div>
     )
   }

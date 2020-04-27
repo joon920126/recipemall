@@ -21,31 +21,31 @@ class Cart extends Component {
       key={item.id}/>) : []
     if (row.length>0) {
       return (
-        <div className="container Site-content">
+        <div className='container Site-content'>
           <h5>장바구니</h5>
           <table>
             <thead>
               <tr>
-                <th className="center">이미지</th>
-                <th className="center">상품정보</th>
-                <th className="center">가격</th>
-                <th className="center">수량</th>
-                <th className="center">총합</th>
+                <th className='center'>이미지</th>
+                <th className='center'>상품정보</th>
+                <th className='center'>가격</th>
+                <th className='center'>수량</th>
+                <th className='center'>총합</th>
               </tr>
             </thead>
             <tbody>
               {row}
             </tbody>
           </table>
-          <div className="center flow-text">
+          <div className='center flow-text'>
                     총 {total}원
-            <Link style={{margin: '8px'}} className="btn brown" to='/Order'>주문하기</Link>
+            <Link style={{margin: '8px'}} className='btn brown' to='/Order'>주문하기</Link>
           </div>
         </div>
       )
     } else {
       return (
-        <div className="container Site-content">
+        <div className='container Site-content'>
           <h5>장바구니</h5>
           <span>장바구니에 담긴 상품이 없습니다.</span>
         </div>

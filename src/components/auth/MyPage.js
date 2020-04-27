@@ -7,10 +7,10 @@ class MyPage extends Component {
   render() {
     if (!this.props.auth.uid) return <Redirect to='/'/>
     return (
-      <div className="container Site-content">
+      <div className='container Site-content'>
         <h5>마이페이지</h5>
 
-        <div className="row">
+        <div className='row'>
           <MyPageButton
             image='https://image.freepik.com/free-icon/1_318-10653.jpg'
             linkTo='/cart'

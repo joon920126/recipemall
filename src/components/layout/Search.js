@@ -35,28 +35,28 @@ class Search extends Component {
     }
     render() {
       return (
-        <div className="row" style={{marginTop: '16px'}}>
-          <div className="container col s12 l4 offset-l4">
+        <div className='row' style={{marginTop: '16px'}}>
+          <div className='container col s12 l4 offset-l4'>
             <form onSubmit={this.handleSubmit}>
-              <div className="input-field">
-                <i className="fas fa-search prefix"></i>
-                <input type="text" onChange={this.handleChange} id="keyword"/>
-                <label htmlFor="search-keyword">찾으시는 재료나 레시피를 입력하세요</label>
+              <div className='input-field'>
+                <i className='fas fa-search prefix'></i>
+                <input type='text' onChange={this.handleChange} id='keyword'/>
+                <label htmlFor='search-keyword'>찾으시는 재료나 레시피를 입력하세요</label>
               </div>
             </form>
           </div>
-          <div className="container col s12 l4">
+          <div className='container col s12 l4'>
             <div style={{marginTop: '28px'}}>
               <label style={{marginRight: '12px'}}>
-                <input className="with-gap" name="filter" type="radio" onChange={this.handleRadioChange} id="all" />
+                <input className='with-gap' name='filter' type='radio' onChange={this.handleRadioChange} id='all' />
                 <span>통합검색</span>
               </label>
               <label style={{marginRight: '12px'}}>
-                <input className="with-gap" name="filter" type="radio" onChange={this.handleRadioChange} id="recipe" />
+                <input className='with-gap' name='filter' type='radio' onChange={this.handleRadioChange} id='recipe' />
                 <span>레시피</span>
               </label>
               <label>
-                <input className="with-gap" name="filter" type="radio" onChange={this.handleRadioChange} id="product" />
+                <input className='with-gap' name='filter' type='radio' onChange={this.handleRadioChange} id='product' />
                 <span>상품</span>
               </label>
             </div>

@@ -25,11 +25,11 @@ class List extends Component {
     const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
 
     return (
-      <div className="container Site-content">
+      <div className='container Site-content'>
 
         <Search/>
-        <h5 className="center">'{keyword}' 검색결과</h5>
-        <div className="row">
+        <h5 className='center'>'{keyword}' 검색결과</h5>
+        <div className='row'>
           {recipeAndProduct && recipeAndProduct.map((item) => {
             switch (item.type) {
               case 'recipe':
@@ -48,14 +48,14 @@ class List extends Component {
             }
           })}
         </div>
-        <div className="row">
-          <ul className="pagination center">
-            {page>1?<li className="waves-effect"><Link to={'/list/'+(page-1)}><i className="material-icons">chevron_left</i></Link></li>:null}
+        <div className='row'>
+          <ul className='pagination center'>
+            {page>1?<li className='waves-effect'><Link to={'/list/'+(page-1)}><i className='material-icons'>chevron_left</i></Link></li>:null}
             {Object.keys(Array.apply(0, Array(Math.ceil(RnP.length/60))))
-                .map((idx)=><li className="waves-effect" key={idx}>
+                .map((idx)=><li className='waves-effect' key={idx}>
                   <Link to={'/list/'+(parseInt(idx)+1)}>{parseInt(idx)+1}</Link>
                 </li>)}
-            {page<Math.ceil(RnP.length/60)? <li className="waves-effect"><Link to={'/list/'+(page+1)}><i className="material-icons">chevron_right</i></Link></li> : null}
+            {page<Math.ceil(RnP.length/60)? <li className='waves-effect'><Link to={'/list/'+(page+1)}><i className='material-icons'>chevron_right</i></Link></li> : null}
           </ul>
         </div>
       </div>

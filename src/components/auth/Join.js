@@ -65,46 +65,46 @@ class Join extends Component {
       const {auth, authError} = this.props
       if (auth.uid) return <Redirect to='/'/>
       return (
-        <div className="container Site-content">
-          <form onSubmit={this.handleSubmit} className="white">
+        <div className='container Site-content'>
+          <form onSubmit={this.handleSubmit} className='white'>
             <h5>회원가입</h5>
-            <div className="input-field">
-              <label htmlFor="email">이메일</label>
-              <input type="email" id="email" onChange={this.handleChange}/>
+            <div className='input-field'>
+              <label htmlFor='email'>이메일</label>
+              <input type='email' id='email' onChange={this.handleChange}/>
             </div>
-            <div className="input-field">
-              <label htmlFor="password">비밀번호</label>
-              <input type="password" id="password" onChange={this.handleChange}/>
+            <div className='input-field'>
+              <label htmlFor='password'>비밀번호</label>
+              <input type='password' id='password' onChange={this.handleChange}/>
             </div>
-            <div className="input-field">
-              <label htmlFor="passwordConfirm">비밀번호 확인</label>
-              <input className='validate' type="password" id="passwordConfirm" onChange={this.handleChange}/>
+            <div className='input-field'>
+              <label htmlFor='passwordConfirm'>비밀번호 확인</label>
+              <input className='validate' type='password' id='passwordConfirm' onChange={this.handleChange}/>
             </div>
-            <div className="input-field">
-              <label htmlFor="name">이름</label>
-              <input type="text" id="name" onChange={this.handleChange}/>
+            <div className='input-field'>
+              <label htmlFor='name'>이름</label>
+              <input type='text' id='name' onChange={this.handleChange}/>
             </div>
-            <div className="input-field">
-              <label htmlFor="zonecode" className={this.state.zonecode? 'active':null}>우편번호</label>
-              <input type="text" disabled onChange={this.handleChange} id="zonecode"/>
+            <div className='input-field'>
+              <label htmlFor='zonecode' className={this.state.zonecode? 'active':null}>우편번호</label>
+              <input type='text' disabled onChange={this.handleChange} id='zonecode'/>
               {this.state.addressApi? <DaumPostcode onComplete={this.handleAddress}/> :
-                                                <button className="btn brown lighten-2" onClick={this.handleOpenPostCode}>우편번호 찾기</button>}
+                                                <button className='btn brown lighten-2' onClick={this.handleOpenPostCode}>우편번호 찾기</button>}
             </div>
-            <div className="input-field">
-              <label className={this.state.address? 'active' : null} htmlFor="address">배송지</label>
-              <input disabled type="text" id="address" onChange={this.handleChange}/>
+            <div className='input-field'>
+              <label className={this.state.address? 'active' : null} htmlFor='address'>배송지</label>
+              <input disabled type='text' id='address' onChange={this.handleChange}/>
             </div>
-            <div className="input-field">
-              <label htmlFor="address2">상세주소</label>
-              <input type="text" onChange={this.handleChange} id="address2"/>
+            <div className='input-field'>
+              <label htmlFor='address2'>상세주소</label>
+              <input type='text' onChange={this.handleChange} id='address2'/>
             </div>
-            <div className="input-field">
-              <label htmlFor="phone">연락처</label>
-              <input type="text" id="phone" onChange={this.handleChange}/>
+            <div className='input-field'>
+              <label htmlFor='phone'>연락처</label>
+              <input type='text' id='phone' onChange={this.handleChange}/>
             </div>
-            <div className="input-field">
-              <button className="btn brown lighten-2">회원가입</button>
-              <div className="red-text center">
+            <div className='input-field'>
+              <button className='btn brown lighten-2'>회원가입</button>
+              <div className='red-text center'>
                 {authError? <p>{authError}</p>: null}
                 {this.state.passwordError? <p>비밀번호를 다시 입력해주세요</p>:null}
               </div>

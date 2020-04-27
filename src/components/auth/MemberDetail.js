@@ -59,7 +59,7 @@ class MemberDetail extends Component {
           <table>
             <thead>
               <tr>
-                <th className="center">주문번호</th>
+                <th className='center'>주문번호</th>
                 <th className='center'>이름</th>
                 <th className='center'>연락처</th>
                 <th className='center'>주문일자</th>
