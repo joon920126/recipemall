@@ -19,16 +19,16 @@ const store=createStore(rootReducer,
 )
 
 const rrfProps = {
-  firebase,
-  config: fbconfig,
-  dispatch: store.dispatch,
-  createFirestoreInstance, // <- needed if using firestore
+    firebase,
+    config: fbconfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance, // <- needed if using firestore
 }
 
 ReactDOM.render(<Provider store={store}>
-  <ReactReduxFirebaseProvider {...rrfProps}>
-    <App />
-  </ReactReduxFirebaseProvider>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+        <App />
+    </ReactReduxFirebaseProvider>
 </Provider>, document.getElementById('root'))
 
 

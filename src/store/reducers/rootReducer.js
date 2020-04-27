@@ -9,13 +9,13 @@ import {firestoreReducer} from 'redux-firestore'
 import {firebaseReducer} from 'react-redux-firebase'
 
 const rootReducer = combineReducers({
-  recipeAndProduct: recipeAndProductReducer,
-  qna: qnaReducer,
-  auth: authReducer,
-  cart: cartReducer,
-  firestore: firestoreReducer,
-  firebase: firebaseReducer,
-  recipe: recipeReducer,
+    recipeAndProduct: recipeAndProductReducer,
+    qna: qnaReducer,
+    auth: authReducer,
+    cart: cartReducer,
+    firestore: firestoreReducer,
+    firebase: firebaseReducer,
+    recipe: recipeReducer,
 })
 
 export default rootReducer
