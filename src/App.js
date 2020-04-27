@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import React, {Component} from 'react'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Main from './components/layout/Main'
@@ -27,49 +27,49 @@ import Profile from './components/auth/Profile'
 import Favorite from './components/layout/Favorite'
 import AdminShippingDetail from './components/customerService/AdminShippingDetail'
 import ShippingDetail from './components/customerService/ShippingDetail'
-import RecipeContextProvider from './contexts/recipeContext';
+import RecipeContextProvider from './contexts/recipeContext'
 
 
 class App extends Component {
-  render(){
+  render() {
     return (
       <BrowserRouter>
         <div className="App Site">
           <Navbar/>
-            <RecipeContextProvider>
-          <Switch>
-            <Route exact path="/" component={Main}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/join" component={Join}/>
-            <Route path="/joincompleted" component={JoinCompleted}/>
-            <Route path="/createproduct" component={CreateProduct}/>
+          <RecipeContextProvider>
+            <Switch>
+              <Route exact path="/" component={Main}/>
+              <Route path="/login" component={Login}/>
+              <Route path="/join" component={Join}/>
+              <Route path="/joincompleted" component={JoinCompleted}/>
+              <Route path="/createproduct" component={CreateProduct}/>
               <Route path="/createrecipe" component={CreateRecipe}/>
-            <Route path="/favorite/:page" component={Favorite}/>
-            <Route exact path="/member/:page" component={Member}/>
-            <Route path="/qna/:page" component={QnA}/>
-            <Route path="/qnaDetail/:id" component={QnADetail}/>
-            <Route path="/cart" component={Cart}/>
-            <Route path="/order" component={Order}/>
-            <Route path="/ordercompleted" component={OrderCompleted}/>
-            <Route path="/shipping" component={Shipping}/>
-            <Route path="/myPage" component={MyPage}/>
-            <Route path="/profile" component={Profile}/>
-            <Route path="/list/:page" component={List}/>
-            <Route path="/createqna" component={CreateQnA}/>
-            <Route path="/adminqna" component={AdminQnA}/>
-            <Route path="/adminshipping" component={AdminShipping}/>
-            <Route path="/product/:id" component={ProductDetail}/>
-            <Route path="/recipe/:id" component={RecipeDetail}/>
-            <Route path="/memberDetail/:id" component={MemberDetail}/>
-            <Route path="/adminshippingdetail/:id" component={AdminShippingDetail}/>
-            <Route path="/shippingdetail/:id" component={ShippingDetail}/>
-          </Switch>
-            </RecipeContextProvider>
+              <Route path="/favorite/:page" component={Favorite}/>
+              <Route exact path="/member/:page" component={Member}/>
+              <Route path="/qna/:page" component={QnA}/>
+              <Route path="/qnaDetail/:id" component={QnADetail}/>
+              <Route path="/cart" component={Cart}/>
+              <Route path="/order" component={Order}/>
+              <Route path="/ordercompleted" component={OrderCompleted}/>
+              <Route path="/shipping" component={Shipping}/>
+              <Route path="/myPage" component={MyPage}/>
+              <Route path="/profile" component={Profile}/>
+              <Route path="/list/:page" component={List}/>
+              <Route path="/createqna" component={CreateQnA}/>
+              <Route path="/adminqna" component={AdminQnA}/>
+              <Route path="/adminshipping" component={AdminShipping}/>
+              <Route path="/product/:id" component={ProductDetail}/>
+              <Route path="/recipe/:id" component={RecipeDetail}/>
+              <Route path="/memberDetail/:id" component={MemberDetail}/>
+              <Route path="/adminshippingdetail/:id" component={AdminShippingDetail}/>
+              <Route path="/shippingdetail/:id" component={ShippingDetail}/>
+            </Switch>
+          </RecipeContextProvider>
           <Footer/>
         </div>
       </BrowserRouter>
-    );
+    )
   }
 }
 
-export default App;
+export default App
