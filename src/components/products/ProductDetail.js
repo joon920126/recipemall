@@ -78,6 +78,10 @@ class ProductDetail extends Component {
                                         <h4>{product.name}</h4>
                                     </td>
                                 </tr>
+                                {isAdmin? <tr>
+                                    <td width='40%'>상품번호</td>
+                                    <td>{product.id}</td>
+                                </tr> : null}
                                 <tr>
                                     <td width='40%' className='blue-text text-lighten-2 flow-text'>가격</td>
                                     <td className='blue-text text-lighten-2 flow-text'>{product.price}원</td>
@@ -88,32 +92,39 @@ class ProductDetail extends Component {
                                 </tr>
                                 <tr>
                                     <td width='40%'>원산지</td>
-                                    <td>{product.madein}</td>
+                                    <td>{product.madeIn}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div className='grey lighten-3'>
-                            <div className='card'>
-                                <div className='card-content'>
-                                    <div className='row' style={{marginBottom: '0px'}}>
-                                        <div className='col s3 l3 flow-text center-align'>
-                                            {this.state.quantity}
-                                        </div>
-                                        <div className='col s4 l4 valign-wrapper'>
-                                            <button className='btn white black-text' type='button' onClick={this.minus}><i className='material-icons'>remove</i></button>
-                                            <button className='btn white black-text' type='button' onClick={this.plus}><i className='material-icons'>add</i></button>
-                                        </div>
-                                        <div className='col s5 l5 flow-text right-align'>
-                                            {this.state.quantity*product.price}원
+                        {isAdmin? (
+                            <div style={{marginTop: '12px'}}>
+                                <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('수정')}>수정</button>
+                                <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('삭제')}>삭제</button>
+                            </div>
+                        ) : firebase.auth().currentUser? (
+                            <div className='grey lighten-3'>
+                                <div className='card'>
+                                    <div className='card-content'>
+                                        <div className='row' style={{marginBottom: '0px'}}>
+                                            <div className='col s3 l3 flow-text center-align'>
+                                                {this.state.quantity}
+                                            </div>
+                                            <div className='col s4 l4 valign-wrapper'>
+                                                <button className='btn white black-text' type='button' onClick={this.minus}><i className='material-icons'>remove</i></button>
+                                                <button className='btn white black-text' type='button' onClick={this.plus}><i className='material-icons'>add</i></button>
+                                            </div>
+                                            <div className='col s5 l5 flow-text right-align'>
+                                                {this.state.quantity*product.price}원
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className='card-action'>
-                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buy}>바로구매</button>
-                                    <button className='btn brown waves-effect waves-light' onClick={this.putIntoCart}>장바구니</button>
+                                    <div className='card-action'>
+                                        <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buy}>바로구매</button>
+                                        <button className='btn brown waves-effect waves-light' onClick={this.putIntoCart}>장바구니</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className='row'>
