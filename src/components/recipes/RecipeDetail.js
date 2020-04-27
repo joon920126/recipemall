@@ -57,9 +57,18 @@ class RecipeDetail extends Component {
                             </tbody>
                         </table>
                         <div style={{marginTop: '12px'}}>
-                            <button style={{marginRight: '4px'}} className='btn brown' onClick={this.addToFav}>즐겨찾기에 추가</button>
-                            <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buyAll}>모든 재료 구매</button>
-                            <a href='#ingredients' className='btn brown'>개별 재료 보러가기</a>
+                            {isAdmin? (
+                                <span>
+                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('수정')}>수정</button>
+                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('삭제')}>삭제</button>
+                                </span>
+                            ) : (
+                                <span>
+                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={this.addToFav}>즐겨찾기에 추가</button>
+                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buyAll}>모든 재료 구매</button>
+                                    <a href='#ingredients' className='btn brown'>개별 재료 보러가기</a>
+                                </span>
+                            )}
                         </div>
                     </div>
                 </div>
