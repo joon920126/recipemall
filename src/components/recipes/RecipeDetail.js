@@ -4,7 +4,7 @@ import Search from '../layout/Search'
 import ProductButton from '../products/ProductButton'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
-import {addToFavorite} from '../../store/actions/recipeActions'
+import {addToFavorite, deleteRecipe} from '../../store/actions/recipeActions'
 
 class RecipeDetail extends Component {
     componentDidMount() {
@@ -13,6 +13,11 @@ class RecipeDetail extends Component {
 
     addToFav() {
         this.props.addToFavorite(this.props.recipeAndProduct.find((recipe)=>recipe.id===this.props.id))
+    }
+
+    deleteRecipe(id) {
+        console.log('delete recipe button')
+        this.props.deleteRecipe(id)
     }
 
     render() {
@@ -60,7 +65,7 @@ class RecipeDetail extends Component {
                             {isAdmin? (
                                 <span>
                                     <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('수정')}>수정</button>
-                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('삭제')}>삭제</button>
+                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.deleteRecipe(id)}>삭제</button>
                                 </span>
                             ) : (
                                 <span>
@@ -107,8 +112,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToFavorite: (recipe)=> {
+        addToFavorite: (recipe) => {
             dispatch(addToFavorite(recipe))
+        },
+        deleteRecipe: (recipe) => {
+            dispatch(deleteRecipe(recipe))
         },
     }
 }

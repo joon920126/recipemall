@@ -77,9 +77,16 @@ export const createRecipe = (recipe) => {
                         }))
                     })
             }).then(() => {
-                dispatch({type: 'ADD_RECIPE'}, recipe)
+                dispatch({type: 'ADD_RECIPE', recipe})
             }).catch((err) => {
-                dispatch({type: 'ADD_RECIPE_ERROR'}, err)
+                dispatch({type: 'ADD_RECIPE_ERROR', err})
             })
+    }
+}
+
+export const deleteRecipe = (id) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        console.log('delete recipe action', id)
+        dispatch({type: 'DELETE_RECIPE', id})
     }
 }
