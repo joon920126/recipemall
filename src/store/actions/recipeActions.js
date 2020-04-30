@@ -59,8 +59,7 @@ export const createRecipe = (recipe) => {
                                 storageURL.push(stepImgURL)
                             }).then(() => {
                                 if (storageURL.length === recipe.stepImg.length) {
-                                    firestore.collection('recipeAndProduct').add({
-                                        id: recipe.id,
+                                    firestore.collection('recipeAndProduct').doc(recipe.id).set({
                                         name: recipe.name,
                                         time: recipe.time,
                                         ingredients: recipe.ingredients,
@@ -86,7 +85,7 @@ export const createRecipe = (recipe) => {
 
 export const deleteRecipe = (id) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
-        console.log('delete recipe action', id)
+        // console.log('delete recipe action', id)
         dispatch({type: 'DELETE_RECIPE', id})
     }
 }
