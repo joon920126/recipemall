@@ -1,6 +1,7 @@
+import firebase from '../../config/fbconfig'
+
 export const addToFavorite = (recipe) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
         userDoc.get().then((doc) => {
@@ -13,7 +14,6 @@ export const addToFavorite = (recipe) => {
                     ...doc.data().favorite,
                     recipe,
                 ]
-                alert('즐겨찾기에 추가되었습니다.')
                 return newFavorite
             }
         }).then((newFavorite) => {
@@ -27,8 +27,7 @@ export const addToFavorite = (recipe) => {
 }
 
 export const removeFromFavorite = (recipe) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
         userDoc.get().then((doc) => {
@@ -46,8 +45,7 @@ export const removeFromFavorite = (recipe) => {
 }
 
 export const createRecipe = (recipe) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         const storageURL = []
         firebase.uploadFile(`recipeImage/${recipe.id}`, recipe.img)
@@ -84,7 +82,7 @@ export const createRecipe = (recipe) => {
 }
 
 export const deleteRecipe = (id) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirestore}) => {
         // console.log('delete recipe action', id)
         dispatch({type: 'DELETE_RECIPE', id})
     }

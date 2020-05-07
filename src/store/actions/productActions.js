@@ -1,9 +1,8 @@
-
+import firebase from '../../config/fbconfig'
 
 export const createProduct = (product) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirestore}) => {
     // make async call to database
-        const firebase = getFirebase()
         const firestore = getFirestore()
         return new Promise(function(resolve, reject) {
             resolve()
@@ -31,7 +30,7 @@ export const createProduct = (product) => {
 }
 
 export const reduceStock = (product, quantity) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         firestore.collection('recipeAndProduct').doc(product).get().then((doc)=> {
             const newStock = doc.data().stock-quantity

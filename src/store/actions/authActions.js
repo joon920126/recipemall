@@ -1,6 +1,7 @@
+import firebase from '../../config/fbconfig'
+
 export const logIn = (credentials) => {
-    return (dispatch, getState, {getFirebase}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState) => {
         firebase.auth().signInWithEmailAndPassword(
             credentials.email,
             credentials.password,
@@ -13,8 +14,7 @@ export const logIn = (credentials) => {
 }
 
 export const logOut = () => {
-    return (dispatch, getState, {getFirebase}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState) => {
         firebase.auth().signOut().then(()=>{
             dispatch({type: 'LOGOUT_SUCCESS'})
         })
@@ -22,8 +22,7 @@ export const logOut = () => {
 }
 
 export const signUp = (newUser) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         firebase.auth().createUserWithEmailAndPassword(
             newUser.email, newUser.password,
@@ -47,8 +46,7 @@ export const signUp = (newUser) => {
 }
 
 export const change = (user) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
         userDoc.get().then((doc) => {

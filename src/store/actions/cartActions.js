@@ -1,9 +1,9 @@
 import {reduceStock} from './productActions'
+import firebase from '../../config/fbconfig'
 
 export const addToCart = (product, quantity) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirestore}) => {
     // 파이어스토어, 파이어베이스 트리거
-        const firebase = getFirebase()
         const firestore = getFirestore()
         // 스토어의 user문서에서 현재 사용자의 아이디의 이름을 가진 문서를 뽑아낸 뒤
         const userDoc = firestore.collection('users').doc(firebase.auth().currentUser.uid)
@@ -37,9 +37,8 @@ export const addToCart = (product, quantity) => {
 }
 
 export const removeOneFromCart = (product) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirestore}) => {
     // 파이어스토어, 파이어베이스 메소드 발동
-        const firebase = getFirebase()
         const firestore = getFirestore()
         // 스토어의 user 문서에서 현재 사용자 아이디의 이름을 가진 문서를 뽑아낸 뒤
         firestore.collection('users').doc(firebase.auth().currentUser.uid).get().then((doc)=>{
@@ -61,8 +60,7 @@ export const removeOneFromCart = (product) => {
 }
 
 export const removeFromCart = (product) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         firestore.collection('users').doc(firebase.auth().currentUser.uid).get().then((doc)=>{
             const newCart = doc.data().cart.filter((item) => item.id!==product.id)
@@ -81,8 +79,7 @@ export const removeFromCart = (product) => {
 }
 
 export const order = (order) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase()
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         const user = firebase.auth().currentUser.uid
         firestore.collection('shipping').doc(Date.now().toString()).set({
@@ -111,7 +108,7 @@ export const order = (order) => {
 }
 
 export const changeDeliver = (order, delivered) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
         firestore.collection('shipping').doc(order).update({
             deliver: delivered,
