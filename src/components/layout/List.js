@@ -14,13 +14,13 @@ class List extends Component {
     }
 
     render() {
-        const keyword = this.props.location.state.keyword
+        const keyword = this.props.location.state? this.props.location.state.keyword : ''
         const page = this.props.page
         const firebase = getFirebase()
         const RnP=(this.props.recipeAndProduct||[])
         const recipeAndProduct = RnP.slice(60*(page-1), 60*page)
             .filter((item) => item.name.includes(keyword)||
-                                                      item.tag.includes(keyword))
+                              item.tag.includes(keyword))
         const favorite = ((this.props.users||[]).find((user)=>user.id===firebase.auth().currentUser.uid)||{}).favorite||[]
         const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
 
@@ -33,7 +33,7 @@ class List extends Component {
                     {recipeAndProduct && recipeAndProduct.map((item) => {
                         switch (item.type) {
                         case 'recipe':
-                            if (this.props.location.state.includeRecipe) {
+                            if (!this.props.location.state || this.props.location.state.includeRecipe) {
                                 if (favorite.filter((fav)=>fav.id===item.id).length!==0) {
                                     return <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>
                                 } else {
@@ -41,7 +41,7 @@ class List extends Component {
                                 }
                             } else return null
                         case 'product':
-                            if (this.props.location.state.includeProduct) {
+                            if (!this.props.location.state || this.props.location.state.includeProduct) {
                                 return <ProductButton product={item} key={'product'+item.id} isAdmin={isAdmin}/>
                             } else return null
                         default: return null
