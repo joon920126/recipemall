@@ -20,7 +20,7 @@ class List extends Component {
         const RnP=(this.props.recipeAndProduct||[])
         const recipeAndProduct = RnP.slice(60*(page-1), 60*page)
             .filter((item) => item.name.includes(keyword)||
-                                          item.tag.includes(keyword))
+                                                      item.tag.includes(keyword))
         const favorite = ((this.props.users||[]).find((user)=>user.id===firebase.auth().currentUser.uid)||{}).favorite||[]
         const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
 
@@ -28,7 +28,7 @@ class List extends Component {
             <div className='container Site-content'>
 
                 <Search/>
-                <h5 className='center'>'{keyword}' 검색결과</h5>
+                <h5 className='center'>{`'${keyword}' 검색결과`}</h5>
                 <div className='row'>
                     {recipeAndProduct && recipeAndProduct.map((item) => {
                         switch (item.type) {

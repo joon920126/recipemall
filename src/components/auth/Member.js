@@ -79,8 +79,6 @@ class Member extends Component {
                         {rows}
                     </tbody>
                 </table>
-                <div>
-                </div>
                 <div className='row'>
                     <ul className='pagination center'>
                         {page>1?<li className='waves-effect'><Link to={'/member/'+(page-1)}><i className='material-icons'>chevron_left</i></Link></li>:null}

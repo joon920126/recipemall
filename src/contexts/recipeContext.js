@@ -10,9 +10,11 @@ const RecipeContextProvider = (props) => {
         ingredients: [],
         difficulty: '',
         img: '',
+        imgName: '',
         steps: [''],
         stepImg: [''],
         stepImgUrl: [''],
+        stepImgName: [''],
         introduction: '',
         tag: [],
     })

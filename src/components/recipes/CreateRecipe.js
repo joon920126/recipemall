@@ -18,6 +18,7 @@ const CreateRecipe = () => {
             ...recipe,
             img: e.target.files[0],
             imgUrl: URL.createObjectURL(e.target.files[0]),
+            imgName: e.target.files[0].name,
         })
     }
 
@@ -30,10 +31,6 @@ const CreateRecipe = () => {
         setRecipe({...recipe,
             // 정규식으로 띄어쓰기 상관없게 만들기
             [e.target.id]: e.target.value.split(', ')})
-    }
-
-    const handleContentChange = (e) => {
-        console.log('a')
     }
 
     const addContent = (e) => {

@@ -12,6 +12,7 @@ const RecipeContent = ({step}) => {
         e.preventDefault()
         recipe.stepImg.splice(step, 1, e.target.files[0])
         recipe.stepImgUrl.splice(step, 1, URL.createObjectURL(e.target.files[0]))
+        recipe.stepImgName.splice(step, 1, e.target.files[0].name)
         setRecipe({
             ...recipe,
             stepImgUrl: recipe.stepImgUrl,

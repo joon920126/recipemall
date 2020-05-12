@@ -16,8 +16,14 @@ class RecipeDetail extends Component {
     }
 
     deleteRecipe(id) {
-        console.log('delete recipe button')
-        this.props.deleteRecipe(id)
+        if (window.confirm('레시피를 정말로 삭제하시겠습니까?\n삭제된 레시피는 복구할 수 없습니다.')) {
+            this.props.deleteRecipe(id)
+            this.props.history.goBack()
+        }
+    }
+
+    updateRecipe(id) {
+        console.log('update recipe button clicked')
     }
 
     render() {
@@ -64,7 +70,7 @@ class RecipeDetail extends Component {
                         <div style={{marginTop: '12px'}}>
                             {isAdmin? (
                                 <span>
-                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('수정')}>수정</button>
+                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.updateRecipe(id)}>수정</button>
                                     <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.deleteRecipe(id)}>삭제</button>
                                 </span>
                             ) : (
@@ -115,8 +121,8 @@ const mapDispatchToProps = (dispatch) => {
         addToFavorite: (recipe) => {
             dispatch(addToFavorite(recipe))
         },
-        deleteRecipe: (recipe) => {
-            dispatch(deleteRecipe(recipe))
+        deleteRecipe: (id) => {
+            dispatch(deleteRecipe(id))
         },
     }
 }
