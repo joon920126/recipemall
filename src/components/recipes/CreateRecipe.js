@@ -3,11 +3,13 @@ import RecipeContent from './RecipeContent'
 import {RecipeContext} from '../../contexts/recipeContext'
 import {useDispatch} from 'react-redux'
 import {createRecipe} from '../../store/actions/recipeActions'
+import {useHistory} from 'react-router-dom'
 
 const CreateRecipe = () => {
     const [steps, setSteps] = useState(1)
     const {recipe, setRecipe} = useContext(RecipeContext)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleChange = (e) => {
         setRecipe({...recipe, [e.target.id]: e.target.value})
@@ -25,6 +27,7 @@ const CreateRecipe = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createRecipe(recipe))
+        history.push('/')
     }
 
     const handleArrayChange = (e) => {
