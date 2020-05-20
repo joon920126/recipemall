@@ -22,7 +22,7 @@ export const createProduct = (product) => {
                 })
             })
         }).then(()=> {
-            dispatch({type: 'ADD_PRODUCT', product: product})
+            dispatch({type: 'ADD_PRODUCT', product})
         }).catch((err) => {
             dispatch({type: 'ADD_PRODUCT_ERROR', err})
         })
