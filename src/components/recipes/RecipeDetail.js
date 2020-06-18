@@ -4,6 +4,7 @@ import Search from '../layout/Search'
 import ProductButton from '../products/ProductButton'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
+import {Link} from 'react-router-dom'
 import {addToFavorite, deleteRecipe} from '../../store/actions/recipeActions'
 
 class RecipeDetail extends Component {
@@ -20,10 +21,6 @@ class RecipeDetail extends Component {
             this.props.deleteRecipe(id)
             this.props.history.goBack()
         }
-    }
-
-    updateRecipe(id) {
-        console.log('update recipe button clicked')
     }
 
     render() {
@@ -70,7 +67,7 @@ class RecipeDetail extends Component {
                         <div style={{marginTop: '12px'}}>
                             {isAdmin? (
                                 <span>
-                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.updateRecipe(id)}>수정</button>
+                                    <Link style={{margin: '4px'}} className='btn brown' to={'/updaterecipe/'+recipe.id}>수정</Link>
                                     <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.deleteRecipe(id)}>삭제</button>
                                 </span>
                             ) : (

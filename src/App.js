@@ -8,6 +8,7 @@ import Join from './components/auth/Join'
 import JoinCompleted from './components/auth/JoinCompleted'
 import CreateProduct from './components/products/CreateProduct'
 import CreateRecipe from './components/recipes/CreateRecipe'
+import UpdateRecipe from './components/recipes/UpdateRecipe'
 import Member from './components/auth/Member'
 import QnA from './components/customerService/QnA'
 import QnADetail from './components/customerService/QnADetail'
@@ -63,6 +64,7 @@ class App extends Component {
                             <Route path='/memberDetail/:id' component={MemberDetail}/>
                             <Route path='/adminshippingdetail/:id' component={AdminShippingDetail}/>
                             <Route path='/shippingdetail/:id' component={ShippingDetail}/>
+                            <Route path='/updaterecipe/:id' component={UpdateRecipe}/>
                         </Switch>
                     </RecipeContextProvider>
                     <Footer/>
