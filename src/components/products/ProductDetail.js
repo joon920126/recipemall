@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {addToCart} from '../../store/actions/cartActions'
+import {deleteProduct} from '../../store/actions/productActions'
 
 class ProductDetail extends Component {
     componentDidMount() {
@@ -47,6 +48,11 @@ class ProductDetail extends Component {
                 quantity: this.state.quantity-1,
             })
         }
+    }
+
+    deleteProduct(id) {
+        this.props.deleteProduct(id)
+        this.props.history.goBack()
     }
 
     render() {
@@ -99,7 +105,7 @@ class ProductDetail extends Component {
                         {isAdmin? (
                             <div style={{marginTop: '12px'}}>
                                 <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('수정')}>수정</button>
-                                <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('삭제')}>삭제</button>
+                                <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.deleteProduct(id)}>삭제</button>
                             </div>
                         ) : firebase.auth().currentUser? (
                             <div className='grey lighten-3'>
@@ -168,6 +174,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (product, quantity) => {
             dispatch(addToCart(product, quantity))
+        },
+        deleteProduct: (id) => {
+            dispatch(deleteProduct(id))
         },
     }
 }

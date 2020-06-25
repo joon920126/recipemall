@@ -10,8 +10,10 @@ class CreateProduct extends Component {
         madeIn: '',
         img: null,
         imgUrl: '',
+        imgName: '',
         content: '',
         tag: '',
+        id: '',
     }
 
     handleChange = (e) => {
@@ -24,6 +26,7 @@ class CreateProduct extends Component {
         this.setState({
             img: e.target.files[0],
             imgUrl: URL.createObjectURL(e.target.files[0]),
+            imgName: e.target.files[0].name,
         })
     }
 
@@ -43,6 +46,10 @@ class CreateProduct extends Component {
                             {this.state.imgUrl? <img className='responsive-img' src={this.state.imgUrl} alt=''/> : <h5 className='center grey-text text-lighten-1'>이미지 없음</h5>}
                         </div>
                         <div className='col s12 l6'>
+                            <div className='input-field'>
+                                <label htmlFor='name'>상품번호</label>
+                                <input type='text' id='id' onChange={this.handleChange}/>
+                            </div>
                             <div className='input-field'>
                                 <label htmlFor='name'>상품명</label>
                                 <input type='text' id='name' onChange={this.handleChange}/>

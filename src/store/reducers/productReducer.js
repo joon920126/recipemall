@@ -9,6 +9,12 @@ const productReducer = (state=initState, action) => {
     case 'ADD_PRODUCT_ERROR':
         console.log('create project error', action.err)
         return state
+    case 'DELETE_PRODUCT':
+        console.log('deleted product', action.id)
+        return state
+    case 'DELETE_PRODUCT_ERROR':
+        console.log('delete product error', action.err)
+        return state
     case 'REDUCE_STOCK':
         console.log('item stock reduced', action.product, action.quantity)
         return state

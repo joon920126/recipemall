@@ -7,15 +7,10 @@ export const createProduct = (product) => {
         return new Promise(function(resolve, reject) {
             resolve()
         }).then(() => {
-            firebase.uploadFile('productImage', product.img).then(() => {
-                firebase.storage().ref('productImage/'+product.img.name).getDownloadURL().then((url) => {
-                    firestore.collection('recipeAndProduct').add({
+            firebase.uploadFile(`productImage/${product.id}`, product.img).then(() => {
+                firebase.storage().ref('productImage/'+product.id+'/'+product.img.name).getDownloadURL().then((url) => {
+                    firestore.collection('recipeAndProduct').doc(product.id).set({
                         ...product,
-                        name: product.name,
-                        content: product.content,
-                        madeIn: product.madeIn,
-                        price: product.price,
-                        tag: product.tag,
                         type: 'product',
                         img: url,
                     })
@@ -25,6 +20,23 @@ export const createProduct = (product) => {
             dispatch({type: 'ADD_PRODUCT', product})
         }).catch((err) => {
             dispatch({type: 'ADD_PRODUCT_ERROR', err})
+        })
+    }
+}
+
+export const deleteProduct = (id) => {
+    return (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore()
+        const productDoc = firestore.collection('recipeAndProduct').doc(id)
+        productDoc.get().then((doc) => {
+            firebase.storage().ref().child(`productImage/${id}/${doc.data().imgName}`).delete()
+                .then(() => {
+                    productDoc.delete()
+                })
+        }).then(() => {
+            dispatch({type: 'DELETE_PRODUCT', id})
+        }).catch((err) => {
+            dispatch({type: 'DELETE_PRODUCT_ERROR', err})
         })
     }
 }
