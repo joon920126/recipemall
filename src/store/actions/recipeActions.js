@@ -47,10 +47,6 @@ export const createRecipe = (recipe) => {
     return (dispatch, getState, {getFirestore}) => {
         const firestore = getFirestore()
 
-        // const functionWithPromise = (item) => { // a function that returns a promise
-        //     return Promise.resolve(item)
-        // }
-
         const asyncImageUpload = async () => {
             const {id} = recipe
 
@@ -121,17 +117,64 @@ export const deleteRecipe = (id) => {
     }
 }
 
-export const updateRecipe = (id) => {
+export const updateRecipe = (recipe, oldRecipe) => {
     return (dispatch, getState, {getFirestore}) => {
-        // 0. 데이터베이스에서 모든 정보를 불러와 context에 저장
-        // 1. 정보 변경시: context에 반영
-        // 2. 레시피 사진 변경시:
-        // 2-1. 스토리지에서 기존 사진 제거 및 새 사진 등록
-        // 2-2. 새 사진의 URL 받아서 데이터베이스 변경
-        // 3. 내용 변경시: context에 반영
-        // 4. 내용 사진 변경시:
-        // 4-1. 변경된 사진의 인덱스 확인 (filter함수 사용)
-        // 4-2. 인덱스에 맞는 사진 스토리지에서 찾아서 제거 및 새 사진 등록
-        // 4-3. context상에서 인덱스 상에 있는 내용 splice로 변형
+        const firestore = getFirestore()
+        const {id} = recipe
+        const recipeDoc = firestore.collection('recipeAndProduct').doc(id)
+        const newRecipe = {}
+
+        if (recipe.name !== oldRecipe.name) {
+            newRecipe.name = recipe.name
+        }
+        if (recipe.time !== oldRecipe.time) {
+            newRecipe.time = recipe.time
+        }
+        if (JSON.stringify(recipe.ingredients) !== JSON.stringify(oldRecipe.ingredients)) {
+            newRecipe.ingredients = recipe.ingredients
+        }
+        if (recipe.difficulty !== oldRecipe.difficulty) {
+            newRecipe.difficulty = recipe.difficulty
+        }
+        if (recipe.img !== oldRecipe.img) {
+            newRecipe.imgName = recipe.imgName
+            firebase.storage().ref().child(`recipeImage/${id}/${oldRecipe.imgName}`).delete()
+            firebase.uploadFile(`recipeImage/${id}`, recipe.img)
+                .then(() => {
+                    firebase.storage().ref(`recipeImage/${id}/${recipe.img.name}`).getDownloadURL()
+                        .then((imgURL) => {
+                            recipeDoc.update({img: imgURL})
+                        })
+                })
+        }
+        if (JSON.stringify(recipe.steps) !== JSON.stringify(oldRecipe.steps)) {
+            newRecipe.content = recipe.steps
+        }
+        if (JSON.stringify(recipe.stepImg) !== JSON.stringify(oldRecipe.stepImg)) {
+            newRecipe.contentImgName = recipe.stepImgName
+            const imageList = oldRecipe.stepImg.slice()
+            recipe.stepImg.map((img, idx) => {
+                if (img !== oldRecipe.stepImg[idx]) {
+                    firebase.uploadFile(`recipeImage/${recipe.id}/stepImg`, img)
+                    firebase.storage().ref(`recipeImage/${id}/stepImg/${oldRecipe.stepImgName[idx]}`).delete()
+                    firebase.uploadFile(`recipeImage/${id}/stepImg`, img)
+                        .then(() => {
+                            firebase.storage().ref(`recipeImage/${id}/stepImg/${recipe.stepImgName[idx]}`).getDownloadURL()
+                                .then((imgURL) => {
+                                    imageList.splice(idx, 1, imgURL)
+                                }).then(() => {
+                                    recipeDoc.update({contentImg: imageList})
+                                })
+                        })
+                }
+            })
+        }
+        if (recipe.introduction !== oldRecipe.introduction) {
+            newRecipe.introduction = recipe.introduction
+        }
+        if (JSON.stringify(recipe.tag) !== JSON.stringify(oldRecipe.tag)) {
+            newRecipe.tag = recipe.tag
+        }
+        recipeDoc.update(newRecipe)
     }
 }

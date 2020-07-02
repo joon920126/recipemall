@@ -52,7 +52,7 @@ const CreateRecipe = () => {
                     <div className='col s12 l6'>
                         <div className='input-field'>
                             <label htmlFor='id'>레시피 번호</label>
-                            <input type='text' id='id' onChange={handleChange}/>
+                            <input placeholder='레시피 번호는 한번 지정하면 변경할 수 없습니다.' type='text' id='id' onChange={handleChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='name'>레시피명</label>

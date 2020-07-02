@@ -2,22 +2,37 @@ import React, {useState, useContext, useEffect} from 'react'
 import RecipeContent from './RecipeContent'
 import {RecipeContext} from '../../contexts/recipeContext'
 import {useDispatch} from 'react-redux'
-import {createRecipe} from '../../store/actions/recipeActions'
+import {updateRecipe, createRecipe} from '../../store/actions/recipeActions'
 import {useHistory} from 'react-router-dom'
 import firebase from '../../config/fbconfig'
 
 const UpdateRecipe = (props) => {
     const [steps, setSteps] = useState(1)
     const {recipe, setRecipe} = useContext(RecipeContext)
+    const [oldRecipe, setOldRecipe] = useState({})
     const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
         firebase.firestore().collection('recipeAndProduct').doc(props.match.params.id).get().then((doc) => {
             const docRecipe = doc.data()
-            console.log(docRecipe)
+            setOldRecipe({
+                id: doc.id,
+                name: docRecipe.name,
+                time: docRecipe.time,
+                ingredients: docRecipe.ingredients,
+                difficulty: docRecipe.difficulty,
+                img: docRecipe.img,
+                imgUrl: docRecipe.img,
+                imgName: docRecipe.imgName,
+                steps: docRecipe.content.slice(),
+                stepImg: docRecipe.contentImg.slice(),
+                stepImgUrl: docRecipe.contentImg.slice(),
+                stepImgName: docRecipe.contentImgName.slice(),
+                introduction: docRecipe.introduction,
+                tag: docRecipe.tag,
+            })
             setRecipe({
-                ...recipe,
                 id: doc.id,
                 name: docRecipe.name,
                 time: docRecipe.time,
@@ -27,9 +42,9 @@ const UpdateRecipe = (props) => {
                 imgUrl: docRecipe.img,
                 imgName: docRecipe.imgName,
                 steps: docRecipe.content,
-                stepImg: docRecipe.contentImg,
-                stepImgUrl: docRecipe.contentImg,
-                stepImgName: docRecipe.contentImgName,
+                stepImg: docRecipe.contentImg.slice(),
+                stepImgUrl: docRecipe.contentImg.slice(),
+                stepImgName: docRecipe.contentImgName.slice(),
                 introduction: docRecipe.introduction,
                 tag: docRecipe.tag,
             })
@@ -59,7 +74,8 @@ const UpdateRecipe = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(recipe)
+        // console.log(recipe)
+        dispatch(updateRecipe(recipe, oldRecipe))
     }
 
     const handleArrayChange = (e) => {
@@ -83,8 +99,8 @@ const UpdateRecipe = (props) => {
                     </div>
                     <div className='col s12 l6'>
                         <div className='input-field'>
-                            <label htmlFor='id' className='active'>레시피 번호</label>
-                            <input type='text' id='id' value={recipe.id||' '} onChange={handleChange}/>
+                            <label htmlFor='id' className='active'>레시피 고유번호는 변경할 수 없습니다.</label>
+                            <input type='text' id='id' disabled value={recipe.id||' '} onChange={handleChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='name' className='active'>레시피명</label>
@@ -118,7 +134,7 @@ const UpdateRecipe = (props) => {
                     </div>
                 </div>
                 <div className='input-field'>
-                    <label htmlFor='introduction'>상품 설명</label>
+                    <label htmlFor='introduction' className='active'>상품 설명</label>
                     <textarea id='introduction' onChange={handleChange} value={recipe.introduction||' '} className='materialize-textarea'></textarea>
                 </div>
                 <div className='input-field'>
