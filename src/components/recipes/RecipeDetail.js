@@ -18,8 +18,8 @@ class RecipeDetail extends Component {
 
     deleteRecipe(id) {
         if (window.confirm('레시피를 정말로 삭제하시겠습니까?\n삭제된 레시피는 복구할 수 없습니다.')) {
-            this.props.deleteRecipe(id)
             this.props.history.goBack()
+            this.props.deleteRecipe(id)
         }
     }
 

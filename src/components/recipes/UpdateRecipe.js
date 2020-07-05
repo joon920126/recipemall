@@ -76,6 +76,7 @@ const UpdateRecipe = (props) => {
         e.preventDefault()
         // console.log(recipe)
         dispatch(updateRecipe(recipe, oldRecipe))
+        history.goBack()
     }
 
     const handleArrayChange = (e) => {
@@ -142,7 +143,7 @@ const UpdateRecipe = (props) => {
                 </div>
                 <div className='input-field center'>
                     <button className='btn brown lighten-2' style={{marginRight: '4px'}} onClick={addContent}>내용 추가</button>
-                    <button className='btn brown lighten-2'>레시피 등록</button>
+                    <button className='btn brown lighten-2'>레시피 수정</button>
                 </div>
             </form>
         </div>

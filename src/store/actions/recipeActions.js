@@ -176,5 +176,10 @@ export const updateRecipe = (recipe, oldRecipe) => {
             newRecipe.tag = recipe.tag
         }
         recipeDoc.update(newRecipe)
+            .then(() => {
+                dispatch({type: 'UPDATE_RECIPE', id})
+            }).catch((err) => {
+                dispatch({type: 'UPDATE_RECIPE_ERROR', err})
+            })
     }
 }
