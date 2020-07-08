@@ -7,6 +7,7 @@ import Login from './components/auth/Login'
 import Join from './components/auth/Join'
 import JoinCompleted from './components/auth/JoinCompleted'
 import CreateProduct from './components/products/CreateProduct'
+import UpdateProduct from './components/products/UpdateProduct'
 import CreateRecipe from './components/recipes/CreateRecipe'
 import UpdateRecipe from './components/recipes/UpdateRecipe'
 import Member from './components/auth/Member'
@@ -65,6 +66,7 @@ class App extends Component {
                             <Route path='/adminshippingdetail/:id' component={AdminShippingDetail}/>
                             <Route path='/shippingdetail/:id' component={ShippingDetail}/>
                             <Route path='/updaterecipe/:id' component={UpdateRecipe}/>
+                            <Route path='/updateproduct/:id' component={UpdateProduct}/>
                         </Switch>
                     </RecipeContextProvider>
                     <Footer/>

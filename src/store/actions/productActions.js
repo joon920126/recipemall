@@ -58,3 +58,31 @@ export const reduceStock = (product, quantity) => {
         })
     }
 }
+
+export const updateProduct = (product, oldImg) => {
+    return (dispatch, getState, {getFirestore}) => {
+        const {id, img} = product
+        delete product.id
+        delete product.img
+        const firestore = getFirestore()
+        const productDoc = firestore.collection('recipeAndProduct').doc(id)
+        productDoc.update(product)
+            .then(() => {
+                if (img) {
+                    firebase.storage().ref().child(`productImage/${id}/${oldImg}`).delete()
+                    firebase.uploadFile(`productImage/${id}`, img).then(() => {
+                        firebase.storage().ref('productImage/'+id+'/'+product.imgName).getDownloadURL().then((url) => {
+                            firestore.collection('recipeAndProduct').doc(id).update({
+                                img: url,
+                            })
+                        })
+                    })
+                }
+            })
+            .then(() => {
+                dispatch({type: 'UPDATE_RECIPE', id})
+            }).catch((err) => {
+                dispatch({type: 'UPDATE_RECIPE_ERROR', err})
+            })
+    }
+}

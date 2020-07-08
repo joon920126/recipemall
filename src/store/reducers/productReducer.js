@@ -21,6 +21,12 @@ const productReducer = (state=initState, action) => {
     case 'REDUCE_STOCK_ERROR':
         console.log('reduceStock error', action.err)
         return state
+    case 'UPDATE_PRODUCT':
+        console.log('updated product', action.id)
+        return state
+    case 'UPDATE_PRODUCT_ERROR':
+        console.log('update product error', action.err)
+        return state
     default: return state
     }
 }

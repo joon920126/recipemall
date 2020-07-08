@@ -6,6 +6,7 @@ import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {addToCart} from '../../store/actions/cartActions'
 import {deleteProduct} from '../../store/actions/productActions'
+import {Link} from 'react-router-dom'
 
 class ProductDetail extends Component {
     componentDidMount() {
@@ -104,7 +105,7 @@ class ProductDetail extends Component {
                         </table>
                         {isAdmin? (
                             <div style={{marginTop: '12px'}}>
-                                <button style={{marginRight: '4px'}} className='btn brown' onClick={() => console.log('수정')}>수정</button>
+                                <Link style={{margin: '4px'}} className='btn brown' to={'/updateproduct/'+id}>수정</Link>
                                 <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.deleteProduct(id)}>삭제</button>
                             </div>
                         ) : firebase.auth().currentUser? (
@@ -157,17 +158,11 @@ const mapStateToProps = (state, ownProps) => {
     const cart = state.cart
 
     return {
-    // product: product,
-    // recipe: recipe.filter(recipe => recipe.ingredients.indexOf(product.tag)!== -1),
         recipeAndProduct: state.firestore.ordered.recipeAndProduct,
         cart: cart,
         id: id,
         user: state.firestore.ordered.users,
     }
-    /**
-     * recipe의 ingredients 배열 내에
-     * product의 tag가 있다면 true
-     */
 }
 
 const mapDispatchToProps = (dispatch) => {
