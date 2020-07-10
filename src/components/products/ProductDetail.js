@@ -101,6 +101,10 @@ class ProductDetail extends Component {
                                     <td width='40%'>원산지</td>
                                     <td>{product.madeIn}</td>
                                 </tr>
+                                {isAdmin? <tr>
+                                    <td width='40%'>재고수량</td>
+                                    <td>{product.stock}</td>
+                                </tr> : null}
                             </tbody>
                         </table>
                         {isAdmin? (

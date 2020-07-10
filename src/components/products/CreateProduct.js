@@ -14,6 +14,7 @@ class CreateProduct extends Component {
         content: '',
         tag: '',
         id: '',
+        stock: 0,
     }
 
     handleChange = (e) => {
@@ -69,6 +70,10 @@ class CreateProduct extends Component {
                             <div className='input-field'>
                                 <label htmlFor='tag'>태그</label>
                                 <input type='text' id='tag' onChange={this.handleChange}/>
+                            </div>
+                            <div className='input-field'>
+                                <label htmlFor='stock'>재고수량</label>
+                                <input type='number' id='stock' onChange={this.handleChange}/>
                             </div>
                             <div className='file-field input-field'>
                                 <div className='btn brown lighten-2'>

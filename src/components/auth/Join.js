@@ -70,29 +70,29 @@ class Join extends Component {
                     <h5>회원가입</h5>
                     <div className='input-field'>
                         <label htmlFor='email'>이메일</label>
-                        <input type='email' id='email' onChange={this.handleChange}/>
+                        <input required type='email' id='email' onChange={this.handleChange}/>
                     </div>
                     <div className='input-field'>
                         <label htmlFor='password'>비밀번호</label>
-                        <input type='password' id='password' onChange={this.handleChange}/>
+                        <input required type='password' id='password' onChange={this.handleChange}/>
                     </div>
                     <div className='input-field'>
                         <label htmlFor='passwordConfirm'>비밀번호 확인</label>
-                        <input className='validate' type='password' id='passwordConfirm' onChange={this.handleChange}/>
+                        <input required className='validate' type='password' id='passwordConfirm' onChange={this.handleChange}/>
                     </div>
                     <div className='input-field'>
                         <label htmlFor='name'>이름</label>
-                        <input type='text' id='name' onChange={this.handleChange}/>
+                        <input required type='text' id='name' onChange={this.handleChange}/>
                     </div>
                     <div className='input-field'>
                         <label htmlFor='zonecode' className={this.state.zonecode? 'active':null}>우편번호</label>
-                        <input type='text' disabled onChange={this.handleChange} id='zonecode'/>
+                        <input required type='text' disabled onChange={this.handleChange} id='zonecode'/>
                         {this.state.addressApi? <DaumPostcode onComplete={this.handleAddress}/> :
                             <button className='btn brown lighten-2' onClick={this.handleOpenPostCode}>우편번호 찾기</button>}
                     </div>
                     <div className='input-field'>
                         <label className={this.state.address? 'active' : null} htmlFor='address'>배송지</label>
-                        <input disabled type='text' id='address' onChange={this.handleChange}/>
+                        <input required disabled type='text' id='address' onChange={this.handleChange}/>
                     </div>
                     <div className='input-field'>
                         <label htmlFor='address2'>상세주소</label>
@@ -100,7 +100,7 @@ class Join extends Component {
                     </div>
                     <div className='input-field'>
                         <label htmlFor='phone'>연락처</label>
-                        <input type='text' id='phone' onChange={this.handleChange}/>
+                        <input required type='text' id='phone' onChange={this.handleChange}/>
                     </div>
                     <div className='input-field'>
                         <button className='btn brown lighten-2'>회원가입</button>

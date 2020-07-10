@@ -2,7 +2,6 @@ import firebase from '../../config/fbconfig'
 
 export const createProduct = (product) => {
     return (dispatch, getState, {getFirestore}) => {
-    // make async call to database
         const firestore = getFirestore()
         return new Promise(function(resolve, reject) {
             resolve()

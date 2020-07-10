@@ -41,7 +41,7 @@ class UpdateProduct extends Component {
         const RnP = this.props.recipeAndProduct
         const oldProduct = RnP? RnP.find((product) => product.id === id):{
             name: '',
-            price: 0,
+            price: null,
             company: '',
             madeIn: '',
             img: null,
@@ -50,6 +50,7 @@ class UpdateProduct extends Component {
             content: '',
             tag: [],
             id: '',
+            stock: null,
         }
         return (
             <div className='container Site-content'>
@@ -83,6 +84,10 @@ class UpdateProduct extends Component {
                             <div className='input-field'>
                                 <label htmlFor='tag' className='active'>태그</label>
                                 <input type='text' id='tag' defaultValue={oldProduct? (Array.isArray(oldProduct.tag)? oldProduct.tag.join(', ') : oldProduct.tag) : ''} onChange={this.handleChange}/>
+                            </div>
+                            <div className='input-field'>
+                                <label htmlFor='stock' className='active'>재고수량</label>
+                                <input type='number' id='stock' defaultValue={oldProduct.stock} onChange={this.handleChange}/>
                             </div>
                             <div className='file-field input-field'>
                                 <div className='btn brown lighten-2'>
