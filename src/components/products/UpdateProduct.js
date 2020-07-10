@@ -33,6 +33,7 @@ class UpdateProduct extends Component {
         e.preventDefault()
         const oldProduct = this.props.recipeAndProduct.find((product) => product.id === this.props.id)
         this.props.updateProduct(this.state, oldProduct.imgName)
+        this.props.history.goBack()
     }
 
 
