@@ -12,6 +12,7 @@ import CreateRecipe from './components/recipes/CreateRecipe'
 import UpdateRecipe from './components/recipes/UpdateRecipe'
 import Member from './components/auth/Member'
 import QnA from './components/customerService/QnA'
+import AdminQnA from './components/customerService/AdminQnA'
 import QnADetail from './components/customerService/QnADetail'
 import Shipping from './components/customerService/Shipping'
 import Cart from './components/cart/Cart'
@@ -19,7 +20,6 @@ import Order from './components/cart/Order'
 import OrderCompleted from './components/cart/OrderCompleted'
 import MyPage from './components/auth/MyPage'
 import CreateQnA from './components/customerService/CreateQnA'
-import AdminQnA from './components/customerService/AdminQnA'
 import AdminShipping from './components/customerService/AdminShipping'
 import List from './components/layout/List'
 import ProductDetail from './components/products/ProductDetail'
@@ -49,6 +49,7 @@ class App extends Component {
                             <Route path='/favorite/:page' component={Favorite}/>
                             <Route exact path='/member/:page' component={Member}/>
                             <Route path='/qna/:page' component={QnA}/>
+                            <Route path='/adminqna/:page' component={AdminQnA}/>
                             <Route path='/qnaDetail/:id' component={QnADetail}/>
                             <Route path='/cart' component={Cart}/>
                             <Route path='/order' component={Order}/>

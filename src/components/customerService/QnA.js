@@ -13,6 +13,7 @@ class QnA extends Component {
         const page = this.props.page
         const qnaSlice = (qna.slice().sort((a, b)=>b.createdAt.seconds-a.createdAt.seconds)
             .slice(15*(page-1), 15*page))
+        console.log(qnaSlice? qnaSlice : null)
         return (
             <div className='container Site-content'>
                 <h4 className='grey-text text-darken-1'>고객센터</h4>
@@ -35,7 +36,7 @@ class QnA extends Component {
                                             {qna.title}
                                         </Link>
                                     </td>
-                                    <td>{moment(qna.createdAt.miliseconds).format('YYYY/MM/DD')}</td>
+                                    <td>{moment.unix(qna.createdAt.seconds).format('YYYY/MM/DD')}</td>
                                 </tr>
                             )
                         })}
