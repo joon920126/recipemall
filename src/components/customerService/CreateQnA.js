@@ -32,25 +32,25 @@ class CreateQnA extends Component {
                         <div className='col s2 l2'>
                             <div className='input-field'>
                                 <label htmlFor='name'>이름</label>
-                                <input type='text' id='name' onChange={this.handleChange}/>
+                                <input required type='text' id='name' onChange={this.handleChange}/>
                             </div>
                         </div>
                         <div className='col s2 l2'>
                             <div className='input-field'>
                                 <label htmlFor='name'>비밀번호</label>
-                                <input type='text' id='password' onChange={this.handleChange}/>
+                                <input required type='text' id='password' onChange={this.handleChange}/>
                             </div>
                         </div>
                         <div className='col s8 l8'>
                             <div className='input-field'>
                                 <label htmlFor='title'>제목</label>
-                                <input type='text' id='title' onChange={this.handleChange}/>
+                                <input required type='text' id='title' onChange={this.handleChange}/>
                             </div>
                         </div>
                         <div className='col s12 l12'>
                             <div className='input-field'>
                                 <label htmlFor='content'>내용</label>
-                                <textarea className='materialize-textarea' type='text' id='content' onChange={this.handleChange}/>
+                                <textarea required className='materialize-textarea' type='text' id='content' onChange={this.handleChange}/>
                             </div>
                         </div>
                     </div>

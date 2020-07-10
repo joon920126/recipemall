@@ -52,35 +52,35 @@ const CreateRecipe = () => {
                     <div className='col s12 l6'>
                         <div className='input-field'>
                             <label htmlFor='id' className='active'>레시피 번호</label>
-                            <input placeholder='레시피 번호는 한번 지정하면 변경할 수 없습니다.' type='text' id='id' onChange={handleChange}/>
+                            <input required placeholder='레시피 번호는 한번 지정하면 변경할 수 없습니다.' type='text' id='id' onChange={handleChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='name'>레시피명</label>
-                            <input type='text' id='name' onChange={handleChange}/>
+                            <input required type='text' id='name' onChange={handleChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='time'>시간</label>
-                            <input type='number' id='time' onChange={handleChange}/>
+                            <input required type='number' id='time' onChange={handleChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='ingredients'>재료</label>
-                            <input type='text' id='ingredients' onChange={handleArrayChange}/>
+                            <input required type='text' id='ingredients' onChange={handleArrayChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='difficulty'>난이도</label>
-                            <input type='text' id='difficulty' onChange={handleChange}/>
+                            <input required type='text' id='difficulty' onChange={handleChange}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='tag'>태그</label>
-                            <input type='text' id='tag' onChange={handleArrayChange}/>
+                            <input required type='text' id='tag' onChange={handleArrayChange}/>
                         </div>
                         <div className='file-field input-field'>
                             <div className='btn brown lighten-2'>
                                 <span>이미지 업로드</span>
-                                <input type='file' onChange={handleFileInput}/>
+                                <input required type='file' onChange={handleFileInput}/>
                             </div>
                             <div className='file-path-wrapper'>
-                                <input type='text' className='file-path wrapper'/>
+                                <input required type='text' className='file-path wrapper'/>
                             </div>
                         </div>
                     </div>

@@ -49,46 +49,46 @@ class CreateProduct extends Component {
                         <div className='col s12 l6'>
                             <div className='input-field'>
                                 <label htmlFor='name'>상품번호</label>
-                                <input type='text' id='id' onChange={this.handleChange}/>
+                                <input placeholder='상품 고유번호는 한번 지정하면 변경할 수 없습니다.' required type='text' id='id' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='name'>상품명</label>
-                                <input type='text' id='name' onChange={this.handleChange}/>
+                                <input required type='text' id='name' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='price'>가격</label>
-                                <input type='number' id='price' onChange={this.handleChange}/>
+                                <input required type='number' id='price' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='company'>회사명</label>
-                                <input type='text' id='company' onChange={this.handleChange}/>
+                                <input required type='text' id='company' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='madeIn'>원산지</label>
-                                <input type='text' id='madeIn' onChange={this.handleChange}/>
+                                <input required type='text' id='madeIn' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='tag'>태그</label>
-                                <input type='text' id='tag' onChange={this.handleChange}/>
+                                <input required type='text' id='tag' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='stock'>재고수량</label>
-                                <input type='number' id='stock' onChange={this.handleChange}/>
+                                <input required type='number' id='stock' onChange={this.handleChange}/>
                             </div>
                             <div className='file-field input-field'>
                                 <div className='btn brown lighten-2'>
                                     <span>이미지 업로드</span>
-                                    <input type='file' onChange={this.handleFileInput}/>
+                                    <input required type='file' onChange={this.handleFileInput}/>
                                 </div>
                                 <div className='file-path-wrapper'>
-                                    <input type='text' className='file-path validate'/>
+                                    <input required type='text' className='file-path validate'/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className='input-field'>
                         <label htmlFor='content'>상품 설명</label>
-                        <textarea id='content' onChange={this.handleChange} className='materialize-textarea'></textarea>
+                        <textarea required id='content' onChange={this.handleChange} className='materialize-textarea'></textarea>
                     </div>
                     <div className='input-field center'>
                         <button className='btn brown lighten-2'>상품 등록</button>
