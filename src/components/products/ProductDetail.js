@@ -17,16 +17,17 @@ class ProductDetail extends Component {
         quantity: 1,
     }
 
-    putIntoCart = () => {
+    putIntoCart(e) {
+        e.preventDefault()
         this.props.addToCart(this.props.recipeAndProduct.find((product) => product.id===this.props.id), this.state.quantity)
         alert('장바구니에 '+this.state.quantity+'개 추가되었습니다.')
     }
 
-    buy = () => {
-        console.log('buy '+this.state.quantity)
-    }
+    // buy() {
+    //     console.log('buy '+this.state.quantity)
+    // }
 
-    plus = (e) => {
+    plus(e) {
         e.preventDefault()
         const id = this.props.id
         const product = this.props.recipeAndProduct.find((product) => product.id===id)
@@ -43,7 +44,8 @@ class ProductDetail extends Component {
         }
     }
 
-    minus = () => {
+    minus(e) {
+        e.preventDefault()
         if (this.state.quantity>1) {
             this.setState({
                 quantity: this.state.quantity-1,
@@ -118,11 +120,11 @@ class ProductDetail extends Component {
                                     <div className='card-content'>
                                         <div className='row' style={{marginBottom: '0px'}}>
                                             <div className='col s3 l3 flow-text center-align'>
-                                                {this.state.quantity}
+                                                {() => this.state.quantity}
                                             </div>
                                             <div className='col s4 l4 valign-wrapper'>
-                                                <button className='btn white black-text' type='button' onClick={this.minus}><i className='material-icons'>remove</i></button>
-                                                <button className='btn white black-text' type='button' onClick={this.plus}><i className='material-icons'>add</i></button>
+                                                <button className='btn white black-text' type='button' onClick={(e) => this.minus(e)}><i className='material-icons'>remove</i></button>
+                                                <button className='btn white black-text' type='button' onClick={(e) => this.plus(e)}><i className='material-icons'>add</i></button>
                                             </div>
                                             <div className='col s5 l5 flow-text right-align'>
                                                 {this.state.quantity*product.price}원
@@ -130,8 +132,8 @@ class ProductDetail extends Component {
                                         </div>
                                     </div>
                                     <div className='card-action'>
-                                        <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buy}>바로구매</button>
-                                        <button className='btn brown waves-effect waves-light' onClick={this.putIntoCart}>장바구니</button>
+                                        {/* <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.buy}>바로구매</button> */}
+                                        <button className='btn brown waves-effect waves-light' onClick={(e) => this.putIntoCart(e)}>장바구니</button>
                                     </div>
                                 </div>
                             </div>

@@ -9,19 +9,19 @@ class UpdateProduct extends Component {
 
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.setState({
             id: this.props.id,
         })
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleFileInput = (e) => {
+    handleFileInput(e) {
         this.setState({
             img: e.target.files[0],
             imgUrl: URL.createObjectURL(e.target.files[0]),
@@ -29,7 +29,7 @@ class UpdateProduct extends Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault()
         const oldProduct = this.props.recipeAndProduct.find((product) => product.id === this.props.id)
         this.props.updateProduct(this.state, oldProduct.imgName)
@@ -64,36 +64,36 @@ class UpdateProduct extends Component {
                         <div className='col s12 l6'>
                             <div className='input-field'>
                                 <label htmlFor='name' className='active'>상품번호</label>
-                                <input type='text' defaultValue={oldProduct.id} id='id' onChange={this.handleChange}/>
+                                <input type='text' defaultValue={oldProduct.id} id='id' onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='name' className='active'>상품명</label>
-                                <input type='text' defaultValue={oldProduct.name} id='name'onChange={this.handleChange}/>
+                                <input type='text' defaultValue={oldProduct.name} id='name'onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='price' className='active'>가격</label>
-                                <input type='number' defaultValue={oldProduct.price} id='price' onChange={this.handleChange}/>
+                                <input type='number' defaultValue={oldProduct.price} id='price' onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='company' className='active'>회사명</label>
-                                <input type='text' defaultValue={oldProduct.company} id='company' onChange={this.handleChange}/>
+                                <input type='text' defaultValue={oldProduct.company} id='company' onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='madeIn' className='active'>원산지</label>
-                                <input type='text' id='madeIn' defaultValue={oldProduct.madeIn} onChange={this.handleChange}/>
+                                <input type='text' id='madeIn' defaultValue={oldProduct.madeIn} onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='tag' className='active'>태그</label>
-                                <input type='text' id='tag' defaultValue={oldProduct? (Array.isArray(oldProduct.tag)? oldProduct.tag.join(', ') : oldProduct.tag) : ''} onChange={this.handleChange}/>
+                                <input type='text' id='tag' defaultValue={oldProduct? (Array.isArray(oldProduct.tag)? oldProduct.tag.join(', ') : oldProduct.tag) : ''} onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='stock' className='active'>재고수량</label>
-                                <input type='number' id='stock' defaultValue={oldProduct.stock} onChange={this.handleChange}/>
+                                <input type='number' id='stock' defaultValue={oldProduct.stock} onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='file-field input-field'>
                                 <div className='btn brown lighten-2'>
                                     <span>이미지 업로드</span>
-                                    <input type='file' onChange={this.handleFileInput}/>
+                                    <input type='file' onChange={() => this.handleFileInput}/>
                                 </div>
                                 <div className='file-path-wrapper'>
                                     <input type='text' defaultValue={oldProduct.imgName} className='file-path validate'/>
@@ -103,7 +103,7 @@ class UpdateProduct extends Component {
                     </div>
                     <div className='input-field'>
                         <label htmlFor='content' className='active'>상품 설명</label>
-                        <textarea id='content' onChange={this.handleChange} defaultValue={oldProduct.content} className='materialize-textarea'></textarea>
+                        <textarea id='content' onChange={(e) => this.handleChange(e)} defaultValue={oldProduct.content} className='materialize-textarea'></textarea>
                     </div>
                     <div className='input-field center'>
                         <button className='btn brown lighten-2'>상품 수정</button>
