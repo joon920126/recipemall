@@ -18,12 +18,12 @@ class Join extends Component {
         addressApi: false,
     }
 
-    handleOpenPostCode(e) {
+    handleOpenPostCode = (e) => {
         e.preventDefault()
         this.setState({addressApi: true})
     }
 
-    handleAddress(data) {
+    handleAddress = (data) => {
         let fullAddress = data.address
         let extraAddress = ''
 

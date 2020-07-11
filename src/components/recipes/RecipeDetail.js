@@ -5,7 +5,7 @@ import ProductButton from '../products/ProductButton'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {Link} from 'react-router-dom'
-import {addToFavorite, deleteRecipe} from '../../store/actions/recipeActions'
+import {addToFavorite, removeFromFavorite, deleteRecipe} from '../../store/actions/recipeActions'
 
 class RecipeDetail extends Component {
     componentDidMount() {
@@ -14,6 +14,10 @@ class RecipeDetail extends Component {
 
     addToFav() {
         this.props.addToFavorite(this.props.recipeAndProduct.find((recipe)=>recipe.id===this.props.id))
+    }
+
+    removeFromFav() {
+        this.props.removeFromFavorite(this.props.recipeAndProduct.find((recipe)=>recipe.id===this.props.id))
     }
 
     deleteRecipe(id) {
@@ -31,6 +35,8 @@ class RecipeDetail extends Component {
         const product = rnp && rnp.filter((product) => product.type==='product' &&
                                                        recipe.ingredients.indexOf(product.tag)!== -1)
         const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
+        const favorite = ((this.props.users||[]).find((user)=>user.id===firebase.auth().currentUser.uid)||{}).favorite||[]
+        const isFav = favorite.some((rec) => rec.id===recipe.id)
         return (
             <div className='container Site-content'>
                 <Search/>
@@ -72,8 +78,11 @@ class RecipeDetail extends Component {
                                 </span>
                             ) : (
                                 <span>
-                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={this.addToFav}>즐겨찾기에 추가</button>
-                                    <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buyAll}>모든 재료 구매</button>
+                                    {isFav?
+                                        <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.removeFromFav()}>즐겨찾기에서 제거</button>:
+                                        <button style={{marginRight: '4px'}} className='btn brown' onClick={() => this.addToFav()}>즐겨찾기에 추가</button>
+                                    }
+                                    {/* <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buyAll}>모든 재료 구매</button> */}
                                     <a href='#ingredients' className='btn brown'>개별 재료 보러가기</a>
                                 </span>
                             )}
@@ -110,6 +119,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         recipeAndProduct: state.firestore.ordered.recipeAndProduct,
         id: id,
+        users: state.firestore.ordered.users,
     }
 }
 
@@ -117,6 +127,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addToFavorite: (recipe) => {
             dispatch(addToFavorite(recipe))
+        },
+        removeFromFavorite: (recipe) => {
+            dispatch(removeFromFavorite(recipe))
         },
         deleteRecipe: (id) => {
             dispatch(deleteRecipe(id))
@@ -127,4 +140,5 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([{collection: 'recipeAndProduct'}]),
+    firestoreConnect([{collection: 'users'}]),
 )(RecipeDetail)
