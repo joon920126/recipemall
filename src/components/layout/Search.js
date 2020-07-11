@@ -7,16 +7,16 @@ class Search extends Component {
         includeRecipe: true,
         includeProduct: true,
     }
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe: this.state.includeRecipe, includeProduct: this.state.includeProduct})
     }
-    handleRadioChange(e) {
+    handleRadioChange = (e) => {
         switch (e.target.id) {
         case 'all':
             this.props.history.push('/list/1', {keyword: this.state.keyword, includeRecipe: true, includeProduct: true})

@@ -19,18 +19,18 @@ class Profile extends Component {
         phone: '',
     }
 
-    handleOpenPostCode(e) {
+    handleOpenPostCode = (e) => {
         e.preventDefault()
         this.setState({addressApi: true})
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         if (this.state.password === this.state.passwordConfirm) {
             this.setState({passwordError: false})
@@ -40,7 +40,7 @@ class Profile extends Component {
         }
     }
 
-    handleAddress(data) {
+    handleAddress = (data) => {
         let fullAddress = data.address
         let extraAddress = ''
 

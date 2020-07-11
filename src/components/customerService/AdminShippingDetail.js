@@ -10,7 +10,7 @@ class AdminShippingDetail extends Component {
         deliver: null,
     }
 
-    componentDidUpdate() {
+    componentDidUpdate = () => {
         window.scrollTo(0, 0)
         const deliver = this.props.shipping&& this.props.shipping.find((order) => order.id === this.props.id).deliver
         switch (deliver) {
@@ -28,7 +28,7 @@ class AdminShippingDetail extends Component {
         }
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.props.changeDeliver(this.props.id, parseInt(e.target.id))
     }
 

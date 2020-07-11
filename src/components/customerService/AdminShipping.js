@@ -8,7 +8,7 @@ import ShippingSearch from '../layout/ShippingSearch'
 
 
 class AdminShipping extends Component {
-    handleClick(e) {
+    handleClick = (e) => {
         e.preventDefault()
         this.props.history.push('/adminshippingdetail/'+e.currentTarget.id)
     }

@@ -17,13 +17,13 @@ class CreateProduct extends Component {
         stock: 0,
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleFileInput(e) {
+    handleFileInput = (e) => {
         this.setState({
             img: e.target.files[0],
             imgUrl: URL.createObjectURL(e.target.files[0]),
@@ -31,7 +31,7 @@ class CreateProduct extends Component {
         })
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.createProduct(this.state)
         this.props.history.push('/')

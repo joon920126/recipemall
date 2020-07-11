@@ -7,13 +7,13 @@ class ReplyQnA extends Component {
         content: '',
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.replyQnA(this.state)
     }

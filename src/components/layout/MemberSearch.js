@@ -6,16 +6,16 @@ class MemberSearch extends Component {
         keyword: '',
         filter: 'all',
     }
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.history.push('/member/1', {keyword: this.state.keyword, filter: this.state.filter})
     }
-    handleRadioChange(e) {
+    handleRadioChange = (e) => {
         this.setState({filter: e.target.id})
     }
     render() {

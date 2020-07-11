@@ -11,7 +11,7 @@ class Member extends Component {
         sortBy: 'byEmail',
     }
 
-    handleRadioChange(e) {
+    handleRadioChange = (e) => {
         this.setState({sortBy: e.target.id})
     }
 

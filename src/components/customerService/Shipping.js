@@ -6,7 +6,7 @@ import {Redirect, Link} from 'react-router-dom'
 import moment from 'moment'
 
 class Shipping extends Component {
-    handleClick(e) {
+    handleClick = (e) => {
         e.preventDefault()
         this.props.history.push('/shippingdetail/'+e.currentTarget.id)
     }
