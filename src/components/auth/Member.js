@@ -11,7 +11,7 @@ class Member extends Component {
         sortBy: 'byEmail',
     }
 
-    handleRadioChange(e) {
+    handleRadioChange = (e) => {
         this.setState({sortBy: e.target.id})
     }
 
@@ -52,15 +52,15 @@ class Member extends Component {
                     <div className='col s4 l4' style={{marginTop: '22px'}}>
                         <span style={{marginRight: '12px'}}>정렬</span>
                         <label style={{marginRight: '12px'}}>
-                            <input type='radio' name='filter' className='with-gap' id='byEmail' onChange={() => this.handleRadioChange}/>
+                            <input type='radio' name='filter' className='with-gap' id='byEmail' onChange={this.handleRadioChange}/>
                             <span>이메일</span>
                         </label>
                         <label style={{marginRight: '12px'}}>
-                            <input type='radio' name='filter' className='with-gap' id='byName' onChange={() => this.handleRadioChange}/>
+                            <input type='radio' name='filter' className='with-gap' id='byName' onChange={this.handleRadioChange}/>
                             <span>이름</span>
                         </label>
                         <label>
-                            <input type='radio' name='filter' className='with-gap' id='byPhone' onChange={() => this.handleRadioChange}/>
+                            <input type='radio' name='filter' className='with-gap' id='byPhone' onChange={this.handleRadioChange}/>
                             <span>전화번호</span>
                         </label>
                     </div>

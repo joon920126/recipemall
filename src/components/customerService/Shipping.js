@@ -6,7 +6,7 @@ import {Redirect, Link} from 'react-router-dom'
 import moment from 'moment'
 
 class Shipping extends Component {
-    handleClick(e) {
+    handleClick = (e) => {
         e.preventDefault()
         this.props.history.push('/shippingdetail/'+e.currentTarget.id)
     }
@@ -16,7 +16,7 @@ class Shipping extends Component {
         const {page, shipping} = this.props
         const rows = shipping&& shipping.filter((order) => order.userid===this.props.auth.uid).sort((a, b) => b.id-a.id)
             .map((shipping) =>
-                <tr onClick={(e) => this.handleClick(e)} key={shipping.id} id={shipping.id}>
+                <tr onClick={this.handleClick} key={shipping.id} id={shipping.id}>
                     <td className='center'>{shipping.id}</td>
                     <td className='center'>{moment(shipping.orderedAt).format('YYYY-MM-DD')}</td>
                     <td className='center'>{shipping.deliver===0? '배송준비중' :

@@ -17,13 +17,13 @@ class CreateProduct extends Component {
         stock: 0,
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleFileInput(e) {
+    handleFileInput = (e) => {
         this.setState({
             img: e.target.files[0],
             imgUrl: URL.createObjectURL(e.target.files[0]),
@@ -31,7 +31,7 @@ class CreateProduct extends Component {
         })
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         this.props.createProduct(this.state)
         this.props.history.push('/')
@@ -40,7 +40,7 @@ class CreateProduct extends Component {
     render() {
         return (
             <div className='container Site-content'>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
+                <form onSubmit={this.handleSubmit}>
                     <h4 className='grey-text text-darken-1'>상품 등록</h4>
                     <div className='row valign-wrapper'>
                         <div className='col s12 l6'>
@@ -49,36 +49,36 @@ class CreateProduct extends Component {
                         <div className='col s12 l6'>
                             <div className='input-field'>
                                 <label htmlFor='name'>상품번호</label>
-                                <input placeholder='상품 고유번호는 한번 지정하면 변경할 수 없습니다.' required type='text' id='id' onChange={(e) => this.handleChange(e)}/>
+                                <input placeholder='상품 고유번호는 한번 지정하면 변경할 수 없습니다.' required type='text' id='id' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='name'>상품명</label>
-                                <input required type='text' id='name' onChange={(e) => this.handleChange(e)}/>
+                                <input required type='text' id='name' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='price'>가격</label>
-                                <input required type='number' id='price' onChange={(e) => this.handleChange(e)}/>
+                                <input required type='number' id='price' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='company'>회사명</label>
-                                <input required type='text' id='company' onChange={(e) => this.handleChange(e)}/>
+                                <input required type='text' id='company' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='madeIn'>원산지</label>
-                                <input required type='text' id='madeIn' onChange={(e) => this.handleChange(e)}/>
+                                <input required type='text' id='madeIn' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='tag'>태그</label>
-                                <input required type='text' id='tag' onChange={(e) => this.handleChange(e)}/>
+                                <input required type='text' id='tag' onChange={this.handleChange}/>
                             </div>
                             <div className='input-field'>
                                 <label htmlFor='stock'>재고수량</label>
-                                <input required type='number' id='stock' onChange={(e) => this.handleChange(e)}/>
+                                <input required type='number' id='stock' onChange={this.handleChange}/>
                             </div>
                             <div className='file-field input-field'>
                                 <div className='btn brown lighten-2'>
                                     <span>이미지 업로드</span>
-                                    <input required type='file' onChange={(e) => this.handleFileInput(e)}/>
+                                    <input required type='file' onChange={this.handleFileInput}/>
                                 </div>
                                 <div className='file-path-wrapper'>
                                     <input required type='text' className='file-path validate'/>
@@ -88,7 +88,7 @@ class CreateProduct extends Component {
                     </div>
                     <div className='input-field'>
                         <label htmlFor='content'>상품 설명</label>
-                        <textarea required id='content' onChange={(e) => this.handleChange(e)} className='materialize-textarea'></textarea>
+                        <textarea required id='content' onChange={this.handleChange} className='materialize-textarea'></textarea>
                     </div>
                     <div className='input-field center'>
                         <button className='btn brown lighten-2'>상품 등록</button>

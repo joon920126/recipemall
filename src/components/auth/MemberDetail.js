@@ -9,7 +9,7 @@ class MemberDetail extends Component {
         window.scrollTo(0, 0)
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         e.preventDefault()
         this.props.history.push('/adminshippingdetail/'+e.currentTarget.id)
     }
@@ -20,7 +20,7 @@ class MemberDetail extends Component {
         const user = userList? userList.find((user) => user.id === id) : {}
         const rows = shipping&& shipping.filter((order)=> order.userid===id)
             .map((shipping) => <ShippingSummary
-                customClickEvent={(e) => this.handleClick(e)}
+                customClickEvent={this.handleClick}
                 key={shipping.id}
                 name={shipping.name}
                 phone={shipping.phone}

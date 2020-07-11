@@ -8,7 +8,7 @@ import ShippingSearch from '../layout/ShippingSearch'
 
 
 class AdminShipping extends Component {
-    handleClick(e) {
+    handleClick = (e) => {
         e.preventDefault()
         this.props.history.push('/adminshippingdetail/'+e.currentTarget.id)
     }
@@ -22,7 +22,7 @@ class AdminShipping extends Component {
                 filter === 'phone'? shipping&& shipping.slice().filter((order) => order.phone.includes(keyword)) :
                     filter === 'all'? shipping&& shipping.slice().filter((order) => order.id.includes(keyword) || order.name.includes(keyword) || order.phone.includes(keyword)) : null
         const rows = searched && searched.sort((a, b) => b.id-a.id).map((shipping) => <ShippingSummary
-            customClickEvent={(e) => this.handleClick(e)}
+            customClickEvent={this.handleClick}
             key={shipping.id}
             name={shipping.name}
             phone={shipping.phone}

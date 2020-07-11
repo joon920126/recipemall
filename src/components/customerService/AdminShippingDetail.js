@@ -10,7 +10,7 @@ class AdminShippingDetail extends Component {
         deliver: null,
     }
 
-    componentDidUpdate() {
+    componentDidUpdate = () => {
         window.scrollTo(0, 0)
         const deliver = this.props.shipping&& this.props.shipping.find((order) => order.id === this.props.id).deliver
         switch (deliver) {
@@ -28,7 +28,7 @@ class AdminShippingDetail extends Component {
         }
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.props.changeDeliver(this.props.id, parseInt(e.target.id))
     }
 
@@ -83,7 +83,7 @@ class AdminShippingDetail extends Component {
                         {shipping&& <tr>
                             <td className='center' colSpan='2'>배송메시지: {shipping.message}</td>
                             <td className='center' colSpan='2'>
-                                <form onChange={(e) => this.handleChange(e)}>
+                                <form onChange={this.handleChange}>
                                     <label style={{marginRight: '8px'}}>
                                         <input className='with-gap' name='delivered' type='radio' id='0'/><span>배송준비중</span>
                                     </label>
