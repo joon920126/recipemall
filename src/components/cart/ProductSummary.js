@@ -5,7 +5,7 @@ import {removeOneFromCart, removeFromCart, addToCart} from '../../store/actions/
 
 
 class ProductSummary extends Component {
-    plus = () => {
+    plus() {
         if (this.props.cart.qty<this.props.product.stock) {
             this.props.addToCart(this.props.product, 1)
         } else {
@@ -13,7 +13,7 @@ class ProductSummary extends Component {
         }
     }
 
-    minus = () => {
+    minus() {
         if (this.props.cart.qty>1) {
             this.props.removeOneFromCart(this.props.product)
         } else {
@@ -21,7 +21,7 @@ class ProductSummary extends Component {
         }
     }
 
-    remove = () => {
+    remove() {
         this.props.removeFromCart(this.props.product)
     }
 
@@ -43,9 +43,9 @@ class ProductSummary extends Component {
                 <td className='center'><h6>{product.price}원</h6></td>
                 <td className='center'>
                     <h6 style={{marginBottom: '12px'}}>{cart.qty}개</h6>
-                    <button className='btn-small white black-text' type='button' onClick={this.plus}><i className='material-icons'>add</i></button>
-                    <button className='btn-small white black-text' type='button' onClick={this.minus}><i className='material-icons'>remove</i></button>
-                    <button className='btn-small white black-text' type='button' onClick={this.remove}><i className='material-icons'>delete</i></button>
+                    <button className='btn-small white black-text' type='button' onClick={() => this.plus()}><i className='material-icons'>add</i></button>
+                    <button className='btn-small white black-text' type='button' onClick={() => this.minus()}><i className='material-icons'>remove</i></button>
+                    <button className='btn-small white black-text' type='button' onClick={() => this.remove()}><i className='material-icons'>delete</i></button>
                 </td>
                 <td className='center'><h6>{product.price*cart.qty}원</h6></td>
             </tr>

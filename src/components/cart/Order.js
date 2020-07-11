@@ -18,7 +18,7 @@ class Order extends Component {
         addressApi: false,
     }
 
-    handleAddress = (data) => {
+    handleAddress(data) {
         let fullAddress = data.address
         let extraAddress = ''
 
@@ -40,13 +40,13 @@ class Order extends Component {
         document.getElementById('zonecode').value = data.zonecode
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleCheck = (e) => {
+    handleCheck(e) {
         const firebase = getFirebase()
         const user = (this.props.user||[]).find((user) => user.id===firebase.auth().currentUser.uid)
         if (e.target.checked) {
@@ -78,7 +78,7 @@ class Order extends Component {
         }
     }
 
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault()
         return new Promise(function(resolve, reject) {
             resolve()
@@ -94,7 +94,7 @@ class Order extends Component {
         })
     }
 
-    handleOpenPostCode = (e) => {
+    handleOpenPostCode(e) {
         e.preventDefault()
         this.setState({addressApi: true})
     }
@@ -157,47 +157,47 @@ class Order extends Component {
                             <div className='col s8 l8'>
                                 <p>
                                     <label>
-                                        <input type='checkbox' onClick={this.handleCheck}/>
+                                        <input type='checkbox' onClick={(e) => this.handleCheck(e)}/>
                                         <span>주문자 정보와 동일</span>
                                     </label>
 
-                                    <button style={{marginLeft: '16px'}} className='btn brown lighten-2' onClick={this.handleOpenPostCode}>우편번호 찾기</button>
+                                    <button style={{marginLeft: '16px'}} className='btn brown lighten-2' onClick={(e) => this.handleOpenPostCode(e)}>우편번호 찾기</button>
                                 </p>
                             </div>
                         </div>
                         <div className='row' style={{marginBottom: '0px'}}>
                             <div className='input-field col s6 l6' style={{marginTop: '0px'}}>
                                 <label className={this.state.name? 'active' : null} htmlFor='name' name='autofill'>이름</label>
-                                <input type='text' id='name' onChange={this.handleChange}/>
+                                <input type='text' id='name' onChange={(e) => this.handleChange(e)}/>
                             </div>
                             <div className='input-field col s6 l6' style={{marginTop: '0px'}}>
                                 <label className={this.state.zonecode? 'active' : null} htmlFor='zonecode' name='autofill'>우편번호</label>
-                                <input disabled type='text' id='zonecode' onChange={this.handleChange}/>
+                                <input disabled type='text' id='zonecode' onChange={(e) => this.handleChange(e)}/>
                             </div>
                         </div>
                         <div className='input-field' style = {{marginTop: '0px'}}>
                             <label className={this.state.address? 'active' : null} htmlFor='address' name='autofill'>배송지</label>
-                            <input disabled type='text' id='address' onChange={this.handleChange}/>
+                            <input disabled type='text' id='address' onChange={(e) => this.handleChange(e)}/>
                         </div>
                         <div className='input-field'>
                             <label className={this.state.address2? 'active' : null} htmlFor='address2' name='autofill'>상세주소</label>
-                            <input type='text' id='address2' onChange={this.handleChange}/>
+                            <input type='text' id='address2' onChange={(e) => this.handleChange(e)}/>
                         </div>
                         <div className='input-field'>
                             <label className={this.state.phone? 'active' : null} htmlFor='phone' name='autofill'>연락처</label>
-                            <input type='text' id='phone' onChange={this.handleChange}/>
+                            <input type='text' id='phone' onChange={(e) => this.handleChange(e)}/>
                         </div>
                         <div className='input-field'>
                             <label htmlFor='phone'>배송메시지</label>
-                            <input type='text' id='message' onChange={this.handleChange}/>
+                            <input type='text' id='message' onChange={(e) => this.handleChange(e)}/>
                         </div>
                     </div>
                     <div className='col s6 l6'>
-                        {this.state.addressApi === true? <DaumPostcode onComplete={this.handleAddress}/> : null}
+                        {this.state.addressApi === true? <DaumPostcode onComplete={this.handleAddress.bind(this)}/> : null}
                     </div>
                 </div>
                 <div className='flow-text center' style={{marginTop: '16px', marginBottom: '16px'}}>주문하시겠습니까?
-                    <button style={{marginLeft: '12px'}} className='btn brown lighten-2' onClick={this.handleSubmit}>주문</button>
+                    <button style={{marginLeft: '12px'}} className='btn brown lighten-2' onClick={(e) => this.handleSubmit(e)}>주문</button>
                 </div>
             </div>
         )
