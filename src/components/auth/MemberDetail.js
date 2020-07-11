@@ -9,7 +9,7 @@ class MemberDetail extends Component {
         window.scrollTo(0, 0)
     }
 
-    handleClick = (e) => {
+    handleClick(e) {
         e.preventDefault()
         this.props.history.push('/adminshippingdetail/'+e.currentTarget.id)
     }

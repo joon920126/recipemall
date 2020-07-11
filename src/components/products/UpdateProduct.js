@@ -9,19 +9,19 @@ class UpdateProduct extends Component {
 
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.setState({
             id: this.props.id,
         })
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleFileInput = (e) => {
+    handleFileInput(e) {
         this.setState({
             img: e.target.files[0],
             imgUrl: URL.createObjectURL(e.target.files[0]),
@@ -29,7 +29,7 @@ class UpdateProduct extends Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault()
         const oldProduct = this.props.recipeAndProduct.find((product) => product.id === this.props.id)
         this.props.updateProduct(this.state, oldProduct.imgName)

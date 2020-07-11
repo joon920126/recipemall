@@ -18,7 +18,7 @@ class Order extends Component {
         addressApi: false,
     }
 
-    handleAddress = (data) => {
+    handleAddress(data) {
         let fullAddress = data.address
         let extraAddress = ''
 
@@ -40,13 +40,13 @@ class Order extends Component {
         document.getElementById('zonecode').value = data.zonecode
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleCheck = (e) => {
+    handleCheck(e) {
         const firebase = getFirebase()
         const user = (this.props.user||[]).find((user) => user.id===firebase.auth().currentUser.uid)
         if (e.target.checked) {
@@ -78,7 +78,7 @@ class Order extends Component {
         }
     }
 
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault()
         return new Promise(function(resolve, reject) {
             resolve()
@@ -94,7 +94,7 @@ class Order extends Component {
         })
     }
 
-    handleOpenPostCode = (e) => {
+    handleOpenPostCode(e) {
         e.preventDefault()
         this.setState({addressApi: true})
     }

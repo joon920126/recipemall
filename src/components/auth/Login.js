@@ -9,13 +9,13 @@ class Login extends Component {
         password: '',
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault()
         this.props.logIn(this.state)
     }

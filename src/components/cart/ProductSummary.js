@@ -5,7 +5,7 @@ import {removeOneFromCart, removeFromCart, addToCart} from '../../store/actions/
 
 
 class ProductSummary extends Component {
-    plus = () => {
+    plus() {
         if (this.props.cart.qty<this.props.product.stock) {
             this.props.addToCart(this.props.product, 1)
         } else {
@@ -13,7 +13,7 @@ class ProductSummary extends Component {
         }
     }
 
-    minus = () => {
+    minus() {
         if (this.props.cart.qty>1) {
             this.props.removeOneFromCart(this.props.product)
         } else {
@@ -21,7 +21,7 @@ class ProductSummary extends Component {
         }
     }
 
-    remove = () => {
+    remove() {
         this.props.removeFromCart(this.props.product)
     }
 

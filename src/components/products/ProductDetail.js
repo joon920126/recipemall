@@ -17,16 +17,16 @@ class ProductDetail extends Component {
         quantity: 1,
     }
 
-    putIntoCart = () => {
+    putIntoCart() {
         this.props.addToCart(this.props.recipeAndProduct.find((product) => product.id===this.props.id), this.state.quantity)
         alert('장바구니에 '+this.state.quantity+'개 추가되었습니다.')
     }
 
-    buy = () => {
-        console.log('buy '+this.state.quantity)
-    }
+    // buy() {
+    //     console.log('buy '+this.state.quantity)
+    // }
 
-    plus = (e) => {
+    plus(e) {
         e.preventDefault()
         const id = this.props.id
         const product = this.props.recipeAndProduct.find((product) => product.id===id)
@@ -43,7 +43,7 @@ class ProductDetail extends Component {
         }
     }
 
-    minus = () => {
+    minus() {
         if (this.state.quantity>1) {
             this.setState({
                 quantity: this.state.quantity-1,
@@ -130,7 +130,7 @@ class ProductDetail extends Component {
                                         </div>
                                     </div>
                                     <div className='card-action'>
-                                        <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buy}>바로구매</button>
+                                        {/* <button style={{marginRight: '4px'}} className='btn brown' onClick={this.buy}>바로구매</button> */}
                                         <button className='btn brown waves-effect waves-light' onClick={this.putIntoCart}>장바구니</button>
                                     </div>
                                 </div>

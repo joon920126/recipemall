@@ -10,13 +10,13 @@ class CreateQnA extends Component {
         content: '',
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value,
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault()
         this.props.createQnA(this.state)
     }
