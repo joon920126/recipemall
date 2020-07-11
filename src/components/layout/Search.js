@@ -40,7 +40,7 @@ class Search extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className='input-field'>
                             <i className='fas fa-search prefix'></i>
-                            <input required type='text' onChange={this.handleChange} id='keyword'/>
+                            <input type='text' onChange={this.handleChange} id='keyword'/>
                             <label htmlFor='search-keyword'>찾으시는 재료나 레시피를 입력하세요</label>
                         </div>
                     </form>

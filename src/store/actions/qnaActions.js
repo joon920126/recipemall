@@ -11,3 +11,9 @@ export const createQnA = (qna) => {
         })
     }
 }
+
+export const replyQnA = (content) => {
+    return (dispatch, getState, {getFirestore}) => {
+        console.log(content)
+    }
+}

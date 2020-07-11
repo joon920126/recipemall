@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
-import {firestoreConnect} from 'react-redux-firebase'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {firestoreConnect, getFirebase} from 'react-redux-firebase'
+import ReplyQnA from './ReplyQnA'
 
 
 class QnADetail extends Component {
@@ -10,7 +12,9 @@ class QnADetail extends Component {
     }
 
     render() {
+        const firebase = getFirebase()
         const qna= this.props.qna && this.props.qna.find((qa) => qa.id === this.props.id) ||[]
+        const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
 
         return (
             <div className='container Site-content'>
@@ -30,6 +34,9 @@ class QnADetail extends Component {
                         <h6>{qna.content}</h6>
                     </div>
                 </div>
+                {/* {isAdmin?
+                    <ReplyQnA/> :
+                    null} */}
             </div>
         )
     }

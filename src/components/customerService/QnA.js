@@ -5,15 +5,26 @@ import {compose} from 'redux'
 import {firestoreConnect, getFirebase} from 'react-redux-firebase'
 import moment from 'moment'
 import {Redirect} from 'react-router-dom'
+import QnASearch from '../layout/QnASearch'
 
 class QnA extends Component {
     render() {
         if (!this.props.auth.uid) return <Redirect to='/'/>
+        const propState = this.props.location.state
+        const keyword = propState? propState.keyword : ''
+        const filter = propState? propState.filter : 'all'
         const qna = (this.props.qna||[])
         const page = this.props.page
-        const qnaSlice = (qna.slice().sort((a, b)=>b.createdAt.seconds-a.createdAt.seconds)
-            .slice(15*(page-1), 15*page))
-        console.log(qnaSlice? qnaSlice : null)
+        const searchedQnA = filter === 'name'?
+            qna.slice().filter((item) => item.name.includes(keyword)) :
+            filter === 'title'?
+                qna.slice().filter((item) => item.title.includes(keyword)) :
+                filter === 'all' ?
+                    qna.slice().filter((item) => item.name.includes(keyword) || item.title.includes(keyword)) : []
+        const sortedQnA = searchedQnA? (searchedQnA.slice().sort((a, b)=>b.createdAt.seconds-a.createdAt.seconds)
+            .slice(15*(page-1), 15*page)) : []
+        const firebase = getFirebase()
+        const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
         return (
             <div className='container Site-content'>
                 <h4 className='grey-text text-darken-1'>고객센터</h4>
@@ -27,7 +38,7 @@ class QnA extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {qnaSlice && qnaSlice.map((qna) => {
+                        {sortedQnA && sortedQnA.map((qna) => {
                             return (
                                 <tr key={qna.id}>
                                     <td>{qna.name}</td>
@@ -60,7 +71,9 @@ class QnA extends Component {
                         </li> : null}
                     </ul>
                 </div>
-                <Link className='btn brown lighten-2' to='/CreateQnA'>글쓰기</Link>
+                {isAdmin?
+                    <QnASearch/> :
+                    <Link className='btn brown lighten-2' to='/CreateQnA'>글쓰기</Link>}
             </div>
         )
     }

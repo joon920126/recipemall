@@ -18,7 +18,7 @@ const SignedInLinks = (props) => {
                     <NavLink to='/mypage' className='brown-text'>회원정보</NavLink>
                     <NavLink to='/favorite/1' className='brown-text'>즐겨찾기</NavLink>
                     <NavLink to='/shipping' className='brown-text'>배송조회</NavLink>
-                    <NavLink to='/qna/1' className='brown-text'>고객센터</NavLink>
+                    {/* <NavLink to='/qna/1' className='brown-text'>고객센터</NavLink> */}
                 </Dropdown></li>
             </ul>
         </div>

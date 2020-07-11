@@ -11,15 +11,16 @@ import UpdateProduct from './components/products/UpdateProduct'
 import CreateRecipe from './components/recipes/CreateRecipe'
 import UpdateRecipe from './components/recipes/UpdateRecipe'
 import Member from './components/auth/Member'
-import QnA from './components/customerService/QnA'
-import AdminQnA from './components/customerService/AdminQnA'
-import QnADetail from './components/customerService/QnADetail'
+// import QnA from './components/customerService/QnA'
+// import AdminQnA from './components/customerService/AdminQnA'
+// import QnADetail from './components/customerService/QnADetail'
 import Shipping from './components/customerService/Shipping'
 import Cart from './components/cart/Cart'
 import Order from './components/cart/Order'
 import OrderCompleted from './components/cart/OrderCompleted'
 import MyPage from './components/auth/MyPage'
-import CreateQnA from './components/customerService/CreateQnA'
+// import CreateQnA from './components/customerService/CreateQnA'
+// import ReplyQnA from './components/customerService/ReplyQnA'
 import AdminShipping from './components/customerService/AdminShipping'
 import List from './components/layout/List'
 import ProductDetail from './components/products/ProductDetail'
@@ -48,9 +49,9 @@ class App extends Component {
                             <Route path='/createrecipe' component={CreateRecipe}/>
                             <Route path='/favorite/:page' component={Favorite}/>
                             <Route exact path='/member/:page' component={Member}/>
-                            <Route path='/qna/:page' component={QnA}/>
-                            <Route path='/adminqna/:page' component={AdminQnA}/>
-                            <Route path='/qnaDetail/:id' component={QnADetail}/>
+                            {/* <Route path='/qna/:page' component={QnA}/> */}
+                            {/* <Route path='/adminqna/:page' component={AdminQnA}/> */}
+                            {/* <Route path='/qnaDetail/:id' component={QnADetail}/> */}
                             <Route path='/cart' component={Cart}/>
                             <Route path='/order' component={Order}/>
                             <Route path='/ordercompleted' component={OrderCompleted}/>
@@ -58,8 +59,9 @@ class App extends Component {
                             <Route path='/myPage' component={MyPage}/>
                             <Route path='/profile' component={Profile}/>
                             <Route path='/list/:page' component={List}/>
-                            <Route path='/createqna' component={CreateQnA}/>
-                            <Route path='/adminqna' component={AdminQnA}/>
+                            {/* <Route path='/createqna' component={CreateQnA}/>
+                            <Route path='/replyqna' component={ReplyQnA}/>
+                            <Route path='/adminqna' component={AdminQnA}/> */}
                             <Route path='/adminshipping' component={AdminShipping}/>
                             <Route path='/product/:id' component={ProductDetail}/>
                             <Route path='/recipe/:id' component={RecipeDetail}/>
