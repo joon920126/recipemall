@@ -20,6 +20,7 @@ const Main = () => {
             </div>
             <div className='container'>
                 <h5>추천상품</h5>
+                <h5>추천레시피</h5>
                 <h5>신상품</h5>
             </div>
         </div>

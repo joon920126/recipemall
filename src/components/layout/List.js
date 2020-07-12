@@ -23,6 +23,8 @@ class List extends Component {
                               item.tag.includes(keyword))
         const favorite = ((this.props.users||[]).find((user)=>user.id===firebase.auth().currentUser.uid)||{}).favorite||[]
         const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
+        const recommendedRecipe = this.props.recommendation? this.props.recommendation[0].recipe:[]
+        const recommendedProduct = this.props.recommendation? this.props.recommendation[0].product:[]
 
         return (
             <div className='container Site-content'>
@@ -34,10 +36,18 @@ class List extends Component {
                         switch (item.type) {
                         case 'recipe':
                             if (!this.props.location.state || this.props.location.state.includeRecipe) {
-                                if (favorite.filter((fav)=>fav.id===item.id).length!==0) {
-                                    return <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>
+                                if (!isAdmin) {
+                                    if (favorite.filter((fav)=>fav.id===item.id).length!==0) {
+                                        return <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>
+                                    } else {
+                                        return <RecipeButton recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>
+                                    }
                                 } else {
-                                    return <RecipeButton recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>
+                                    if (recommendedRecipe.some((recc) => recc.id===item.id)) {
+                                        return <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin} isRecc={true}/>
+                                    } else {
+                                        return <RecipeButton recipe={item} key={'recipe'+item.id} isAdmin={isAdmin} isRecc={true}/>
+                                    }
                                 }
                             } else return null
                         case 'product':
@@ -67,6 +77,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         recipeAndProduct: state.firestore.ordered.recipeAndProduct,
         users: state.firestore.ordered.users,
+        recommendation: state.firestore.ordered.recommendation,
         page: parseInt(ownProps.match.params.page),
     }
 }
@@ -75,4 +86,5 @@ export default compose(
     connect(mapStateToProps),
     firestoreConnect([{collection: 'recipeAndProduct'}]),
     firestoreConnect([{collection: 'users'}]),
+    firestoreConnect([{collection: 'recommendation'}]),
 )(List)

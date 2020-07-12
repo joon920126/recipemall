@@ -14,6 +14,7 @@ export const addToFavorite = (recipe) => {
                     ...doc.data().favorite,
                     recipe,
                 ]
+                alert('즐겨찾기에 추가되었습니다.')
                 return newFavorite
             }
         }).then((newFavorite) => {
@@ -21,7 +22,7 @@ export const addToFavorite = (recipe) => {
         }).then(() => {
             dispatch({type: 'ADD_TO_FAVORITE_SUCCESS'})
         }).catch((err) => {
-            dispatch({type: 'ADD_TO_FAVORITE_ERROR'}, err)
+            dispatch({type: 'ADD_TO_FAVORITE_ERROR', err})
         })
     }
 }
@@ -38,7 +39,52 @@ export const removeFromFavorite = (recipe) => {
         }).then(() => {
             dispatch({type: 'REMOVE_FROM_FAVORITE_SUCCESS'})
         }).catch((err) => {
-            dispatch({type: 'REMOVE_FROM_FAVORITE_ERROR'}, err)
+            dispatch({type: 'REMOVE_FROM_FAVORITE_ERROR', err})
+        })
+    }
+}
+
+export const addToRecommendation = (recipe) => {
+    return (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore()
+        const userDoc = firestore.collection('recommendation').doc('recommendation')
+        userDoc.get().then((doc) => {
+            if (doc.data().recipe.filter((fav) => fav.id===recipe.id).length!==0) {
+                const newRecommendation = doc.data().recipe
+                alert('이미 추천목록에 있는 레시피입니다.')
+                return newRecommendation
+            } else {
+                const newRecommendation = [
+                    ...doc.data().recipe,
+                    recipe,
+                ]
+                alert('추천목록에 추가되었습니다.')
+                return newRecommendation
+            }
+        }).then((newRecommendation) => {
+            userDoc.update({recipe: newRecommendation})
+        }).then(() => {
+            dispatch({type: 'ADD_TO_RECOMMENDATION_SUCCESS', recipe})
+        }).catch((err) => {
+            dispatch({type: 'ADD_TO_RECOMMENDATION_ERROR', err})
+        })
+    }
+}
+
+export const removeFromRecommendation = (recipe) => {
+    return (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore()
+        const userDoc = firestore.collection('recommendation').doc('recommendation')
+        userDoc.get().then((doc) => {
+            const newRecommendation = doc.data().recipe.filter((fav) => fav.id!==recipe.id)
+            return newRecommendation
+        }).then((newRecommendation) => {
+            userDoc.update({recipe: newRecommendation})
+        }).then(() => {
+            alert('추천목록에서 제거되었습니다.')
+            dispatch({type: 'REMOVE_FROM_RECOMMENDATION_SUCCESS', recipe})
+        }).catch((err) => {
+            dispatch({type: 'REMOVE_FROM_RECOMMENDATION_ERROR', err})
         })
     }
 }

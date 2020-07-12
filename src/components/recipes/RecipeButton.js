@@ -1,11 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addToFavorite} from '../../store/actions/recipeActions'
+import {addToFavorite, addToRecommendation} from '../../store/actions/recipeActions'
 
-const RecipeButton = ({recipe, dispatch, isAdmin}) => {
-    const handleClick = (e) => {
+const RecipeButton = ({recipe, dispatch, isAdmin, isRecc}) => {
+    const handleClick = () => {
         dispatch(addToFavorite(recipe))
+    }
+
+    const handleAdminClick = () => {
+        dispatch(addToRecommendation(recipe))
     }
 
     return (
@@ -15,7 +19,7 @@ const RecipeButton = ({recipe, dispatch, isAdmin}) => {
                     <Link to={'/recipe/'+recipe.id} key={recipe.id}>
                         <img src={recipe.img} alt=''/>
                     </Link>
-                    {isAdmin? null : <i className='fas fa-heart halfway-fab btn-floating center pink lighten-4' onClick={handleClick}></i>}
+                    <i className='fas fa-heart halfway-fab btn-floating center pink lighten-4' onClick={isAdmin? handleAdminClick : handleClick}/>
                 </div>
                 <div className='card-content recipe-button'>
                     <div><Link to={'/recipe/'+recipe.id} key={recipe.id}><span className='card-title grey-text text-darken-2'><strong>{recipe.name}</strong></span></Link></div>

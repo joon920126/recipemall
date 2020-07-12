@@ -1,11 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {removeFromFavorite} from '../../store/actions/recipeActions'
+import {removeFromFavorite, removeFromRecommendation} from '../../store/actions/recipeActions'
 
-const RecipeButtonAlt = ({recipe, dispatch, isAdmin}) => {
+const RecipeButtonAlt = ({recipe, dispatch, isAdmin, isRecc}) => {
     const handleClick = () => {
         dispatch(removeFromFavorite(recipe))
+    }
+
+    const handleAdminClick = () => {
+        dispatch(removeFromRecommendation(recipe))
     }
 
     return (
@@ -15,7 +19,7 @@ const RecipeButtonAlt = ({recipe, dispatch, isAdmin}) => {
                     <Link to={'/recipe/'+recipe.id} key={recipe.id}>
                         <img src={recipe.img} alt=''/>
                     </Link>
-                    {isAdmin? null : <i className='fas fa-times halfway-fab btn-floating center grey lighten-1' onClick={handleClick}></i>}
+                    <i className='fas fa-times halfway-fab btn-floating center grey lighten-1' onClick={isAdmin? handleAdminClick : handleClick}/>
                 </div>
                 <div className='card-content recipe-button'>
                     <div><Link to={'/recipe/'+recipe.id} key={recipe.id}><span className='card-title grey-text text-darken-2'><strong>{recipe.name}</strong></span></Link></div>
