@@ -27,6 +27,18 @@ const productReducer = (state=initState, action) => {
     case 'UPDATE_PRODUCT_ERROR':
         console.log('update product error', action.err)
         return state
+    case 'ADD_PRODUCT_TO_RECOMMENDATION':
+        console.log('added to recommendation', action.product)
+        return state
+    case 'ADD_PRODUCT_TO_RECOMMENDATION_ERROR':
+        console.log('add to recommendation error', action.err)
+        return state
+    case 'REMOVE_PRODUCT_FROM_RECOMMENDATION':
+        console.log('removed from recommendation', action.product)
+        return state
+    case 'REMOVE_PRODUCT_FROM_RECOMMENDATION_ERROR':
+        console.log('remove from recommendation error', action.err)
+        return state
     default: return state
     }
 }

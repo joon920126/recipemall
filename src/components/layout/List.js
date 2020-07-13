@@ -52,7 +52,8 @@ class List extends Component {
                             } else return null
                         case 'product':
                             if (!this.props.location.state || this.props.location.state.includeProduct) {
-                                return <ProductButton product={item} key={'product'+item.id} isAdmin={isAdmin}/>
+                                const isRecc = recommendedProduct.some((recc) => recc.id===item.id)
+                                return <ProductButton product={item} key={'product'+item.id} isAdmin={isAdmin} isRecc={isRecc}/>
                             } else return null
                         default: return null
                         }
