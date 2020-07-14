@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {removeFromFavorite, removeFromRecommendation} from '../../store/actions/recipeActions'
 
-const RecipeButtonAlt = ({recipe, dispatch, isAdmin, isRecc}) => {
+const RecipeButtonAlt = ({recipe, dispatch, isAdmin}) => {
     const handleClick = () => {
         dispatch(removeFromFavorite(recipe))
     }

@@ -20,9 +20,11 @@ const Main = (props) => {
     }, [])
 
     useEffect(() => {
-        firebase.auth().currentUser && firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).get().then((doc) => {
-            setFavorite(doc.data().favorite)
-        })
+        if (!isAdmin) {
+            firebase.auth().currentUser && firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).get().then((doc) => {
+                setFavorite(doc.data().favorite)
+            })
+        }
     }, [])
 
     return (
@@ -49,9 +51,10 @@ const Main = (props) => {
                 <h5>추천레시피</h5>
                 <div className='row'>
                     {reccRecipe.map((item) => {
-                        return favorite.some((fav) => fav.id===item.id) ?
-                            <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin} isRecc={true}/>:
-                            <RecipeButton recipe={item} key={'recipe'+item.id} isAdmin={isAdmin} isRecc={true}/>
+                        return isAdmin? <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/> :
+                            favorite.some((fav) => fav.id===item.id) ?
+                                <RecipeButtonAlt recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>:
+                                <RecipeButton recipe={item} key={'recipe'+item.id} isAdmin={isAdmin}/>
                     })}
                 </div>
                 {/* <h5>신상품</h5> */}

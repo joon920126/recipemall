@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addToFavorite, addToRecommendation} from '../../store/actions/recipeActions'
 
-const RecipeButton = ({recipe, dispatch, isAdmin, isRecc}) => {
+const RecipeButton = ({recipe, dispatch, isAdmin}) => {
     const handleClick = () => {
         dispatch(addToFavorite(recipe))
     }

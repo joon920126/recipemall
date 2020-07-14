@@ -23,7 +23,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='footer-copyright grey'>
-                <div className='container center-align'>&copy; 2019 RecipeMall corps</div>
+                <div className='container center-align'>&copy; 20xx RecipeMall corps</div>
             </div>
         </footer>
     )
