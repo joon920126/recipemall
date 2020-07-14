@@ -5,12 +5,16 @@ import ProductButton from '../products/ProductButton'
 import RecipeButton from '../recipes/RecipeButton'
 import RecipeButtonAlt from '../recipes/RecipeButtonAlt'
 
-const Main = (props) => {
+const Main = () => {
     const [reccRecipe, setReccRecipe] = useState([])
     const [reccProduct, setReccProduct] = useState([])
     const [favorite, setFavorite] = useState([])
+    const [mainImgURL, setMainImgURL] = useState('')
     const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
 
+    firebase.storage().ref('mainImage/main.jpg').getDownloadURL().then((URL) => {
+        setMainImgURL(URL)
+    })
 
     useEffect(() => {
         firebase.firestore().collection('recommendation').doc('recommendation').get().then((doc) => {
@@ -32,17 +36,10 @@ const Main = (props) => {
             <div className='container'>
                 <Search/>
             </div>
-            <div className='carousel carousel-slider'>
-                <div className='carousel-item'><img className='responsive-img' src='https://www.sonomamag.com/wp-content/uploads/2016/11/turkeydinner-1024x692.jpg' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://billypenn.com/wp-content/uploads/2016/11/tundeweydinner-1024x576.jpg?resize=994,559' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://3er1viui9wo30pkxh1v2nh4w-wpengine.netdna-ssl.com/wp-content/uploads/prod/sites/93/2018/12/rawpixel-754045-unsplash-1024x684.jpg' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://cdn.shopify.com/s/files/1/1426/0444/articles/turkey-dinner_1024x1024.jpg?v=1479929411' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://theallonsy.com/wp-content/uploads/2017/05/TheCarbonBarDinner-1024x682.jpg' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://foodtruckempire.com/wp-content/uploads/Cateringfamilydinner-1024x681.jpg' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://www.hotforfoodblog.com/wp-content/uploads/2019/01/100challengemealplan_hotforfood_filtered1-e1549057884190-1024x683.jpg' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://www.ahstatic.com/photos/b0k7_rsr001_00_p_1024x768.jpg' alt=''/></div>
-                <div className='carousel-item'><img className='responsive-img' src='https://practicallyfine.com/wp-content/uploads/2019/04/dinner1-1024x681.jpg' alt=''/></div>
-            </div>
+            {/* <div className='carousel carousel-slider'>
+                <div className='carousel-item'><img className='responsive-img' src={mainImgURL} alt='main'/></div>
+            </div> */}
+            <img src={mainImgURL} alt='main' style={{width: '100%'}}/>
             <div className='container'>
                 <h5>추천상품</h5>
                 <div className='row'>

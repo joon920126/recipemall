@@ -9,7 +9,7 @@ const SignedInLinks = (props) => {
         <div>
             <ul className='right'>
                 <li><NavLink to='/Cart'>장바구니</NavLink></li>
-                <li><a onClick={props.logOut}>로그아웃</a></li>
+                <li><NavLink to='/' onClick={props.logOut}>로그아웃</NavLink></li>
                 <li><Dropdown trigger={
                     <Button className='transparent z-depth-0'>
                         <i className='fas fa-user'></i>
