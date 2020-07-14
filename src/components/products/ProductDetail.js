@@ -120,7 +120,7 @@ class ProductDetail extends Component {
                                     <div className='card-content'>
                                         <div className='row' style={{marginBottom: '0px'}}>
                                             <div className='col s3 l3 flow-text center-align'>
-                                                {() => this.state.quantity}
+                                                {this.state.quantity}
                                             </div>
                                             <div className='col s4 l4 valign-wrapper'>
                                                 <button className='btn white black-text' type='button' onClick={(e) => this.minus(e)}><i className='material-icons'>remove</i></button>

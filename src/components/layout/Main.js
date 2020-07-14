@@ -23,7 +23,7 @@ const Main = (props) => {
         firebase.auth().currentUser && firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).get().then((doc) => {
             setFavorite(doc.data().favorite)
         })
-    })
+    }, [])
 
     return (
         <div className='Site-content'>

@@ -12,7 +12,7 @@ class Cart extends Component {
         const firebase = getFirebase()
         const product = (this.props.product||[]).filter((item)=>item.type==='product')
         const user = (this.props.user||[]).find((user)=>user.id===firebase.auth().currentUser.uid)
-        const testPrice= user&& user.cart.map((item1)=>product.find((product)=>product.id===item1.id).price*item1.qty)
+        const testPrice= user&& user.cart.map((item1) => product.find((product)=>product.id===item1.id).price*item1.qty)
         const testPrice2 = testPrice? testPrice : []
         const total = testPrice2? testPrice2.reduce(((a, b)=>a+b), 0) : undefined
         const row = user? user.cart.map((item)=> <ProductSummary
@@ -70,6 +70,6 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([{collection: 'recipeAndProduct'}]),
     firestoreConnect([{collection: 'users'}]),
+    firestoreConnect([{collection: 'recipeAndProduct'}]),
 )(Cart)
