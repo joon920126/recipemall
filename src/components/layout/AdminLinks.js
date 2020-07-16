@@ -13,7 +13,7 @@ const AdminLinks = (props) => {
                 <li><NavLink to='/member/1'>회원관리</NavLink></li>
                 <li><NavLink to='/adminshipping'>배송관리</NavLink></li>
                 {/* <li><NavLink to='/qna/1'>고객센터</NavLink></li> */}
-                <li><a onClick={props.logOut}>로그아웃</a></li>
+                <li><NavLink to='/' onClick={props.logOut}>로그아웃</NavLink></li>
                 <li>
                     <Button className='transparent z-depth-0' tooltip='관리자 계정으로 접속중입니다.'>
                         <i className='fas fa-user-cog'></i>

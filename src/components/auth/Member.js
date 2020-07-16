@@ -36,13 +36,16 @@ class Member extends Component {
             case 'byName': return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
             case 'byEmail': return a.email < b.email ? -1 : a.email > b.email ? 1 : 0
             case 'byPhone': return a.phone < b.phone ? -1 : a.phone > b.phone ? 1 : 0
+            default: return 0
             }
         }).slice(20*(page-1), 20*page)
+
         const rows = sortedUser&& sortedUser.map((member) => <MemberSummary
             member={member}
             info={user.find((user)=>user.id === member.id)}
             key={member.id}
         />)
+
         return (
             <div className='container Site-content'>
                 <div className='row'>

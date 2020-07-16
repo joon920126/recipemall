@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import RecipeContent from './RecipeContent'
 import {RecipeContext} from '../../contexts/recipeContext'
 import {useDispatch} from 'react-redux'
-import {updateRecipe, createRecipe} from '../../store/actions/recipeActions'
+import {updateRecipe} from '../../store/actions/recipeActions'
 import {useHistory} from 'react-router-dom'
 import firebase from '../../config/fbconfig'
 
@@ -50,6 +50,7 @@ const UpdateRecipe = (props) => {
             })
             setSteps(docRecipe.content.length)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     // 2. 가져온 데이터를 recipe context에 넣기
     // 3. 문서에 맞게 값 배치 (value = '~~~~')

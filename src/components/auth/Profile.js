@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
-import {firestoreConnect, getFirebase} from 'react-redux-firebase'
+import {firestoreConnect} from 'react-redux-firebase'
 import {change} from '../../store/actions/authActions'
 import {Redirect} from 'react-router-dom'
 import DaumPostcode from 'react-daum-postcode'

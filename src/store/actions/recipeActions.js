@@ -149,7 +149,7 @@ export const deleteRecipe = (id) => {
         const recipeDoc = firestore.collection('recipeAndProduct').doc(id)
         recipeDoc.get().then((doc) => {
             doc.data().contentImgName.map((img) => {
-                firebase.storage().ref().child(`recipeImage/${id}/stepImg/${img}`).delete()
+                return firebase.storage().ref().child(`recipeImage/${id}/stepImg/${img}`).delete()
             })
             firebase.storage().ref().child(`recipeImage/${id}/${doc.data().imgName}`).delete()
                 .then(() => {
@@ -213,6 +213,7 @@ export const updateRecipe = (recipe, oldRecipe) => {
                                 })
                         })
                 }
+                return undefined
             })
         }
         if (recipe.introduction !== oldRecipe.introduction) {

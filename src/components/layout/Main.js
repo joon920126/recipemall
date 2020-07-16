@@ -29,6 +29,7 @@ const Main = () => {
                 setFavorite(doc.data().favorite)
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

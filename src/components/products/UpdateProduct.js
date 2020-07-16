@@ -59,7 +59,7 @@ class UpdateProduct extends Component {
                     <h4 className='grey-text text-darken-1'>상품 수정</h4>
                     <div className='row valign-wrapper'>
                         <div className='col s12 l6'>
-                            {this.state.imgUrl? <img className='responsive-img' src={this.state.imgUrl} alt=''/> : oldProduct.img? <img className='responsive-img' src={oldProduct.img}/>: <h5 className='center grey-text text-lighten-1'>이미지 없음</h5>}
+                            {this.state.imgUrl? <img className='responsive-img' src={this.state.imgUrl} alt=''/> : oldProduct.img? <img alt='' className='responsive-img' src={oldProduct.img}/>: <h5 className='center grey-text text-lighten-1'>이미지 없음</h5>}
                         </div>
                         <div className='col s12 l6'>
                             <div className='input-field'>

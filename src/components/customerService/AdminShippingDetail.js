@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ShippingSummary from './ShippingSummary'
-import {firestoreConnect, getFirebase} from 'react-redux-firebase'
+import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {changeDeliver} from '../../store/actions/cartActions'
@@ -16,15 +16,17 @@ class AdminShippingDetail extends Component {
         switch (deliver) {
         case 0: {
             document.getElementById('0').setAttribute('checked', true)
-            return
+            break
         }
         case 1: {
             document.getElementById('1').setAttribute('checked', true)
-            return
+            break
         }
         case 2: {
             document.getElementById('2').setAttribute('checked', true)
+            break
         }
+        default: return
         }
     }
 
@@ -71,7 +73,7 @@ class AdminShippingDetail extends Component {
                     </thead>
                     <tbody>
                         {shipping&&product? shipping.cart.map((item) => <tr key={item.id}>
-                            <td style={{width: '15%'}} className='center'><img className='responsive-img materialboxed' src={product.find((item1) => item1.id===item.id).img}/></td>
+                            <td style={{width: '15%'}} className='center'><img alt='' className='responsive-img materialboxed' src={product.find((item1) => item1.id===item.id).img}/></td>
                             <td style={{width: '35%'}} className='center'>{item.id}</td>
                             <td style={{width: '40%'}} className='center'>{product.find((item1) => item1.id===item.id).name}</td>
                             <td style={{width: '10%'}} className='center'>{item.qty}개</td>

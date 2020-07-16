@@ -15,6 +15,7 @@ const recipeReducer = (state=initState, action) => {
         return state
     case 'DELETE_RECIPE_ERROR':
         console.log('delete recipe error', action.err)
+        return state
     case 'ADD_TO_FAVORITE_SUCCESS':
         console.log('favorite added', action.recipe)
         return state
@@ -45,6 +46,7 @@ const recipeReducer = (state=initState, action) => {
         return state
     case 'UPDATE_RECIPE_ERROR':
         console.log('update recipe error', action.err)
+        return state
     default: return state
     }
 }
