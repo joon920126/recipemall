@@ -9,8 +9,12 @@ class OrderCompleted extends Component {
         if (!this.props.location.state) return <Redirect to='/'/>
         return (
             <div className='container Site-content'>
-                <h1>this is OrderCompleted</h1>
-                <Link className='btn' to='/'>Return to Main</Link>
+                <div className='row'>
+                    <div className='col s8 l8 offset-l2 center'>
+                        <h5>회원가입이 완료되셨습니다.</h5>
+                        <Link to='/' className='btn'>메인페이지로 이동</Link>
+                    </div>
+                </div>
             </div>
         )
     }
