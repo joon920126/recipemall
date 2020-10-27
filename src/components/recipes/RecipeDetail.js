@@ -90,7 +90,7 @@ class RecipeDetail extends Component {
                     </div>
                 </div>
                 <div className='row'>
-                    <p className='flow-text center-align'>{recipe.introduction}</p>
+                    <p style={{whiteSpace: 'pre-wrap'}} className='flow-text center-align'>{recipe.introduction}</p>
                     {recipe.content && recipe.content.map((content, index) => {
                         return (
                             <div className='row valign-wrapper' key={index}>
@@ -98,7 +98,7 @@ class RecipeDetail extends Component {
                                     <img src={recipe.contentImg[index]} alt='' className='responsive-img'/>
                                 </div>
                                 <div className='col s8 l7 offset-l1'>
-                                    <h6>{content}</h6>
+                                    <h6 style={{whiteSpace: 'pre-wrap'}}>{content}</h6>
                                 </div>
                             </div>
                         )

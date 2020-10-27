@@ -55,7 +55,7 @@ class UpdateProduct extends Component {
         }
         return (
             <div className='container Site-content'>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
                     <h4 className='grey-text text-darken-1'>상품 수정</h4>
                     <div className='row valign-wrapper'>
                         <div className='col s12 l6'>
