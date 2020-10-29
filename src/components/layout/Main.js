@@ -12,7 +12,7 @@ const Main = () => {
     const [mainImgURL, setMainImgURL] = useState('')
     const isAdmin = firebase.auth().currentUser && (firebase.auth().currentUser.uid==='XlIC5HDHQIOYDc9wILQokNfhzFA2')
 
-    firebase.storage().ref('mainImage/main.jpg').getDownloadURL().then((URL) => {
+    firebase.storage().ref('mainImage/Featured-Image-2.jpg').getDownloadURL().then((URL) => {
         setMainImgURL(URL)
     })
 

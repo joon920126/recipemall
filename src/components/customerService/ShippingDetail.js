@@ -44,7 +44,6 @@ class ShippingDetail extends Component {
                     <thead>
                         <tr>
                             <th className='center'>이미지</th>
-                            <th className='center'>상품번호</th>
                             <th className='center'>상품정보</th>
                             <th className='center'>수량</th>
                         </tr>
@@ -52,9 +51,8 @@ class ShippingDetail extends Component {
                     <tbody>
                         {shipping&&product? shipping.cart.map((item) => <tr key={item.id}>
                             <td style={{width: '15%'}} className='center'><img alt='' className='responsive-img materialboxed' src={product.find((item1) => item1.id===item.id).img}/></td>
-                            <td style={{width: '35%'}} className='center'>{item.id}</td>
-                            <td style={{width: '40%'}} className='center'>{product.find((item1) => item1.id===item.id).name}</td>
-                            <td style={{width: '10%'}} className='center'>{item.qty}개</td>
+                            <td style={{width: '60%'}} className='center'>{product.find((item1) => item1.id===item.id).name}</td>
+                            <td style={{width: '25%'}} className='center'>{item.qty}개</td>
                         </tr>,
                         ): null}
                         {shipping&&<tr>

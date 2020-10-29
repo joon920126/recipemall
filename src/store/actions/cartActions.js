@@ -102,7 +102,7 @@ export const order = (order) => {
             dispatch({type: 'ORDER_SUCCESS', order})
         })
             .catch((err) => {
-                dispatch({type: 'ORDER_ERROR'}, err)
+                dispatch({type: 'ORDER_ERROR', err})
             })
     }
 }

@@ -11,8 +11,9 @@ class OrderCompleted extends Component {
             <div className='container Site-content'>
                 <div className='row'>
                     <div className='col s8 l8 offset-l2 center'>
-                        <h5>회원가입이 완료되셨습니다.</h5>
-                        <Link to='/' className='btn'>메인페이지로 이동</Link>
+                        <img style={{marginTop: '12px'}} src='./delivery.png' alt=''/>
+                        <h5 style={{marginBottom: '16px'}}>주문이 완료되었습니다.</h5>
+                        <Link to='/' className='btn brown'>메인페이지로 이동</Link>
                     </div>
                 </div>
             </div>
