@@ -16,8 +16,9 @@ const Main = () => {
         setMainImgURL(URL)
     })
 
+
     useEffect(() => {
-        firebase.firestore().collection('recommendation').doc('recommendation').get().then((doc) => {
+        firebase.firestore().collection('recommendation').doc('recommendation').onSnapshot((doc) => {
             setReccProduct(doc.data().product)
             setReccRecipe(doc.data().recipe)
         })

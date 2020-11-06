@@ -10,7 +10,7 @@ const MemberSummary = (member) => {
             <td>{user.name}</td>
             <td>{user.phone}</td>
             <td><Link to={'/memberdetail/'+auth.id} className='btn brown'>조회</Link></td>
-            <td><span className='btn brown'>삭제</span></td>
+            {/* <td><span className='btn brown'>삭제</span></td> */}
         </tr>
     )
 }

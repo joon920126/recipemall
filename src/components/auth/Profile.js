@@ -66,11 +66,11 @@ class Profile extends Component {
         const auth = this.props.auth
         const users = this.props.users
         const user = users&&users.find((user) => user.id===auth.uid)
-        if (!this.props.auth.uid) return <Redirect to='/'/>
+        // if (!this.props.auth.uid) return <Redirect to='/'/>
         return (
             <div className='container Site-content'>
                 <h5 className='grey-text'>회원정보 확인 및 수정</h5>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
                     <div className='input-field'>
                         <label className='active' htmlFor='name'>이름</label>
                         <input className='validate' placeholder={user? user.name:''} type='text' id='name' onChange={(e) => this.handleChange(e)}/>
@@ -87,8 +87,8 @@ class Profile extends Component {
                     <div className='input-field'>
                         <label className='active' htmlFor='zonecode'>우편번호</label>
                         <input disabled className='validate' placeholder={user? user.zonecode:''} type='text' id='zonecode' onChange={(e) => this.handleChange(e)}/>
-                        {this.state.addressApi? <DaumPostcode onComplete={this.handleAddress.bind(this)}/> :
-                            <button className='btn brown lighten-2' onClick={this.handleOpenPostCode}>우편번호 찾기</button>}
+                        {this.state.addressApi? <DaumPostcode onComplete={(e) => this.handleAddress(e)}/> :
+                            <button className='btn brown lighten-2' onClick={(e) => this.handleOpenPostCode(e)}>우편번호 찾기</button>}
                     </div>
                     <div className='input-field'>
                         <label className='active' htmlFor='address'>배송지</label>

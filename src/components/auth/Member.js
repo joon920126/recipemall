@@ -55,15 +55,15 @@ class Member extends Component {
                     <div className='col s4 l4' style={{marginTop: '22px'}}>
                         <span style={{marginRight: '12px'}}>정렬</span>
                         <label style={{marginRight: '12px'}}>
-                            <input type='radio' name='filter' className='with-gap' id='byEmail' onChange={() => this.handleRadioChange}/>
+                            <input type='radio' name='sortBy' className='with-gap' id='byEmail' onChange={this.handleRadioChange.bind(this)}/>
                             <span>이메일</span>
                         </label>
                         <label style={{marginRight: '12px'}}>
-                            <input type='radio' name='filter' className='with-gap' id='byName' onChange={() => this.handleRadioChange}/>
+                            <input type='radio' name='sortBy' className='with-gap' id='byName' onChange={this.handleRadioChange.bind(this)}/>
                             <span>이름</span>
                         </label>
                         <label>
-                            <input type='radio' name='filter' className='with-gap' id='byPhone' onChange={() => this.handleRadioChange}/>
+                            <input type='radio' name='sortBy' className='with-gap' id='byPhone' onChange={this.handleRadioChange.bind(this)}/>
                             <span>전화번호</span>
                         </label>
                     </div>
@@ -75,7 +75,7 @@ class Member extends Component {
                             <th>이름</th>
                             <th>연락처</th>
                             <th>회원정보</th>
-                            <th>삭제</th>
+                            {/* <th>삭제</th> */}
                         </tr>
                     </thead>
                     <tbody>
