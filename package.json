@@ -14,7 +14,7 @@
     "react-redux": "^7.2.0",
     "react-redux-firebase": "^3.3.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^5.0.1",
     "redux": "^4.0.4",
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0"
